@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { DollarSign, ShieldCheck, AlertTriangle, Loader2, Lightbulb, CheckCircle2, XCircle, Save, History } from "lucide-react";
+import { DollarSign, ShieldCheck, AlertTriangle, Loader2, Lightbulb, CheckCircle2, XCircle, Save, History, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { syntheticEncounterNote, syntheticPatient } from "@/data/syntheticData";
+import { syntheticPatient } from "@/data/syntheticData";
 import { useBillingValidations } from "@/hooks/useBillingValidations";
+import { ClinicalNote } from "@/hooks/useClinicalNotes";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import BillingHistory from "./BillingHistory";
+import ClinicalNoteSelectDialog from "./ClinicalNoteSelectDialog";
 
 interface ValidationResult {
   overallRisk: "low" | "medium" | "high";
@@ -21,19 +23,154 @@ interface ValidationResult {
 }
 
 const BillingValidator = () => {
-  const [inputNotes, setInputNotes] = useState(syntheticEncounterNote);
+  const [inputNotes, setInputNotes] = useState("");
   const [validationResult, setValidationResult] = useState<ValidationResult | null>(null);
   const [reasoning, setReasoning] = useState("");
   const [isValidating, setIsValidating] = useState(false);
   const [isExplaining, setIsExplaining] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
+  const [showNoteSelect, setShowNoteSelect] = useState(false);
+  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
+  const [selectedNoteTag, setSelectedNoteTag] = useState<string | null>(null);
 
   const { saveValidation } = useBillingValidations();
 
+  const handleNoteSelect = (note: ClinicalNote, noteTag: string) => {
+    // Use structured note for billing validation
+    setInputNotes(note.structured_note);
+    setSelectedPatientId(note.patient_id);
+    setSelectedNoteTag(noteTag);
+    setValidationResult(null);
+    setReasoning("");
+    toast.success(`Loaded ${noteTag}`);
+  };
+
+  // Parse clinical notes to extract ICD-10 and CPT codes dynamically
+  const parseNotesForCoding = (notes: string) => {
+    const icd10Codes: Array<{ code: string; description: string; confidence: number }> = [];
+    const missingElements: string[] = [];
+    let baseRisk = 5;
+
+    // Check for diagnoses and assign ICD-10 codes
+    const diabetesMatch = notes.match(/(?:t2dm|type 2 diabetes|diabetes|dm2|e11\.65|hyperglycemia)/i);
+    const htnMatch = notes.match(/(?:htn|hypertension|high blood pressure|i10|elevated.*bp|bp.*\d+\/\d+)/i);
+    const copdMatch = notes.match(/(?:copd|chronic obstructive|j44)/i);
+    const anxietyMatch = notes.match(/(?:anxiety|gad|f41)/i);
+    const depressionMatch = notes.match(/(?:depression|mdd|f32)/i);
+
+    if (diabetesMatch) {
+      icd10Codes.push({ code: "E11.65", description: "Type 2 Diabetes with hyperglycemia", confidence: 95 });
+    }
+    if (htnMatch) {
+      icd10Codes.push({ code: "I10", description: "Essential (primary) hypertension", confidence: 92 });
+    }
+    if (copdMatch) {
+      icd10Codes.push({ code: "J44.9", description: "Chronic obstructive pulmonary disease, unspecified", confidence: 88 });
+    }
+    if (anxietyMatch) {
+      icd10Codes.push({ code: "F41.1", description: "Generalized anxiety disorder", confidence: 85 });
+    }
+    if (depressionMatch) {
+      icd10Codes.push({ code: "F32.9", description: "Major depressive disorder, single episode", confidence: 85 });
+    }
+
+    // Default if no conditions found
+    if (icd10Codes.length === 0) {
+      icd10Codes.push({ code: "Z00.00", description: "General adult medical examination", confidence: 70 });
+    }
+
+    // Check for CPT code based on complexity
+    const cptCodes: Array<{ code: string; description: string; confidence: number }> = [];
+    const hasMultipleDiagnoses = icd10Codes.length >= 2;
+    const hasPlan = notes.match(/(?:plan|treatment|rx|medication|follow.?up)/i);
+    const hasVitals = notes.match(/(?:bp|blood pressure|hr|heart rate|temp|vitals)/i);
+
+    if (hasMultipleDiagnoses && hasPlan) {
+      cptCodes.push({ code: "99214", description: "Office visit, established patient, moderate complexity", confidence: 88 });
+    } else if (hasPlan) {
+      cptCodes.push({ code: "99213", description: "Office visit, established patient, low complexity", confidence: 85 });
+    } else {
+      cptCodes.push({ code: "99212", description: "Office visit, established patient, straightforward", confidence: 80 });
+    }
+
+    // Check for missing elements and calculate risk
+    const denialRisks: Array<{ rule: string; status: "pass" | "warning" | "fail"; detail: string }> = [];
+
+    if (!hasVitals) {
+      missingElements.push("Vital signs documentation");
+      baseRisk += 20;
+      denialRisks.push({ rule: "Vitals documentation", status: "warning", detail: "Vital signs not clearly documented" });
+    } else {
+      denialRisks.push({ rule: "Vitals documentation", status: "pass", detail: "Vital signs are documented" });
+    }
+
+    if (!notes.match(/(?:medication|rx|drug|metformin|lisinopril|prescription)/i)) {
+      missingElements.push("Medication list");
+      baseRisk += 15;
+      denialRisks.push({ rule: "Medication documentation", status: "warning", detail: "Current medications not clearly listed" });
+    } else {
+      denialRisks.push({ rule: "Medication documentation", status: "pass", detail: "Medications are documented" });
+    }
+
+    if (!notes.match(/(?:assessment|diagnosis|dx|impression)/i)) {
+      missingElements.push("Assessment section");
+      baseRisk += 30;
+      denialRisks.push({ rule: "Assessment documentation", status: "fail", detail: "Assessment/diagnosis section missing" });
+    } else {
+      denialRisks.push({ rule: "Assessment documentation", status: "pass", detail: "Assessment is clearly documented" });
+    }
+
+    if (!hasPlan) {
+      missingElements.push("Treatment plan");
+      baseRisk += 25;
+      denialRisks.push({ rule: "Plan documentation", status: "fail", detail: "Treatment plan is missing or unclear" });
+    } else {
+      denialRisks.push({ rule: "Plan documentation", status: "pass", detail: "Treatment plan is documented" });
+    }
+
+    // Add code compatibility check
+    denialRisks.push({
+      rule: "CPT/ICD-10 compatibility",
+      status: "pass",
+      detail: "Office visit code matches complexity of documented conditions"
+    });
+
+    // Calculate overall risk
+    const riskPercentage = Math.min(baseRisk, 100);
+    let overallRisk: "low" | "medium" | "high" = "low";
+    if (riskPercentage >= 50) overallRisk = "high";
+    else if (riskPercentage >= 25) overallRisk = "medium";
+
+    // Generate recommendations
+    const recommendations: string[] = [];
+    if (missingElements.includes("Vital signs documentation")) {
+      recommendations.push("Add complete vital signs (BP, HR, Temp, RR) to the documentation");
+    }
+    if (missingElements.includes("Medication list")) {
+      recommendations.push("Include current medication list with dosages");
+    }
+    if (!notes.match(/(?:education|counseling|discussed)/i)) {
+      recommendations.push("Document patient education provided regarding treatment plan");
+    }
+    if (!notes.match(/(?:follow.?up|return|f\/u)/i)) {
+      recommendations.push("Include specific follow-up timeline in the plan");
+    }
+
+    return {
+      icd10Codes,
+      cptCodes,
+      denialRisks,
+      missingElements,
+      recommendations,
+      riskPercentage,
+      overallRisk
+    };
+  };
+
   const handleValidateClaim = async () => {
     if (!inputNotes.trim()) {
-      toast.error("Please enter clinical notes first");
+      toast.error("Please load a clinical note first");
       return;
     }
 
@@ -43,31 +180,17 @@ const BillingValidator = () => {
     // Simulate AI processing
     await new Promise((resolve) => setTimeout(resolve, 1800));
     
+    // Parse notes dynamically
+    const parsed = parseNotesForCoding(inputNotes);
+    
     const result: ValidationResult = {
-      overallRisk: "low",
-      riskPercentage: 12,
-      icd10Codes: [
-        { code: "E11.65", description: "Type 2 Diabetes with hyperglycemia", confidence: 95 },
-        { code: "I10", description: "Essential (primary) hypertension", confidence: 92 },
-      ],
-      cptCodes: [
-        { code: "99214", description: "Office visit, established patient, moderate complexity", confidence: 88 },
-      ],
-      denialRisks: [
-        { rule: "Medical necessity documented", status: "pass", detail: "Clear symptoms and clinical findings support diagnosis" },
-        { rule: "Code specificity check", status: "pass", detail: "ICD-10 codes are specific to 5th character level" },
-        { rule: "CPT/ICD-10 compatibility", status: "pass", detail: "Office visit code matches complexity of documented conditions" },
-        { rule: "Plan documentation", status: "warning", detail: "Plan is present but could include more specific medication details" },
-      ],
-      recommendations: [
-        "Consider adding specific Metformin dosage in the plan section",
-        "Document patient education provided regarding medication adherence",
-        "Include follow-up timeline explicitly in the assessment",
-      ],
-      missingElements: [
-        "Specific medication dosage",
-        "Patient education documentation",
-      ],
+      overallRisk: parsed.overallRisk,
+      riskPercentage: parsed.riskPercentage,
+      icd10Codes: parsed.icd10Codes,
+      cptCodes: parsed.cptCodes,
+      denialRisks: parsed.denialRisks,
+      recommendations: parsed.recommendations,
+      missingElements: parsed.missingElements,
     };
 
     setValidationResult(result);
@@ -122,9 +245,11 @@ The claim is likely to be approved with minor documentation improvements.`;
       return;
     }
 
+    const patientId = selectedPatientId || syntheticPatient.patient_id;
+
     setIsSaving(true);
     const { error } = await saveValidation(
-      syntheticPatient.patient_id,
+      patientId,
       inputNotes,
       validationResult.icd10Codes,
       validationResult.cptCodes,
@@ -136,14 +261,9 @@ The claim is likely to be approved with minor documentation improvements.`;
     if (error) {
       toast.error("Failed to save validation");
     } else {
-      toast.success("Validation saved to your history");
+      toast.success(`Validation saved for ${patientId}`);
     }
     setIsSaving(false);
-  };
-
-  const handleLoadSample = () => {
-    setInputNotes(syntheticEncounterNote);
-    toast.info("Sample encounter note loaded");
   };
 
   const getRiskColor = (risk: "low" | "medium" | "high") => {
@@ -204,9 +324,17 @@ The claim is likely to be approved with minor documentation improvements.`;
           <Card className="flex flex-col">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base font-medium">Clinical Notes</CardTitle>
-                <Button variant="ghost" size="sm" onClick={handleLoadSample}>
-                  Load Sample
+                <CardTitle className="text-base font-medium">
+                  Clinical Notes
+                  {selectedNoteTag && (
+                    <span className="ml-2 text-xs font-normal text-muted-foreground">
+                      ({selectedNoteTag})
+                    </span>
+                  )}
+                </CardTitle>
+                <Button variant="ghost" size="sm" onClick={() => setShowNoteSelect(true)}>
+                  <FileText className="w-4 h-4 mr-1" />
+                  Load Clinical Note
                 </Button>
               </div>
             </CardHeader>
@@ -214,8 +342,9 @@ The claim is likely to be approved with minor documentation improvements.`;
               <Textarea
                 value={inputNotes}
                 onChange={(e) => setInputNotes(e.target.value)}
-                placeholder="Paste or load clinical notes for validation..."
+                placeholder="Load a clinical note from the Documentation Assistant to validate..."
                 className="flex-1 min-h-[300px] resize-none text-sm"
+                readOnly
               />
               <div className="mt-4">
                 <Button
@@ -406,6 +535,12 @@ The claim is likely to be approved with minor documentation improvements.`;
           </Card>
         )}
       </div>
+
+      <ClinicalNoteSelectDialog
+        open={showNoteSelect}
+        onOpenChange={setShowNoteSelect}
+        onSelect={handleNoteSelect}
+      />
     </div>
   );
 };

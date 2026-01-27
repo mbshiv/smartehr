@@ -173,9 +173,12 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
       return;
     }
 
+    // Use selected patient ID or fallback to syntheticPatient
+    const patientId = selectedPatientId || syntheticPatient.patient_id;
+
     setIsSaving(true);
     const { error } = await saveNote(
-      syntheticPatient.patient_id,
+      patientId,
       inputNotes,
       structuredNote,
       reasoning || undefined
@@ -184,7 +187,7 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
     if (error) {
       toast.error("Failed to save note");
     } else {
-      toast.success("Note saved to your history");
+      toast.success(`Note saved for ${patientId}`);
     }
     setIsSaving(false);
   };
