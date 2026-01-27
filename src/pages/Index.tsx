@@ -1,28 +1,13 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import PatientSidebar from "@/components/layout/PatientSidebar";
 import DocumentationAssistant from "@/components/modules/DocumentationAssistant";
 import BillingValidator from "@/components/modules/BillingValidator";
-
-// Lifted state types for persistence across module switches
-interface DocumentationState {
-  inputNotes: string;
-  structuredNote: string;
-  reasoning: string;
-  selectedPatientId: string | null;
-}
-
-interface BillingState {
-  inputNotes: string;
-  validationResult: any | null;
-  reasoning: string;
-  selectedPatientId: string | null;
-  selectedNoteTag: string | null;
-}
+import { DocumentationState } from "@/components/modules/DocumentationAssistant";
+import { BillingState } from "@/components/modules/BillingValidator";
 
 const Index = () => {
   const [activeModule, setActiveModule] = useState<"documentation" | "billing">("documentation");
-  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
 
   // Lifted documentation state
   const [docState, setDocState] = useState<DocumentationState>({
@@ -41,9 +26,14 @@ const Index = () => {
     selectedNoteTag: null,
   });
 
-  const handlePatientChange = (patientId: string | null) => {
-    setSelectedPatientId(patientId);
-  };
+  // Derive the sidebar patient ID from the active module's state
+  const selectedPatientId = useMemo(() => {
+    if (activeModule === "documentation") {
+      return docState.selectedPatientId;
+    } else {
+      return billingState.selectedPatientId;
+    }
+  }, [activeModule, docState.selectedPatientId, billingState.selectedPatientId]);
 
   return (
     <div className="flex h-screen bg-background overflow-hidden">
@@ -55,13 +45,11 @@ const Index = () => {
         <div className="flex-1 overflow-hidden bg-panel">
           {activeModule === "documentation" ? (
             <DocumentationAssistant
-              onPatientChange={handlePatientChange}
               state={docState}
               onStateChange={setDocState}
             />
           ) : (
             <BillingValidator
-              onPatientChange={handlePatientChange}
               state={billingState}
               onStateChange={setBillingState}
             />
