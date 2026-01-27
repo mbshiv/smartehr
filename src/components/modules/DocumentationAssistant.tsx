@@ -123,7 +123,7 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
 
       {/* Main Content */}
       <div className="flex-1 p-6 overflow-y-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Input Panel */}
           <Card className="flex flex-col">
             <CardHeader className="pb-3">
