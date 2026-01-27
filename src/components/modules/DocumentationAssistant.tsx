@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { FileText, Sparkles, Lightbulb, Loader2, ClipboardCopy, Check, Save, History } from "lucide-react";
+import { FileText, Sparkles, Lightbulb, Loader2, ClipboardCopy, Check, Save, History, FolderOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { sampleRawClinicianNotes, syntheticPatient } from "@/data/syntheticData";
+import { syntheticPatient } from "@/data/syntheticData";
 import { useClinicalNotes } from "@/hooks/useClinicalNotes";
 import { toast } from "sonner";
 import NotesHistory from "./NotesHistory";
+import PatientSelectDialog from "./PatientSelectDialog";
 
 const DocumentationAssistant = () => {
-  const [inputNotes, setInputNotes] = useState(sampleRawClinicianNotes);
+  const [inputNotes, setInputNotes] = useState("");
   const [structuredNote, setStructuredNote] = useState("");
   const [reasoning, setReasoning] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
@@ -17,8 +18,16 @@ const DocumentationAssistant = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
+  const [showPatientSelect, setShowPatientSelect] = useState(false);
+  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
 
   const { saveNote } = useClinicalNotes();
+
+  const handlePatientSelect = (patientId: string, notes: string) => {
+    setInputNotes(notes);
+    setSelectedPatientId(patientId);
+    toast.success(`Loaded notes for ${patientId}`);
+  };
 
   const handleGenerateNote = async () => {
     if (!inputNotes.trim()) {
@@ -125,9 +134,8 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
     setIsSaving(false);
   };
 
-  const handleLoadSample = () => {
-    setInputNotes(sampleRawClinicianNotes);
-    toast.info("Sample notes loaded");
+  const handleOpenPatientSelect = () => {
+    setShowPatientSelect(true);
   };
 
   if (showHistory) {
@@ -166,9 +174,17 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
           <Card className="flex flex-col">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base font-medium">Raw Clinical Notes</CardTitle>
-                <Button variant="ghost" size="sm" onClick={handleLoadSample}>
-                  Load Sample
+                <CardTitle className="text-base font-medium">
+                  Raw Clinical Notes
+                  {selectedPatientId && (
+                    <span className="ml-2 text-xs font-normal text-muted-foreground">
+                      ({selectedPatientId})
+                    </span>
+                  )}
+                </CardTitle>
+                <Button variant="ghost" size="sm" onClick={handleOpenPatientSelect}>
+                  <FolderOpen className="w-4 h-4 mr-1" />
+                  Load Patient
                 </Button>
               </div>
             </CardHeader>
@@ -290,6 +306,12 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
           </Card>
         )}
       </div>
+
+      <PatientSelectDialog
+        open={showPatientSelect}
+        onOpenChange={setShowPatientSelect}
+        onSelect={handlePatientSelect}
+      />
     </div>
   );
 };

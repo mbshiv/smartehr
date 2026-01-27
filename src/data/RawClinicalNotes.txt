@@ -1,0 +1,924 @@
+=== PATIENT_001.txt ===
+pt smokes 1ppd
+dx: asthma exacerbation
+no meds listed but pt taking metformin
+no f/u scheduled
+plan: hydration + rest
+hx of htn + dm
+meds: metformin 500 bid
+no f/u scheduled
+pt smokes 1ppd
+
+=== PATIENT_002.txt ===
+pt missed meds 3x this wk
+no recent a1c
+pt denies cp but reports tightness on exertion
+plan: increase metformin
+no meds listed but pt taking metformin
+pt c/o fever + cough x 9d
+
+=== PATIENT_003.txt ===
+no recent a1c
+pt missed meds 3x this wk
+no f/u scheduled
+labs pending
+cc: c/o rash x 1d
+pt missed meds 3x this wk
+meds: albuterol prn
+vitals: BP 151/91 HR 79 T 98.2
+plan: reinforce adherence
+pt missed meds 3x this wk
+pt feels better today
+no f/u scheduled
+
+=== PATIENT_004.txt ===
+hx of htn + dm
+pt missed meds 3x this wk
+cc: c/o dizziness x 6d
+vitals: vitals: bp 108/78 hr 81 temp 99.4
+plan: increase metformin
+dx: htn
+no f/u scheduled
+pt smokes 1ppd
+pt smokes 1ppd
+
+=== PATIENT_005.txt ===
+pt c/o dizziness x 10d
+no meds listed but pt taking metformin
+current meds: ibuprofen 400 tid, atorvastatin 20 qhs, metformin 500 bid
+plan: hydration + rest
+vitals: bp 143/75 hr 86 temp 98.7
+
+=== PATIENT_006.txt ===
+pt feels better today
+pt missed meds 3x this wk
+meds: metformin 500 bid, atorvastatin 20 qhs, lisinopril 10 qd
+pt feels better today
+pt smokes 1ppd
+pt feels better today
+dx: osteoarthritis
+no f/u scheduled
+pt smokes 1ppd
+vitals: bp 131/96 hr 95 temp 97.5
+plan: monitor bp
+
+=== PATIENT_007.txt ===
+BP 124/88 HR 98
+no f/u scheduled
+pt denies cp but reports tightness on exertion
+current meds: hctz 25 qd
+pt c/o back pain x 7d
+dx: osteoarthritis
+no f/u scheduled
+
+=== PATIENT_008.txt ===
+pt feels better today
+plan: hydration + rest
+labs pending
+current meds: hctz 25 qd
+pt feels better today
+labs pending
+pt c/o knee pain x 5d
+pt smokes 1ppd
+hx of htn + dm
+dx: benign positional vertigo
+pt missed meds 3x this wk
+
+=== PATIENT_009.txt ===
+pt smokes 1ppd
+cc: c/o fever + cough x 4d
+dx: gastroenteritis
+plan: prescribe inhaler
+meds: levothyroxine 75 qd, atorvastatin 20 qhs, lisinopril 10 qd
+labs pending
+
+=== PATIENT_010.txt ===
+meds: levothyroxine 75 qd, atorvastatin 20 qhs, amoxicillin 500 tid
+dx: osteoarthritis
+pt feels better today
+pt denies cp but reports tightness on exertion
+
+=== PATIENT_011.txt ===
+pt smokes 1ppd
+dx: t2dm uncontrolled
+vitals: bp 145/65 hr 87 temp 97.5
+pt routine checkup
+plan: refer to cardio
+labs pending
+pt anxious about sx
+no recent a1c
+current meds: omeprazole 20 qd, levothyroxine 75 qd, hctz 25 qd
+
+=== PATIENT_012.txt ===
+plan: hydration + rest
+pt feels better today
+pt c/o knee pain x 3d
+meds: metformin 500 bid, amoxicillin 500 tid, albuterol prn
+vitals: bp 154/70 hr 69 temp 99.0
+
+=== PATIENT_013.txt ===
+pt c/o fever + cough x 1d
+current meds: atorvastatin 20 qhs, levothyroxine 75 qd
+plan: prescribe inhaler
+dx: t2dm uncontrolled
+
+=== PATIENT_014.txt ===
+pt feels better today
+pt anxious about sx
+cc: c/o fatigue x 10d
+meds: albuterol prn, lisinopril 10 qd
+pt anxious about sx
+pt anxious about sx
+pt feels better today
+labs pending
+labs pending
+pt missed meds 3x this wk
+
+=== PATIENT_015.txt ===
+pt feels better today
+vitals: vitals: bp 147/61 hr 80 temp 98.4
+meds: omeprazole 20 qd, metformin 500 bid, lisinopril 10 qd
+cc: c/o fatigue x 2d
+
+=== PATIENT_016.txt ===
+pt routine checkup
+dx: osteoarthritis
+vitals: bp 157/80 hr 100 temp 99.3
+
+=== PATIENT_017.txt ===
+no f/u scheduled
+pt missed meds 3x this wk
+plan: f/u 2w
+pt feels better today
+pt anxious about sx
+no f/u scheduled
+pt anxious about sx
+pt smokes 1ppd
+labs pending
+meds: lisinopril 10 qd
+dx: t2dm uncontrolled
+
+=== PATIENT_018.txt ===
+cc: c/o knee pain x 8d
+dx: osteoarthritis
+meds: ibuprofen 400 tid
+pt denies cp but reports tightness on exertion
+
+=== PATIENT_019.txt ===
+no f/u scheduled
+pt feels better today
+cc: c/o rash x 10d
+plan: reinforce adherence
+hx of htn + dm
+no f/u scheduled
+dx: contact dermatitis
+no recent a1c
+pt denies cp but reports tightness on exertion
+meds: hctz 25 qd, levothyroxine 75 qd, amoxicillin 500 tid
+vitals: BP 145/67 HR 72 T 100.5
+
+=== PATIENT_020.txt ===
+pt smokes 1ppd
+pt anxious about sx
+pt missed meds 3x this wk
+dx: asthma exacerbation
+pt missed meds 3x this wk
+pt anxious about sx
+pt c/o dizziness x 3d
+hx of htn + dm
+pt anxious about sx
+no f/u scheduled
+
+=== PATIENT_021.txt ===
+pt anxious about sx
+pt missed meds 3x this wk
+dx: contact dermatitis
+no f/u scheduled
+meds: amoxicillin 500 tid, lisinopril 10 qd, ibuprofen 400 tid
+pt c/o fatigue x 7d
+hx of htn + dm
+hx of htn + dm
+hx of htn + dm
+
+=== PATIENT_022.txt ===
+no recent a1c
+pt c/o abd pain x 6d
+BP 124/79 HR 79
+current meds: ibuprofen 400 tid, amoxicillin 500 tid
+labs pending
+no f/u scheduled
+
+=== PATIENT_023.txt ===
+BP 117/77 HR 97 T 99.6
+pt c/o fatigue x 7d
+hx of htn + dm
+dx: chronic fatigue syndrome
+meds: hctz 25 qd, atorvastatin 20 qhs, amoxicillin 500 tid
+
+=== PATIENT_024.txt ===
+pt feels better today
+meds: omeprazole 20 qd
+hx of htn + dm
+labs pending
+no recent a1c
+dx: benign positional vertigo
+cc: c/o fatigue x 7d
+pt feels better today
+
+=== PATIENT_025.txt ===
+pt c/o cp x 2d
+dx: stable angina
+BP 137/93 HR 81 T 97.2
+
+=== PATIENT_026.txt ===
+pt smokes 1ppd
+pt c/o cp x 2d
+hx of htn + dm
+pt feels better today
+pt smokes 1ppd
+pt anxious about sx
+hx of htn + dm
+plan: prescribe inhaler
+pt smokes 1ppd
+hx of htn + dm
+
+=== PATIENT_027.txt ===
+hx of htn + dm
+no f/u scheduled
+pt anxious about sx
+no f/u scheduled
+cc: routine checkup
+no recent a1c
+pt smokes 1ppd
+vitals: BP 147/93 HR 95
+pt smokes 1ppd
+pt missed meds 3x this wk
+
+=== PATIENT_028.txt ===
+no f/u scheduled
+pt smokes 1ppd
+pt denies cp but reports tightness on exertion
+meds: omeprazole 20 qd
+no f/u scheduled
+vitals: BP 101/75 HR 96 T 99.7
+pt feels better today
+no recent a1c
+
+=== PATIENT_029.txt ===
+labs pending
+pt c/o dizziness x 8d
+pt missed meds 3x this wk
+no recent a1c
+hx of htn + dm
+labs pending
+bp 148/71 hr 86 temp 97.1
+no recent a1c
+plan: f/u 2w
+
+=== PATIENT_030.txt ===
+pt anxious about sx
+plan: prescribe inhaler
+pt c/o rash x 5d
+no meds listed but pt taking metformin
+
+=== PATIENT_031.txt ===
+dx: osteoarthritis
+pt smokes 1ppd
+cc: routine checkup
+
+=== PATIENT_032.txt ===
+pt feels better today
+meds: ibuprofen 400 tid, atorvastatin 20 qhs, albuterol prn
+pt c/o knee pain x 6d
+no recent a1c
+pt feels better today
+bp 144/72 hr 74 temp 97.1
+pt smokes 1ppd
+
+=== PATIENT_033.txt ===
+pt missed meds 3x this wk
+pt routine checkup
+current meds: lisinopril 10 qd, atorvastatin 20 qhs, albuterol prn
+BP 160/71 HR 63 T 98.1
+pt smokes 1ppd
+pt missed meds 3x this wk
+plan: increase metformin
+dx: t2dm uncontrolled
+
+=== PATIENT_034.txt ===
+pt smokes 1ppd
+pt smokes 1ppd
+hx of htn + dm
+pt feels better today
+hx of htn + dm
+cc: c/o rash x 10d
+vitals: bp 130/86 hr 74 temp 99.0
+labs pending
+
+=== PATIENT_035.txt ===
+pt c/o abd pain x 2d
+vitals: bp 107/67 hr 85 temp 99.7
+pt denies cp but reports tightness on exertion
+plan: hydration + rest
+dx: t2dm uncontrolled
+meds: hctz 25 qd
+
+=== PATIENT_036.txt ===
+current meds: atorvastatin 20 qhs, lisinopril 10 qd, ibuprofen 400 tid
+pt c/o knee pain x 4d
+plan: refer to cardio
+dx: htn
+
+=== PATIENT_037.txt ===
+pt feels better today
+labs pending
+pt c/o sob x 5d
+pt smokes 1ppd
+dx: t2dm uncontrolled
+pt denies cp but reports tightness on exertion
+pt feels better today
+pt feels better today
+pt anxious about sx
+hx of htn + dm
+
+=== PATIENT_038.txt ===
+current meds: ibuprofen 400 tid
+pt missed meds 3x this wk
+pt smokes 1ppd
+no meds listed but pt taking metformin
+pt missed meds 3x this wk
+pt c/o abd pain x 10d
+BP 141/71 HR 94
+labs pending
+pt anxious about sx
+labs pending
+no f/u scheduled
+pt anxious about sx
+
+=== PATIENT_039.txt ===
+pt smokes 1ppd
+dx: benign positional vertigo
+vitals: bp 118/61 hr 83 temp 98.3
+pt denies cp but reports tightness on exertion
+no f/u scheduled
+pt anxious about sx
+pt feels better today
+pt smokes 1ppd
+meds: ibuprofen 400 tid, hctz 25 qd, levothyroxine 75 qd
+pt feels better today
+
+=== PATIENT_040.txt ===
+vitals: vitals: bp 110/97 hr 60 temp 97.1
+cc: c/o dizziness x 10d
+pt feels better today
+no recent a1c
+pt smokes 1ppd
+hx of htn + dm
+labs pending
+pt smokes 1ppd
+pt missed meds 3x this wk
+dx: chronic fatigue syndrome
+plan: prescribe inhaler
+pt anxious about sx
+
+=== PATIENT_041.txt ===
+plan: prescribe inhaler
+bp 124/86 hr 80 temp 97.3
+dx: asthma exacerbation
+pt c/o knee pain x 7d
+no f/u scheduled
+current meds: omeprazole 20 qd
+
+=== PATIENT_042.txt ===
+vitals: bp 149/88 hr 80 temp 97.9
+no f/u scheduled
+dx: benign positional vertigo
+plan: monitor bp
+pt c/o cp x 3d
+
+=== PATIENT_043.txt ===
+vitals: bp 120/84 hr 95 temp 98.2
+no f/u scheduled
+pt missed meds 3x this wk
+pt smokes 1ppd
+
+=== PATIENT_044.txt ===
+vitals: bp 106/84 hr 72 temp 99.9
+pt smokes 1ppd
+plan: start abx
+pt c/o rash x 3d
+pt feels better today
+pt smokes 1ppd
+pt feels better today
+current meds: levothyroxine 75 qd
+
+=== PATIENT_045.txt ===
+pt anxious about sx
+pt anxious about sx
+plan: order labs
+pt c/o cp x 4d
+dx: contact dermatitis
+bp 117/67 hr 76 temp 100.1
+
+=== PATIENT_046.txt ===
+dx: stable angina
+BP 154/87 HR 76
+plan: recommend PT
+
+=== PATIENT_047.txt ===
+BP 102/86 HR 84
+pt c/o back pain x 5d
+plan: f/u 2w
+pt feels better today
+
+=== PATIENT_048.txt ===
+pt anxious about sx
+no recent a1c
+plan: order labs
+pt c/o dizziness x 5d
+
+=== PATIENT_049.txt ===
+no recent a1c
+no recent a1c
+pt smokes 1ppd
+labs pending
+pt smokes 1ppd
+BP 149/87 HR 88 T 98.3
+pt c/o knee pain x 2d
+pt smokes 1ppd
+hx of htn + dm
+pt missed meds 3x this wk
+
+=== PATIENT_050.txt ===
+cc: c/o knee pain x 2d
+vitals: bp 142/75 hr 81 temp 100.3
+pt denies cp but reports tightness on exertion
+pt missed meds 3x this wk
+pt feels better today
+
+=== PATIENT_051.txt ===
+cc: routine checkup
+pt anxious about sx
+dx: viral uri
+meds: ibuprofen 400 tid, atorvastatin 20 qhs
+
+=== PATIENT_052.txt ===
+dx: benign positional vertigo
+pt anxious about sx
+pt anxious about sx
+pt smokes 1ppd
+no f/u scheduled
+labs pending
+pt anxious about sx
+cc: c/o cp x 3d
+pt feels better today
+no recent a1c
+pt smokes 1ppd
+pt missed meds 3x this wk
+
+=== PATIENT_053.txt ===
+dx: benign positional vertigo
+no meds listed but pt taking metformin
+plan: prescribe inhaler
+hx of htn + dm
+pt smokes 1ppd
+pt c/o sob x 2d
+labs pending
+no recent a1c
+current meds: ibuprofen 400 tid
+vitals: bp 116/90 hr 84 temp 99.2
+
+=== PATIENT_054.txt ===
+vitals: BP 137/65 HR 100 T 98.9
+cc: c/o rash x 7d
+no recent a1c
+plan: refer to cardio
+
+=== PATIENT_055.txt ===
+pt smokes 1ppd
+pt c/o fatigue x 2d
+vitals: bp 157/99 hr 85 temp 99.1
+pt denies cp but reports tightness on exertion
+current meds: ibuprofen 400 tid
+
+=== PATIENT_056.txt ===
+dx: t2dm uncontrolled
+plan: reinforce adherence
+no meds listed but pt taking metformin
+cc: c/o back pain x 5d
+meds: hctz 25 qd, ibuprofen 400 tid
+
+=== PATIENT_057.txt ===
+pt anxious about sx
+no recent a1c
+hx of htn + dm
+labs pending
+plan: order labs
+pt smokes 1ppd
+meds: albuterol prn
+dx: viral uri
+vitals: bp 119/94 hr 100 temp 100.4
+
+=== PATIENT_058.txt ===
+plan: refer to cardio
+pt missed meds 3x this wk
+dx: asthma exacerbation
+pt anxious about sx
+no recent a1c
+no f/u scheduled
+vitals: vitals: bp 106/80 hr 60 temp 97.0
+cc: c/o abd pain x 8d
+pt anxious about sx
+pt missed meds 3x this wk
+
+=== PATIENT_059.txt ===
+pt feels better today
+pt missed meds 3x this wk
+pt smokes 1ppd
+vitals: vitals: bp 146/95 hr 61 temp 97.1
+pt feels better today
+cc: c/o abd pain x 1d
+dx: asthma exacerbation
+pt missed meds 3x this wk
+pt missed meds 3x this wk
+labs pending
+
+=== PATIENT_060.txt ===
+no meds listed but pt taking metformin
+pt missed meds 3x this wk
+labs pending
+pt anxious about sx
+pt c/o abd pain x 10d
+pt anxious about sx
+
+=== PATIENT_061.txt ===
+no recent a1c
+BP 106/92 HR 68 T 100.2
+pt c/o knee pain x 7d
+dx: viral uri
+hx of htn + dm
+
+=== PATIENT_062.txt ===
+pt c/o rash x 8d
+plan: prescribe inhaler
+dx: t2dm uncontrolled
+labs pending
+no recent a1c
+labs pending
+BP 114/100 HR 69
+no recent a1c
+current meds: hctz 25 qd, ibuprofen 400 tid
+pt anxious about sx
+
+=== PATIENT_063.txt ===
+pt missed meds 3x this wk
+cc: c/o fatigue x 2d
+vitals: BP 121/61 HR 63 T 98.0
+meds: levothyroxine 75 qd, amoxicillin 500 tid
+
+=== PATIENT_064.txt ===
+pt anxious about sx
+no recent a1c
+pt c/o cp x 8d
+labs pending
+bp 141/69 hr 79 temp 98.9
+pt missed meds 3x this wk
+pt anxious about sx
+no recent a1c
+pt smokes 1ppd
+pt smokes 1ppd
+
+=== PATIENT_065.txt ===
+hx of htn + dm
+pt anxious about sx
+dx: gastroenteritis
+no recent a1c
+plan: reinforce adherence
+pt anxious about sx
+labs pending
+bp 114/94 hr 94 temp 98.6
+pt anxious about sx
+pt smokes 1ppd
+pt feels better today
+pt smokes 1ppd
+
+=== PATIENT_066.txt ===
+dx: contact dermatitis
+plan: f/u 2w
+pt routine checkup
+
+=== PATIENT_067.txt ===
+pt c/o rash x 3d
+plan: increase metformin
+pt missed meds 3x this wk
+pt feels better today
+bp 119/80 hr 98 temp 98.8
+hx of htn + dm
+meds: atorvastatin 20 qhs
+
+=== PATIENT_068.txt ===
+dx: viral uri
+pt missed meds 3x this wk
+no recent a1c
+hx of htn + dm
+pt anxious about sx
+pt smokes 1ppd
+no f/u scheduled
+no recent a1c
+plan: prescribe inhaler
+vitals: BP 156/95 HR 79 T 98.6
+no meds listed but pt taking metformin
+
+=== PATIENT_069.txt ===
+dx: viral uri
+pt smokes 1ppd
+plan: monitor bp
+pt anxious about sx
+meds: metformin 500 bid, lisinopril 10 qd, levothyroxine 75 qd
+
+=== PATIENT_070.txt ===
+labs pending
+no f/u scheduled
+pt anxious about sx
+dx: osteoarthritis
+no recent a1c
+pt c/o cp x 5d
+pt smokes 1ppd
+BP 114/99 HR 72
+no f/u scheduled
+current meds: albuterol prn, amoxicillin 500 tid, hctz 25 qd
+
+=== PATIENT_071.txt ===
+vitals: vitals: bp 160/83 hr 80 temp 100.0
+pt anxious about sx
+hx of htn + dm
+dx: chronic fatigue syndrome
+labs pending
+plan: monitor bp
+no recent a1c
+cc: c/o abd pain x 2d
+
+=== PATIENT_072.txt ===
+hx of htn + dm
+plan: increase metformin
+pt c/o abd pain x 9d
+BP 147/64 HR 98 T 99.7
+
+=== PATIENT_073.txt ===
+pt feels better today
+no recent a1c
+dx: osteoarthritis
+pt smokes 1ppd
+pt anxious about sx
+pt missed meds 3x this wk
+vitals: vitals: bp 115/60 hr 99 temp 98.3
+pt anxious about sx
+hx of htn + dm
+pt feels better today
+labs pending
+hx of htn + dm
+
+=== PATIENT_074.txt ===
+dx: chronic fatigue syndrome
+plan: hydration + rest
+pt c/o sob x 9d
+pt anxious about sx
+vitals: bp 110/77 hr 86 temp 97.0
+pt missed meds 3x this wk
+pt smokes 1ppd
+
+=== PATIENT_075.txt ===
+plan: prescribe inhaler
+pt denies cp but reports tightness on exertion
+no f/u scheduled
+pt c/o back pain x 8d
+pt missed meds 3x this wk
+pt missed meds 3x this wk
+BP 110/69 HR 99
+
+=== PATIENT_076.txt ===
+plan: recommend PT
+current meds: albuterol prn, amoxicillin 500 tid, atorvastatin 20 qhs
+pt c/o fatigue x 8d
+hx of htn + dm
+no f/u scheduled
+pt smokes 1ppd
+labs pending
+
+=== PATIENT_077.txt ===
+vitals: BP 136/93 HR 83 T 97.4
+labs pending
+plan: start abx
+pt smokes 1ppd
+meds: atorvastatin 20 qhs, levothyroxine 75 qd
+dx: gastroenteritis
+no meds listed but pt taking metformin
+pt anxious about sx
+
+=== PATIENT_078.txt ===
+pt missed meds 3x this wk
+bp 108/66 hr 91 temp 97.6
+pt feels better today
+no f/u scheduled
+pt anxious about sx
+pt missed meds 3x this wk
+pt c/o dizziness x 3d
+no f/u scheduled
+labs pending
+
+=== PATIENT_079.txt ===
+plan: monitor bp
+hx of htn + dm
+dx: contact dermatitis
+labs pending
+pt c/o sob x 6d
+
+=== PATIENT_080.txt ===
+no meds listed but pt taking metformin
+bp 133/93 hr 67 temp 97.1
+pt feels better today
+pt denies cp but reports tightness on exertion
+plan: increase metformin
+hx of htn + dm
+no f/u scheduled
+pt feels better today
+pt c/o rash x 2d
+
+=== PATIENT_081.txt ===
+current meds: metformin 500 bid, lisinopril 10 qd
+pt anxious about sx
+dx: asthma exacerbation
+pt smokes 1ppd
+plan: hydration + rest
+
+=== PATIENT_082.txt ===
+cc: c/o rash x 3d
+plan: refer to cardio
+meds: levothyroxine 75 qd, atorvastatin 20 qhs
+dx: viral uri
+vitals: BP 102/95 HR 70 T 98.7
+
+=== PATIENT_083.txt ===
+BP 158/100 HR 82 T 98.2
+current meds: ibuprofen 400 tid, metformin 500 bid, atorvastatin 20 qhs
+dx: osteoarthritis
+pt denies cp but reports tightness on exertion
+pt c/o dizziness x 3d
+
+=== PATIENT_084.txt ===
+dx: htn
+pt c/o abd pain x 8d
+BP 102/82 HR 83 T 97.8
+
+=== PATIENT_085.txt ===
+pt missed meds 3x this wk
+pt missed meds 3x this wk
+hx of htn + dm
+no f/u scheduled
+pt c/o back pain x 4d
+pt anxious about sx
+dx: htn
+bp 130/90 hr 73 temp 98.5
+pt smokes 1ppd
+pt missed meds 3x this wk
+labs pending
+
+=== PATIENT_086.txt ===
+pt missed meds 3x this wk
+pt anxious about sx
+labs pending
+current meds: albuterol prn
+no recent a1c
+pt c/o fatigue x 7d
+dx: benign positional vertigo
+vitals: bp 154/78 hr 98 temp 99.7
+no f/u scheduled
+pt anxious about sx
+no f/u scheduled
+hx of htn + dm
+
+=== PATIENT_087.txt ===
+plan: order labs
+pt missed meds 3x this wk
+pt anxious about sx
+pt c/o sob x 1d
+pt missed meds 3x this wk
+labs pending
+BP 144/81 HR 97
+no recent a1c
+
+=== PATIENT_088.txt ===
+plan: reinforce adherence
+dx: chronic fatigue syndrome
+no recent a1c
+pt c/o knee pain x 4d
+pt smokes 1ppd
+
+=== PATIENT_089.txt ===
+dx: chronic fatigue syndrome
+pt denies cp but reports tightness on exertion
+pt smokes 1ppd
+vitals: BP 120/98 HR 63
+no f/u scheduled
+labs pending
+cc: c/o back pain x 8d
+
+=== PATIENT_090.txt ===
+no meds listed but pt taking metformin
+vitals: bp 107/68 hr 92 temp 98.4
+plan: reinforce adherence
+pt denies cp but reports tightness on exertion
+pt c/o back pain x 7d
+current meds: ibuprofen 400 tid
+
+=== PATIENT_091.txt ===
+no f/u scheduled
+plan: order labs
+pt c/o dizziness x 5d
+BP 123/98 HR 61
+pt denies cp but reports tightness on exertion
+
+=== PATIENT_092.txt ===
+no f/u scheduled
+hx of htn + dm
+bp 131/94 hr 81 temp 97.0
+no recent a1c
+pt missed meds 3x this wk
+pt feels better today
+pt smokes 1ppd
+pt smokes 1ppd
+
+=== PATIENT_093.txt ===
+dx: benign positional vertigo
+pt c/o abd pain x 4d
+pt feels better today
+pt anxious about sx
+
+=== PATIENT_094.txt ===
+dx: osteoarthritis
+pt denies cp but reports tightness on exertion
+pt c/o cp x 8d
+bp 129/100 hr 87 temp 97.2
+plan: recommend PT
+
+=== PATIENT_095.txt ===
+no recent a1c
+pt feels better today
+no recent a1c
+no recent a1c
+meds: albuterol prn, lisinopril 10 qd, amoxicillin 500 tid
+no f/u scheduled
+labs pending
+cc: c/o knee pain x 2d
+pt missed meds 3x this wk
+dx: t2dm uncontrolled
+labs pending
+no f/u scheduled
+
+=== PATIENT_096.txt ===
+pt anxious about sx
+no f/u scheduled
+pt missed meds 3x this wk
+BP 153/79 HR 75
+pt denies cp but reports tightness on exertion
+pt anxious about sx
+dx: osteoarthritis
+plan: recommend PT
+pt anxious about sx
+no recent a1c
+
+=== PATIENT_097.txt ===
+dx: gastroenteritis
+vitals: vitals: bp 159/90 hr 69 temp 99.3
+plan: hydration + rest
+cc: c/o dizziness x 5d
+meds: amoxicillin 500 tid, ibuprofen 400 tid, albuterol prn
+
+=== PATIENT_098.txt ===
+no recent a1c
+dx: benign positional vertigo
+plan: hydration + rest
+pt missed meds 3x this wk
+vitals: bp 108/86 hr 72 temp 99.9
+labs pending
+pt c/o abd pain x 4d
+
+=== PATIENT_099.txt ===
+current meds: atorvastatin 20 qhs, lisinopril 10 qd, albuterol prn
+pt feels better today
+pt missed meds 3x this wk
+no recent a1c
+no recent a1c
+pt c/o rash x 8d
+pt smokes 1ppd
+no f/u scheduled
+
+=== PATIENT_100.txt ===
+vitals: BP 112/82 HR 69
+meds: ibuprofen 400 tid, levothyroxine 75 qd, albuterol prn
+hx of htn + dm
+dx: viral uri
+hx of htn + dm
+pt smokes 1ppd
+cc: c/o abd pain x 5d
+pt feels better today
