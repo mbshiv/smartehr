@@ -17,13 +17,11 @@ export interface DocumentationState {
 }
 
 interface DocumentationAssistantProps {
-  onPatientChange?: (patientId: string | null) => void;
   state: DocumentationState;
   onStateChange: (state: DocumentationState) => void;
 }
 
 const DocumentationAssistant = ({
-  onPatientChange,
   state,
   onStateChange,
 }: DocumentationAssistantProps) => {
@@ -44,7 +42,6 @@ const DocumentationAssistant = ({
 
   const handlePatientSelect = (patientId: string, notes: string) => {
     updateState({ inputNotes: notes, selectedPatientId: patientId });
-    onPatientChange?.(patientId);
     toast.success(`Loaded notes for ${patientId}`);
   };
 

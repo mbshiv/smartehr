@@ -31,12 +31,11 @@ export interface BillingState {
 }
 
 interface BillingValidatorProps {
-  onPatientChange?: (patientId: string | null) => void;
   state: BillingState;
   onStateChange: (state: BillingState) => void;
 }
 
-const BillingValidator = ({ onPatientChange, state, onStateChange }: BillingValidatorProps) => {
+const BillingValidator = ({ state, onStateChange }: BillingValidatorProps) => {
   const [isValidating, setIsValidating] = useState(false);
   const [isExplaining, setIsExplaining] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -60,7 +59,6 @@ const BillingValidator = ({ onPatientChange, state, onStateChange }: BillingVali
       validationResult: null,
       reasoning: "",
     });
-    onPatientChange?.(note.patient_id);
     toast.success(`Loaded ${noteTag}`);
   };
 
