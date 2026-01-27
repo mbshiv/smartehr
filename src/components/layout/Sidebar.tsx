@@ -36,7 +36,7 @@ const Sidebar = ({
 
       {/* Navigation */}
       <nav className="flex-1 p-4 space-y-2">
-        <p className="text-xs font-medium text-sidebar-foreground/50 uppercase tracking-wider mb-4 px-3">MODULES</p>
+        <p className="text-xs font-medium text-sidebar-foreground/50 uppercase tracking-wider mb-4 px-3">SMART MODULES</p>
         {navItems.map(item => <button key={item.id} onClick={() => onModuleChange(item.id)} className={cn("w-full flex items-start gap-3 p-3 rounded-lg transition-all duration-200 text-left group", activeModule === item.id ? "bg-sidebar-primary text-sidebar-primary-foreground" : "hover:bg-sidebar-accent text-sidebar-foreground/80 hover:text-sidebar-accent-foreground")}>
             <item.icon className={cn("w-5 h-5 mt-0.5 transition-colors", activeModule === item.id ? "text-sidebar-primary-foreground" : "text-sidebar-foreground/60 group-hover:text-sidebar-accent-foreground")} />
             <div>
