@@ -6,6 +6,7 @@ import BillingValidator from "@/components/modules/BillingValidator";
 
 const Index = () => {
   const [activeModule, setActiveModule] = useState<"documentation" | "billing">("documentation");
+  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
 
   return (
     <div className="flex h-screen bg-background overflow-hidden">
@@ -16,14 +17,14 @@ const Index = () => {
       <main className="flex-1 flex overflow-hidden">
         <div className="flex-1 overflow-hidden bg-panel">
           {activeModule === "documentation" ? (
-            <DocumentationAssistant />
+            <DocumentationAssistant onPatientChange={setSelectedPatientId} />
           ) : (
-            <BillingValidator />
+            <BillingValidator onPatientChange={setSelectedPatientId} />
           )}
         </div>
 
         {/* Right Patient Sidebar */}
-        <PatientSidebar />
+        <PatientSidebar selectedPatientId={selectedPatientId} />
       </main>
     </div>
   );

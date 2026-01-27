@@ -1,9 +1,20 @@
-import { User, Calendar, Shield, AlertTriangle, Heart } from "lucide-react";
-import { syntheticPatient } from "@/data/syntheticData";
+import { User, Calendar, Shield, AlertTriangle, Heart, Pill } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { getPatientProfile, getDefaultPatientProfile, PatientProfile } from "@/data/patientProfilesParser";
+import { useMemo } from "react";
 
-const PatientSidebar = () => {
-  const patient = syntheticPatient;
+interface PatientSidebarProps {
+  selectedPatientId: string | null;
+}
+
+const PatientSidebar = ({ selectedPatientId }: PatientSidebarProps) => {
+  const patient = useMemo<PatientProfile>(() => {
+    if (selectedPatientId) {
+      const profile = getPatientProfile(selectedPatientId);
+      if (profile) return profile;
+    }
+    return getDefaultPatientProfile();
+  }, [selectedPatientId]);
 
   const calculateAge = (dob: string) => {
     const birthDate = new Date(dob);
@@ -43,7 +54,7 @@ const PatientSidebar = () => {
           <div className="space-y-3">
             <div className="flex items-center gap-3 text-sm">
               <span className="text-muted-foreground w-20">Patient ID</span>
-              <span className="font-mono text-foreground">{patient.patient_id}</span>
+              <span className="font-mono text-foreground">{patient.patientId}</span>
             </div>
             <div className="flex items-center gap-3 text-sm">
               <span className="text-muted-foreground w-20">DOB</span>
@@ -54,10 +65,6 @@ const PatientSidebar = () => {
                   year: "numeric",
                 })}
               </span>
-            </div>
-            <div className="flex items-center gap-3 text-sm">
-              <span className="text-muted-foreground w-20">PCP</span>
-              <span className="text-foreground">{patient.pcp}</span>
             </div>
           </div>
         </section>
@@ -74,22 +81,6 @@ const PatientSidebar = () => {
           </div>
         </section>
 
-        {/* Last Visit */}
-        <section>
-          <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-2">
-            <Calendar className="w-3.5 h-3.5" />
-            Last Visit
-          </h3>
-          <p className="text-sm text-foreground">
-            {new Date(patient.lastVisit).toLocaleDateString("en-US", {
-              weekday: "long",
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </p>
-        </section>
-
         {/* Allergies */}
         <section>
           <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-2">
@@ -97,15 +88,19 @@ const PatientSidebar = () => {
             Allergies
           </h3>
           <div className="flex flex-wrap gap-2">
-            {patient.allergies.map((allergy) => (
-              <Badge
-                key={allergy}
-                variant="outline"
-                className="bg-destructive/10 text-destructive border-destructive/30"
-              >
-                {allergy}
-              </Badge>
-            ))}
+            {patient.allergies.length > 0 ? (
+              patient.allergies.map((allergy) => (
+                <Badge
+                  key={allergy}
+                  variant="outline"
+                  className="bg-destructive/10 text-destructive border-destructive/30"
+                >
+                  {allergy}
+                </Badge>
+              ))
+            ) : (
+              <span className="text-sm text-muted-foreground">No known allergies</span>
+            )}
           </div>
         </section>
 
@@ -116,14 +111,40 @@ const PatientSidebar = () => {
             Active Conditions
           </h3>
           <div className="space-y-2">
-            {patient.conditions.map((condition) => (
-              <div
-                key={condition}
-                className="bg-secondary/50 rounded-lg px-3 py-2 text-sm text-foreground"
-              >
-                {condition}
-              </div>
-            ))}
+            {patient.conditions.length > 0 ? (
+              patient.conditions.map((condition) => (
+                <div
+                  key={condition}
+                  className="bg-secondary/50 rounded-lg px-3 py-2 text-sm text-foreground"
+                >
+                  {condition}
+                </div>
+              ))
+            ) : (
+              <span className="text-sm text-muted-foreground">No active conditions</span>
+            )}
+          </div>
+        </section>
+
+        {/* Medications */}
+        <section>
+          <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-2">
+            <Pill className="w-3.5 h-3.5" />
+            Current Medications
+          </h3>
+          <div className="space-y-2">
+            {patient.medications.length > 0 ? (
+              patient.medications.map((medication) => (
+                <div
+                  key={medication}
+                  className="bg-accent/50 rounded-lg px-3 py-2 text-sm text-foreground"
+                >
+                  {medication}
+                </div>
+              ))
+            ) : (
+              <span className="text-sm text-muted-foreground">No current medications</span>
+            )}
           </div>
         </section>
       </div>

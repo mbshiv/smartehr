@@ -1,0 +1,999 @@
+Patient 001
+Name: Patient_001
+DOB: 1966-01-23
+Gender: Female
+Insurance: Aetna
+Allergies: Bee stings, Penicillin
+Conditions: None
+Medications: Omeprazole, Metformin
+----------------------------------------
+
+Patient 002
+Name: Patient_002
+DOB: 1990-03-26
+Gender: Female
+Insurance: HealthFirst
+Allergies: Penicillin, Latex, Bee stings
+Conditions: None
+Medications: Ibuprofen, Omeprazole
+----------------------------------------
+
+Patient 003
+Name: Patient_003
+DOB: 1977-08-10
+Gender: Male
+Insurance: HealthFirst
+Allergies: Penicillin, Shellfish, Latex
+Conditions: COPD
+Medications: Ibuprofen, Omeprazole, Metformin
+----------------------------------------
+
+Patient 004
+Name: Patient_004
+DOB: 1981-08-29
+Gender: Female
+Insurance: UnitedHealth
+Allergies: Shellfish, Latex
+Conditions: None
+Medications: Metformin
+----------------------------------------
+
+Patient 005
+Name: Patient_005
+DOB: 1965-10-19
+Gender: Female
+Insurance: BlueCross
+Allergies: Penicillin, Shellfish, Latex
+Conditions: Diabetes
+Medications: Sertraline, Atorvastatin, Ibuprofen
+----------------------------------------
+
+Patient 006
+Name: Patient_006
+DOB: 1994-06-07
+Gender: Male
+Insurance: Aetna
+Allergies: None
+Conditions: None
+Medications: None
+----------------------------------------
+
+Patient 007
+Name: Patient_007
+DOB: 1993-09-21
+Gender: Male
+Insurance: UnitedHealth
+Allergies: None
+Conditions: Depression, Asthma, Anxiety
+Medications: None
+----------------------------------------
+
+Patient 008
+Name: Patient_008
+DOB: 1960-01-13
+Gender: Male
+Insurance: BlueCross
+Allergies: None
+Conditions: Hypertension
+Medications: Sertraline, Ibuprofen, Albuterol
+----------------------------------------
+
+Patient 009
+Name: Patient_009
+DOB: 1976-02-04
+Gender: Male
+Insurance: WellCare
+Allergies: Shellfish, Pollen, Penicillin
+Conditions: None
+Medications: Lisinopril
+----------------------------------------
+
+Patient 010
+Name: Patient_010
+DOB: 1971-09-02
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: Latex, Bee stings
+Conditions: Asthma
+Medications: None
+----------------------------------------
+
+Patient 011
+Name: Patient_011
+DOB: 1984-02-09
+Gender: Male
+Insurance: Aetna
+Allergies: Shellfish, Dust
+Conditions: Asthma, Diabetes
+Medications: Sertraline
+----------------------------------------
+
+Patient 012
+Name: Patient_012
+DOB: 1982-09-17
+Gender: Male
+Insurance: Cigna
+Allergies: Shellfish, Bee stings
+Conditions: None
+Medications: Ibuprofen, Atorvastatin, Omeprazole
+----------------------------------------
+
+Patient 013
+Name: Patient_013
+DOB: 1980-02-03
+Gender: Male
+Insurance: Aetna
+Allergies: Peanuts
+Conditions: Diabetes, Asthma, COPD
+Medications: None
+----------------------------------------
+
+Patient 014
+Name: Patient_014
+DOB: 1966-04-19
+Gender: Female
+Insurance: Aetna
+Allergies: Peanuts, Penicillin
+Conditions: None
+Medications: None
+----------------------------------------
+
+Patient 015
+Name: Patient_015
+DOB: 1975-07-20
+Gender: Male
+Insurance: Aetna
+Allergies: None
+Conditions: Depression, Asthma
+Medications: Ibuprofen, Sertraline, Atorvastatin
+----------------------------------------
+
+Patient 016
+Name: Patient_016
+DOB: 1990-05-14
+Gender: Male
+Insurance: Kaiser Permanente
+Allergies: None
+Conditions: Hypertension, Anxiety, Arthritis
+Medications: None
+----------------------------------------
+
+Patient 017
+Name: Patient_017
+DOB: 1979-04-12
+Gender: Male
+Insurance: BlueCross
+Allergies: Shellfish, Pollen
+Conditions: Diabetes
+Medications: Atorvastatin, Omeprazole, Albuterol
+----------------------------------------
+
+Patient 018
+Name: Patient_018
+DOB: 1980-06-08
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: Bee stings, Shellfish, Peanuts
+Conditions: COPD, Hypertension, Diabetes
+Medications: Omeprazole, Ibuprofen
+----------------------------------------
+
+Patient 019
+Name: Patient_019
+DOB: 1973-09-01
+Gender: Female
+Insurance: WellCare
+Allergies: None
+Conditions: COPD, Depression, Diabetes
+Medications: Lisinopril
+----------------------------------------
+
+Patient 020
+Name: Patient_020
+DOB: 2003-11-10
+Gender: Male
+Insurance: Kaiser Permanente
+Allergies: Pollen, Latex
+Conditions: COPD, Anxiety
+Medications: Atorvastatin, Sertraline, Lisinopril
+----------------------------------------
+
+Patient 021
+Name: Patient_021
+DOB: 1998-12-26
+Gender: Male
+Insurance: Cigna
+Allergies: None
+Conditions: Asthma
+Medications: None
+----------------------------------------
+
+Patient 022
+Name: Patient_022
+DOB: 1979-02-16
+Gender: Female
+Insurance: Aetna
+Allergies: Latex, Bee stings
+Conditions: None
+Medications: Metformin
+----------------------------------------
+
+Patient 023
+Name: Patient_023
+DOB: 2003-04-23
+Gender: Female
+Insurance: HealthFirst
+Allergies: Bee stings, Dust, Latex
+Conditions: Depression, Arthritis
+Medications: Atorvastatin, Ibuprofen
+----------------------------------------
+
+Patient 024
+Name: Patient_024
+DOB: 1955-10-25
+Gender: Female
+Insurance: HealthFirst
+Allergies: None
+Conditions: Depression
+Medications: Lisinopril, Ibuprofen, Atorvastatin
+----------------------------------------
+
+Patient 025
+Name: Patient_025
+DOB: 2001-12-31
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: Pollen
+Conditions: None
+Medications: Omeprazole, Sertraline, Albuterol
+----------------------------------------
+
+Patient 026
+Name: Patient_026
+DOB: 1960-06-20
+Gender: Male
+Insurance: Cigna
+Allergies: Pollen, Penicillin
+Conditions: Anxiety
+Medications: None
+----------------------------------------
+
+Patient 027
+Name: Patient_027
+DOB: 1999-07-01
+Gender: Female
+Insurance: WellCare
+Allergies: Dust, Bee stings
+Conditions: None
+Medications: Albuterol, Metformin
+----------------------------------------
+
+Patient 028
+Name: Patient_028
+DOB: 1965-08-24
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: Shellfish, Penicillin, Dust
+Conditions: None
+Medications: None
+----------------------------------------
+
+Patient 029
+Name: Patient_029
+DOB: 1999-07-15
+Gender: Female
+Insurance: Cigna
+Allergies: None
+Conditions: Arthritis, COPD, Hypertension
+Medications: Lisinopril, Metformin, Ibuprofen
+----------------------------------------
+
+Patient 030
+Name: Patient_030
+DOB: 1995-12-04
+Gender: Male
+Insurance: Cigna
+Allergies: None
+Conditions: Anxiety
+Medications: Lisinopril
+----------------------------------------
+
+Patient 031
+Name: Patient_031
+DOB: 1988-08-11
+Gender: Female
+Insurance: Aetna
+Allergies: Bee stings, Latex, Pollen
+Conditions: Anxiety
+Medications: None
+----------------------------------------
+
+Patient 032
+Name: Patient_032
+DOB: 2002-05-18
+Gender: Male
+Insurance: HealthFirst
+Allergies: None
+Conditions: None
+Medications: Albuterol, Sertraline
+----------------------------------------
+
+Patient 033
+Name: Patient_033
+DOB: 2000-01-19
+Gender: Male
+Insurance: WellCare
+Allergies: None
+Conditions: None
+Medications: None
+----------------------------------------
+
+Patient 034
+Name: Patient_034
+DOB: 1953-07-29
+Gender: Male
+Insurance: Aetna
+Allergies: None
+Conditions: Hypertension
+Medications: None
+----------------------------------------
+
+Patient 035
+Name: Patient_035
+DOB: 1950-08-23
+Gender: Male
+Insurance: BlueCross
+Allergies: None
+Conditions: Depression, Arthritis
+Medications: Albuterol, Metformin
+----------------------------------------
+
+Patient 036
+Name: Patient_036
+DOB: 1968-08-10
+Gender: Female
+Insurance: BlueCross
+Allergies: None
+Conditions: Asthma
+Medications: None
+----------------------------------------
+
+Patient 037
+Name: Patient_037
+DOB: 1973-01-10
+Gender: Male
+Insurance: Cigna
+Allergies: Latex, Shellfish
+Conditions: COPD, Diabetes
+Medications: None
+----------------------------------------
+
+Patient 038
+Name: Patient_038
+DOB: 1991-01-30
+Gender: Male
+Insurance: Kaiser Permanente
+Allergies: Shellfish, Penicillin
+Conditions: Diabetes, Depression, COPD
+Medications: Omeprazole
+----------------------------------------
+
+Patient 039
+Name: Patient_039
+DOB: 1950-08-22
+Gender: Female
+Insurance: HealthFirst
+Allergies: Bee stings, Peanuts
+Conditions: None
+Medications: Ibuprofen, Omeprazole, Metformin
+----------------------------------------
+
+Patient 040
+Name: Patient_040
+DOB: 2001-05-26
+Gender: Female
+Insurance: WellCare
+Allergies: None
+Conditions: Depression, Asthma
+Medications: Ibuprofen, Metformin, Atorvastatin
+----------------------------------------
+
+Patient 041
+Name: Patient_041
+DOB: 2004-09-25
+Gender: Female
+Insurance: UnitedHealth
+Allergies: None
+Conditions: None
+Medications: Sertraline, Atorvastatin, Lisinopril
+----------------------------------------
+
+Patient 042
+Name: Patient_042
+DOB: 1976-08-19
+Gender: Female
+Insurance: Aetna
+Allergies: Peanuts, Dust
+Conditions: Asthma, Diabetes, Hypertension
+Medications: Sertraline, Metformin, Omeprazole
+----------------------------------------
+
+Patient 043
+Name: Patient_043
+DOB: 1985-09-21
+Gender: Male
+Insurance: UnitedHealth
+Allergies: None
+Conditions: None
+Medications: Atorvastatin, Sertraline, Ibuprofen
+----------------------------------------
+
+Patient 044
+Name: Patient_044
+DOB: 2000-04-14
+Gender: Female
+Insurance: HealthFirst
+Allergies: Penicillin, Peanuts, Pollen
+Conditions: Diabetes, Asthma
+Medications: Ibuprofen, Albuterol, Lisinopril
+----------------------------------------
+
+Patient 045
+Name: Patient_045
+DOB: 1998-09-25
+Gender: Female
+Insurance: HealthFirst
+Allergies: Bee stings, Penicillin, Dust
+Conditions: None
+Medications: None
+----------------------------------------
+
+Patient 046
+Name: Patient_046
+DOB: 1992-09-14
+Gender: Male
+Insurance: BlueCross
+Allergies: None
+Conditions: Hypertension
+Medications: Albuterol, Sertraline
+----------------------------------------
+
+Patient 047
+Name: Patient_047
+DOB: 1955-02-15
+Gender: Female
+Insurance: UnitedHealth
+Allergies: Penicillin
+Conditions: Diabetes, Depression, Hypertension
+Medications: Atorvastatin
+----------------------------------------
+
+Patient 048
+Name: Patient_048
+DOB: 1989-07-14
+Gender: Female
+Insurance: Aetna
+Allergies: Shellfish
+Conditions: Asthma, COPD
+Medications: Lisinopril, Ibuprofen, Atorvastatin
+----------------------------------------
+
+Patient 049
+Name: Patient_049
+DOB: 1999-10-31
+Gender: Female
+Insurance: Aetna
+Allergies: Dust, Pollen, Shellfish
+Conditions: COPD
+Medications: None
+----------------------------------------
+
+Patient 050
+Name: Patient_050
+DOB: 1959-06-10
+Gender: Male
+Insurance: Kaiser Permanente
+Allergies: None
+Conditions: Asthma, Anxiety
+Medications: Atorvastatin, Omeprazole
+----------------------------------------
+
+Patient 051
+Name: Patient_051
+DOB: 1950-04-18
+Gender: Female
+Insurance: UnitedHealth
+Allergies: Latex, Shellfish, Bee stings
+Conditions: Asthma, Anxiety
+Medications: Omeprazole, Lisinopril, Albuterol
+----------------------------------------
+
+Patient 052
+Name: Patient_052
+DOB: 1954-10-11
+Gender: Female
+Insurance: HealthFirst
+Allergies: None
+Conditions: Anxiety, Hypertension, Depression
+Medications: Atorvastatin, Metformin
+----------------------------------------
+
+Patient 053
+Name: Patient_053
+DOB: 2004-07-05
+Gender: Female
+Insurance: Aetna
+Allergies: Penicillin, Bee stings, Peanuts
+Conditions: Anxiety, Arthritis, Depression
+Medications: Lisinopril, Albuterol, Metformin
+----------------------------------------
+
+Patient 054
+Name: Patient_054
+DOB: 1996-01-19
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: None
+Conditions: None
+Medications: Lisinopril, Omeprazole
+----------------------------------------
+
+Patient 055
+Name: Patient_055
+DOB: 1989-10-22
+Gender: Female
+Insurance: WellCare
+Allergies: Penicillin, Latex, Peanuts
+Conditions: Asthma, Anxiety, Depression
+Medications: Metformin, Albuterol, Ibuprofen
+----------------------------------------
+
+Patient 056
+Name: Patient_056
+DOB: 1962-05-08
+Gender: Male
+Insurance: WellCare
+Allergies: Penicillin, Shellfish
+Conditions: None
+Medications: Ibuprofen, Sertraline, Atorvastatin
+----------------------------------------
+
+Patient 057
+Name: Patient_057
+DOB: 1993-06-08
+Gender: Male
+Insurance: Cigna
+Allergies: Bee stings
+Conditions: Anxiety, Hypertension, Depression
+Medications: Omeprazole, Sertraline
+----------------------------------------
+
+Patient 058
+Name: Patient_058
+DOB: 1999-01-20
+Gender: Female
+Insurance: Cigna
+Allergies: Peanuts, Bee stings, Penicillin
+Conditions: Asthma, Diabetes, Arthritis
+Medications: Lisinopril, Atorvastatin, Ibuprofen
+----------------------------------------
+
+Patient 059
+Name: Patient_059
+DOB: 1975-01-12
+Gender: Female
+Insurance: WellCare
+Allergies: Penicillin, Bee stings
+Conditions: Anxiety, Arthritis, Diabetes
+Medications: None
+----------------------------------------
+
+Patient 060
+Name: Patient_060
+DOB: 1977-10-19
+Gender: Female
+Insurance: Aetna
+Allergies: None
+Conditions: None
+Medications: Lisinopril, Ibuprofen, Atorvastatin
+----------------------------------------
+
+Patient 061
+Name: Patient_061
+DOB: 1953-10-22
+Gender: Female
+Insurance: Aetna
+Allergies: Bee stings, Penicillin, Dust
+Conditions: None
+Medications: Omeprazole
+----------------------------------------
+
+Patient 062
+Name: Patient_062
+DOB: 1976-09-16
+Gender: Female
+Insurance: Aetna
+Allergies: Dust
+Conditions: None
+Medications: None
+----------------------------------------
+
+Patient 063
+Name: Patient_063
+DOB: 1973-04-07
+Gender: Female
+Insurance: HealthFirst
+Allergies: Latex, Shellfish
+Conditions: Anxiety, Asthma, Depression
+Medications: Lisinopril, Atorvastatin, Metformin
+----------------------------------------
+
+Patient 064
+Name: Patient_064
+DOB: 1966-11-01
+Gender: Female
+Insurance: Aetna
+Allergies: Peanuts, Shellfish, Pollen
+Conditions: Anxiety
+Medications: Ibuprofen
+----------------------------------------
+
+Patient 065
+Name: Patient_065
+DOB: 1974-08-24
+Gender: Male
+Insurance: BlueCross
+Allergies: Shellfish
+Conditions: Arthritis, Hypertension
+Medications: Albuterol, Ibuprofen
+----------------------------------------
+
+Patient 066
+Name: Patient_066
+DOB: 2004-11-17
+Gender: Male
+Insurance: HealthFirst
+Allergies: Pollen, Penicillin, Dust
+Conditions: Hypertension, COPD, Depression
+Medications: None
+----------------------------------------
+
+Patient 067
+Name: Patient_067
+DOB: 1972-06-28
+Gender: Female
+Insurance: BlueCross
+Allergies: None
+Conditions: Anxiety, Diabetes
+Medications: Omeprazole
+----------------------------------------
+
+Patient 068
+Name: Patient_068
+DOB: 1951-01-09
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: Bee stings, Pollen, Penicillin
+Conditions: Diabetes
+Medications: Sertraline
+----------------------------------------
+
+Patient 069
+Name: Patient_069
+DOB: 1989-03-01
+Gender: Female
+Insurance: BlueCross
+Allergies: Bee stings, Pollen, Peanuts
+Conditions: Anxiety, Asthma
+Medications: None
+----------------------------------------
+
+Patient 070
+Name: Patient_070
+DOB: 1999-12-27
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: Penicillin, Shellfish
+Conditions: None
+Medications: None
+----------------------------------------
+
+Patient 071
+Name: Patient_071
+DOB: 1992-12-11
+Gender: Male
+Insurance: UnitedHealth
+Allergies: None
+Conditions: None
+Medications: Metformin, Sertraline
+----------------------------------------
+
+Patient 072
+Name: Patient_072
+DOB: 1972-10-30
+Gender: Female
+Insurance: Aetna
+Allergies: Shellfish
+Conditions: Diabetes
+Medications: Atorvastatin, Lisinopril
+----------------------------------------
+
+Patient 073
+Name: Patient_073
+DOB: 1994-08-05
+Gender: Male
+Insurance: HealthFirst
+Allergies: None
+Conditions: Diabetes
+Medications: Albuterol, Ibuprofen, Lisinopril
+----------------------------------------
+
+Patient 074
+Name: Patient_074
+DOB: 1961-10-08
+Gender: Male
+Insurance: UnitedHealth
+Allergies: Latex
+Conditions: Asthma, Diabetes
+Medications: Ibuprofen
+----------------------------------------
+
+Patient 075
+Name: Patient_075
+DOB: 1999-10-01
+Gender: Male
+Insurance: Aetna
+Allergies: Dust
+Conditions: Asthma, Diabetes, Arthritis
+Medications: Metformin
+----------------------------------------
+
+Patient 076
+Name: Patient_076
+DOB: 1975-11-28
+Gender: Male
+Insurance: UnitedHealth
+Allergies: None
+Conditions: COPD
+Medications: None
+----------------------------------------
+
+Patient 077
+Name: Patient_077
+DOB: 1957-10-23
+Gender: Female
+Insurance: BlueCross
+Allergies: Shellfish, Pollen
+Conditions: None
+Medications: Atorvastatin, Omeprazole
+----------------------------------------
+
+Patient 078
+Name: Patient_078
+DOB: 2000-12-27
+Gender: Female
+Insurance: BlueCross
+Allergies: None
+Conditions: None
+Medications: Ibuprofen, Atorvastatin, Albuterol
+----------------------------------------
+
+Patient 079
+Name: Patient_079
+DOB: 1964-01-19
+Gender: Female
+Insurance: Aetna
+Allergies: Bee stings, Pollen, Latex
+Conditions: Diabetes, Depression
+Medications: Omeprazole
+----------------------------------------
+
+Patient 080
+Name: Patient_080
+DOB: 1952-03-28
+Gender: Female
+Insurance: WellCare
+Allergies: None
+Conditions: Anxiety, Hypertension, Diabetes
+Medications: Omeprazole
+----------------------------------------
+
+Patient 081
+Name: Patient_081
+DOB: 1984-08-03
+Gender: Male
+Insurance: HealthFirst
+Allergies: Penicillin, Bee stings
+Conditions: Anxiety, Depression, Hypertension
+Medications: None
+----------------------------------------
+
+Patient 082
+Name: Patient_082
+DOB: 1990-08-28
+Gender: Female
+Insurance: HealthFirst
+Allergies: Dust, Shellfish
+Conditions: Asthma, Anxiety, Diabetes
+Medications: None
+----------------------------------------
+
+Patient 083
+Name: Patient_083
+DOB: 1993-08-04
+Gender: Female
+Insurance: Cigna
+Allergies: None
+Conditions: None
+Medications: Omeprazole, Lisinopril
+----------------------------------------
+
+Patient 084
+Name: Patient_084
+DOB: 1996-01-03
+Gender: Female
+Insurance: Cigna
+Allergies: Dust
+Conditions: Anxiety, COPD, Hypertension
+Medications: Lisinopril
+----------------------------------------
+
+Patient 085
+Name: Patient_085
+DOB: 2003-06-12
+Gender: Female
+Insurance: Cigna
+Allergies: None
+Conditions: Anxiety, COPD, Depression
+Medications: None
+----------------------------------------
+
+Patient 086
+Name: Patient_086
+DOB: 1982-05-31
+Gender: Male
+Insurance: BlueCross
+Allergies: Peanuts
+Conditions: None
+Medications: None
+----------------------------------------
+
+Patient 087
+Name: Patient_087
+DOB: 1952-01-25
+Gender: Male
+Insurance: HealthFirst
+Allergies: Dust, Latex, Shellfish
+Conditions: None
+Medications: Albuterol
+----------------------------------------
+
+Patient 088
+Name: Patient_088
+DOB: 1996-12-01
+Gender: Female
+Insurance: HealthFirst
+Allergies: Bee stings, Dust
+Conditions: Diabetes, Hypertension
+Medications: None
+----------------------------------------
+
+Patient 089
+Name: Patient_089
+DOB: 1998-10-16
+Gender: Male
+Insurance: Kaiser Permanente
+Allergies: None
+Conditions: Hypertension
+Medications: None
+----------------------------------------
+
+Patient 090
+Name: Patient_090
+DOB: 1966-06-27
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: None
+Conditions: Arthritis, Asthma
+Medications: Lisinopril, Omeprazole
+----------------------------------------
+
+Patient 091
+Name: Patient_091
+DOB: 1954-09-24
+Gender: Female
+Insurance: Cigna
+Allergies: None
+Conditions: None
+Medications: Omeprazole
+----------------------------------------
+
+Patient 092
+Name: Patient_092
+DOB: 1986-05-02
+Gender: Male
+Insurance: WellCare
+Allergies: Latex
+Conditions: Asthma
+Medications: None
+----------------------------------------
+
+Patient 093
+Name: Patient_093
+DOB: 1973-09-09
+Gender: Female
+Insurance: UnitedHealth
+Allergies: Latex, Shellfish
+Conditions: None
+Medications: Lisinopril
+----------------------------------------
+
+Patient 094
+Name: Patient_094
+DOB: 1966-05-23
+Gender: Female
+Insurance: UnitedHealth
+Allergies: Latex, Dust
+Conditions: COPD
+Medications: Atorvastatin, Omeprazole
+----------------------------------------
+
+Patient 095
+Name: Patient_095
+DOB: 1980-02-29
+Gender: Male
+Insurance: Aetna
+Allergies: Pollen
+Conditions: None
+Medications: None
+----------------------------------------
+
+Patient 096
+Name: Patient_096
+DOB: 1991-10-17
+Gender: Female
+Insurance: Aetna
+Allergies: None
+Conditions: None
+Medications: None
+----------------------------------------
+
+Patient 097
+Name: Patient_097
+DOB: 1977-09-01
+Gender: Male
+Insurance: WellCare
+Allergies: Latex, Pollen, Penicillin
+Conditions: Depression
+Medications: Atorvastatin, Sertraline
+----------------------------------------
+
+Patient 098
+Name: Patient_098
+DOB: 1955-11-12
+Gender: Female
+Insurance: BlueCross
+Allergies: Pollen
+Conditions: Depression, COPD
+Medications: None
+----------------------------------------
+
+Patient 099
+Name: Patient_099
+DOB: 1952-03-23
+Gender: Male
+Insurance: Kaiser Permanente
+Allergies: Peanuts
+Conditions: Depression, Hypertension
+Medications: Lisinopril
+----------------------------------------
+
+Patient 100
+Name: Patient_100
+DOB: 1972-06-24
+Gender: Male
+Insurance: Cigna
+Allergies: None
+Conditions: COPD, Diabetes
+Medications: Atorvastatin
+----------------------------------------
