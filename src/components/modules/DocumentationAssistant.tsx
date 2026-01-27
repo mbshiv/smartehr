@@ -9,7 +9,11 @@ import { toast } from "sonner";
 import NotesHistory from "./NotesHistory";
 import PatientSelectDialog from "./PatientSelectDialog";
 
-const DocumentationAssistant = () => {
+interface DocumentationAssistantProps {
+  onPatientChange?: (patientId: string | null) => void;
+}
+
+const DocumentationAssistant = ({ onPatientChange }: DocumentationAssistantProps) => {
   const [inputNotes, setInputNotes] = useState("");
   const [structuredNote, setStructuredNote] = useState("");
   const [reasoning, setReasoning] = useState("");
@@ -26,6 +30,7 @@ const DocumentationAssistant = () => {
   const handlePatientSelect = (patientId: string, notes: string) => {
     setInputNotes(notes);
     setSelectedPatientId(patientId);
+    onPatientChange?.(patientId);
     toast.success(`Loaded notes for ${patientId}`);
   };
 

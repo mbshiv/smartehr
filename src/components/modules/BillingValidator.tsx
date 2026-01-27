@@ -22,7 +22,11 @@ interface ValidationResult {
   missingElements: string[];
 }
 
-const BillingValidator = () => {
+interface BillingValidatorProps {
+  onPatientChange?: (patientId: string | null) => void;
+}
+
+const BillingValidator = ({ onPatientChange }: BillingValidatorProps) => {
   const [inputNotes, setInputNotes] = useState("");
   const [validationResult, setValidationResult] = useState<ValidationResult | null>(null);
   const [reasoning, setReasoning] = useState("");
@@ -43,6 +47,7 @@ const BillingValidator = () => {
     setSelectedNoteTag(noteTag);
     setValidationResult(null);
     setReasoning("");
+    onPatientChange?.(note.patient_id);
     toast.success(`Loaded ${noteTag}`);
   };
 
