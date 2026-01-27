@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import BillingHistory from "./BillingHistory";
 import ClinicalNoteSelectDialog from "./ClinicalNoteSelectDialog";
 
-interface ValidationResult {
+export interface ValidationResult {
   overallRisk: "low" | "medium" | "high";
   riskPercentage: number;
   icd10Codes: Array<{ code: string; description: string; confidence: number }>;
@@ -22,31 +22,44 @@ interface ValidationResult {
   missingElements: string[];
 }
 
-interface BillingValidatorProps {
-  onPatientChange?: (patientId: string | null) => void;
+export interface BillingState {
+  inputNotes: string;
+  validationResult: ValidationResult | null;
+  reasoning: string;
+  selectedPatientId: string | null;
+  selectedNoteTag: string | null;
 }
 
-const BillingValidator = ({ onPatientChange }: BillingValidatorProps) => {
-  const [inputNotes, setInputNotes] = useState("");
-  const [validationResult, setValidationResult] = useState<ValidationResult | null>(null);
-  const [reasoning, setReasoning] = useState("");
+interface BillingValidatorProps {
+  onPatientChange?: (patientId: string | null) => void;
+  state: BillingState;
+  onStateChange: (state: BillingState) => void;
+}
+
+const BillingValidator = ({ onPatientChange, state, onStateChange }: BillingValidatorProps) => {
   const [isValidating, setIsValidating] = useState(false);
   const [isExplaining, setIsExplaining] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const [showNoteSelect, setShowNoteSelect] = useState(false);
-  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
-  const [selectedNoteTag, setSelectedNoteTag] = useState<string | null>(null);
+
+  const { inputNotes, validationResult, reasoning, selectedPatientId, selectedNoteTag } = state;
+
+  const updateState = (updates: Partial<BillingState>) => {
+    onStateChange({ ...state, ...updates });
+  };
 
   const { saveValidation } = useBillingValidations();
 
   const handleNoteSelect = (note: ClinicalNote, noteTag: string) => {
     // Use structured note for billing validation
-    setInputNotes(note.structured_note);
-    setSelectedPatientId(note.patient_id);
-    setSelectedNoteTag(noteTag);
-    setValidationResult(null);
-    setReasoning("");
+    updateState({
+      inputNotes: note.structured_note,
+      selectedPatientId: note.patient_id,
+      selectedNoteTag: noteTag,
+      validationResult: null,
+      reasoning: "",
+    });
     onPatientChange?.(note.patient_id);
     toast.success(`Loaded ${noteTag}`);
   };
@@ -195,7 +208,7 @@ const BillingValidator = ({ onPatientChange }: BillingValidatorProps) => {
     }
 
     setIsValidating(true);
-    setReasoning("");
+    updateState({ reasoning: "" });
     
     // Simulate AI processing
     await new Promise((resolve) => setTimeout(resolve, 1800));
@@ -213,7 +226,7 @@ const BillingValidator = ({ onPatientChange }: BillingValidatorProps) => {
       missingElements: parsed.missingElements,
     };
 
-    setValidationResult(result);
+    updateState({ validationResult: result });
     setIsValidating(false);
     toast.success("Claim validation complete");
   };
@@ -255,7 +268,7 @@ Base denial risk: 8%
 
 The claim is likely to be approved with minor documentation improvements.`;
 
-    setReasoning(explanationText);
+    updateState({ reasoning: explanationText });
     setIsExplaining(false);
   };
 
@@ -361,7 +374,7 @@ The claim is likely to be approved with minor documentation improvements.`;
             <CardContent className="flex-1 flex flex-col">
               <Textarea
                 value={inputNotes}
-                onChange={(e) => setInputNotes(e.target.value)}
+                onChange={(e) => updateState({ inputNotes: e.target.value })}
                 placeholder="Load a clinical note from the Documentation Assistant to validate..."
                 className="flex-1 min-h-[300px] resize-none text-sm"
                 readOnly
