@@ -24,14 +24,7 @@ const PatientSidebar = ({
           </p>
         </div>
         {/* Synthetic Data Notice */}
-        <div className="p-4 m-4 bg-accent rounded-lg absolute bottom-4 left-130 right-4">
-          <p className="text-xs text-accent-foreground font-medium text-center">
-            ⚠️ Synthetic Data Only
-          </p>
-          <p className="text-xs text-accent-foreground/70 mt-1 text-center">
-            No real PHI is used in this demo.
-          </p>
-        </div>
+        
       </aside>;
   }
   const calculateAge = (dob: string) => {

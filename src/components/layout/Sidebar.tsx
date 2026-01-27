@@ -55,9 +55,8 @@ const Sidebar = ({
           <UserMenu />
         </div>
         <div className="px-3 py-2 rounded-lg bg-sidebar-accent/50">
-          <p className="text-xs text-sidebar-foreground/60">
-            Demo Mode • Synthetic Data Only
-          </p>
+          <p className="text-xs text-sidebar-foreground/60">Demo Mode:
+Synthetic Data Only. No real PHI is used in this demo.</p>
         </div>
       </div>
     </aside>;
