@@ -81,7 +81,7 @@ const Auth = () => {
             <Activity className="w-7 h-7 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="font-bold text-2xl text-foreground">NextGenEHR</h1>
+            <h1 className="font-bold text-2xl text-foreground">SmartEHR</h1>
             <p className="text-sm text-muted-foreground">AI-Powered Clinical Platform</p>
           </div>
         </div>
