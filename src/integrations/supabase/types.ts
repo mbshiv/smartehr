@@ -14,7 +14,102 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      billing_validations: {
+        Row: {
+          clinical_notes: string
+          cpt_codes: Json
+          created_at: string
+          denial_risk_score: number
+          icd10_codes: Json
+          id: string
+          missing_elements: Json
+          patient_id: string
+          recommendations: Json
+          user_id: string
+        }
+        Insert: {
+          clinical_notes: string
+          cpt_codes?: Json
+          created_at?: string
+          denial_risk_score?: number
+          icd10_codes?: Json
+          id?: string
+          missing_elements?: Json
+          patient_id: string
+          recommendations?: Json
+          user_id: string
+        }
+        Update: {
+          clinical_notes?: string
+          cpt_codes?: Json
+          created_at?: string
+          denial_risk_score?: number
+          icd10_codes?: Json
+          id?: string
+          missing_elements?: Json
+          patient_id?: string
+          recommendations?: Json
+          user_id?: string
+        }
+        Relationships: []
+      }
+      clinical_notes: {
+        Row: {
+          created_at: string
+          id: string
+          patient_id: string
+          raw_notes: string
+          reasoning: string | null
+          structured_note: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          patient_id: string
+          raw_notes: string
+          reasoning?: string | null
+          structured_note: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          patient_id?: string
+          raw_notes?: string
+          reasoning?: string | null
+          structured_note?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          email: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

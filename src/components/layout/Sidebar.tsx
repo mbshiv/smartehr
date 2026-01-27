@@ -1,5 +1,6 @@
 import { FileText, DollarSign, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
+import UserMenu from "./UserMenu";
 
 interface SidebarProps {
   activeModule: "documentation" | "billing";
@@ -78,8 +79,12 @@ const Sidebar = ({ activeModule, onModuleChange }: SidebarProps) => {
         ))}
       </nav>
 
-      {/* Footer */}
-      <div className="p-4 border-t border-sidebar-border">
+      {/* User Menu & Footer */}
+      <div className="p-4 border-t border-sidebar-border space-y-3">
+        <div className="flex items-center justify-between px-2">
+          <span className="text-xs text-sidebar-foreground/60">Account</span>
+          <UserMenu />
+        </div>
         <div className="px-3 py-2 rounded-lg bg-sidebar-accent/50">
           <p className="text-xs text-sidebar-foreground/60">
             Demo Mode • Synthetic Data Only
