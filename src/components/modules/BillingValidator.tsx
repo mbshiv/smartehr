@@ -80,15 +80,30 @@ const BillingValidator = () => {
       icd10Codes.push({ code: "Z00.00", description: "General adult medical examination", confidence: 70 });
     }
 
-    // Check for CPT code based on complexity
+    // Check for CPT code based on complexity using E/M guidelines
     const cptCodes: Array<{ code: string; description: string; confidence: number }> = [];
     const hasMultipleDiagnoses = icd10Codes.length >= 2;
-    const hasPlan = notes.match(/(?:plan|treatment|rx|medication|follow.?up)/i);
-    const hasVitals = notes.match(/(?:bp|blood pressure|hr|heart rate|temp|vitals)/i);
+    const hasPlan = notes.match(/(?:plan|treatment|rx|adjust|reinforce|order|schedule|follow.?up)/i);
+    const hasVitals = notes.match(/(?:bp|blood pressure|hr|heart rate|temp|vitals|\d+\/\d+)/i);
+    const hasHistory = notes.match(/(?:history|hpi|presents?|reports?|complains?|symptoms?)/i);
+    const hasExam = notes.match(/(?:exam|physical|no signs|distress|lungs|heart|abdomen)/i);
+    const hasLabsOrImaging = notes.match(/(?:a1c|lab|imaging|xray|ct|mri|blood|urine|test)/i);
+    
+    // Calculate complexity score based on documentation elements
+    let complexityScore = 0;
+    if (hasMultipleDiagnoses) complexityScore += 2;
+    if (hasPlan) complexityScore += 1;
+    if (hasVitals) complexityScore += 1;
+    if (hasHistory) complexityScore += 1;
+    if (hasExam) complexityScore += 1;
+    if (hasLabsOrImaging) complexityScore += 1;
 
-    if (hasMultipleDiagnoses && hasPlan) {
+    // Assign CPT code based on complexity score
+    if (complexityScore >= 5) {
+      cptCodes.push({ code: "99215", description: "Office visit, established patient, high complexity", confidence: 85 });
+    } else if (complexityScore >= 4) {
       cptCodes.push({ code: "99214", description: "Office visit, established patient, moderate complexity", confidence: 88 });
-    } else if (hasPlan) {
+    } else if (complexityScore >= 2) {
       cptCodes.push({ code: "99213", description: "Office visit, established patient, low complexity", confidence: 85 });
     } else {
       cptCodes.push({ code: "99212", description: "Office visit, established patient, straightforward", confidence: 80 });
