@@ -8,99 +8,86 @@ import { useClinicalNotes } from "@/hooks/useClinicalNotes";
 import { toast } from "sonner";
 import NotesHistory from "./NotesHistory";
 import PatientSelectDialog from "./PatientSelectDialog";
+
+export interface DocumentationState {
+  inputNotes: string;
+  structuredNote: string;
+  reasoning: string;
+  selectedPatientId: string | null;
+}
+
 interface DocumentationAssistantProps {
   onPatientChange?: (patientId: string | null) => void;
+  state: DocumentationState;
+  onStateChange: (state: DocumentationState) => void;
 }
+
 const DocumentationAssistant = ({
-  onPatientChange
+  onPatientChange,
+  state,
+  onStateChange,
 }: DocumentationAssistantProps) => {
-  const [inputNotes, setInputNotes] = useState("");
-  const [structuredNote, setStructuredNote] = useState("");
-  const [reasoning, setReasoning] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [isExplaining, setIsExplaining] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const [showPatientSelect, setShowPatientSelect] = useState(false);
-  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
-  const {
-    saveNote
-  } = useClinicalNotes();
+
+  const { inputNotes, structuredNote, reasoning, selectedPatientId } = state;
+
+  const { saveNote } = useClinicalNotes();
+
+  const updateState = (updates: Partial<DocumentationState>) => {
+    onStateChange({ ...state, ...updates });
+  };
+
   const handlePatientSelect = (patientId: string, notes: string) => {
-    setInputNotes(notes);
-    setSelectedPatientId(patientId);
+    updateState({ inputNotes: notes, selectedPatientId: patientId });
     onPatientChange?.(patientId);
     toast.success(`Loaded notes for ${patientId}`);
   };
+
   const generateStructuredNote = (rawNotes: string): string => {
-    // Parse the raw notes to extract key information
     const lines = rawNotes.split('\n').filter(line => line.trim());
 
-    // Extract chief complaint (usually first line or after "c/o" or "cc:")
     const ccMatch = rawNotes.match(/(?:c\/o|cc:|chief complaint:?)\s*(.+)/i);
     const chiefComplaint = ccMatch ? ccMatch[1].trim() : lines[0] || "Not documented";
 
-    // Extract vitals if present
     const bpMatch = rawNotes.match(/(?:bp|blood pressure):?\s*(\d+\/\d+)/i);
     const hrMatch = rawNotes.match(/(?:hr|heart rate|pulse):?\s*(\d+)/i);
     const tempMatch = rawNotes.match(/(?:temp|temperature):?\s*([\d.]+)/i);
 
-    // Extract diagnoses/conditions
     const diabetesMatch = rawNotes.match(/(?:t2dm|type 2 diabetes|diabetes|dm2)/i);
     const htnMatch = rawNotes.match(/(?:htn|hypertension|high blood pressure)/i);
     const copdMatch = rawNotes.match(/(?:copd|chronic obstructive)/i);
     const anxietyMatch = rawNotes.match(/(?:anxiety|gad)/i);
     const depressionMatch = rawNotes.match(/(?:depression|mdd)/i);
 
-    // Build diagnoses and codes
-    const diagnoses: {
-      name: string;
-      code: string;
-    }[] = [];
-    if (diabetesMatch) diagnoses.push({
-      name: "Type 2 Diabetes Mellitus",
-      code: "E11.65"
-    });
-    if (htnMatch) diagnoses.push({
-      name: "Essential Hypertension",
-      code: "I10"
-    });
-    if (copdMatch) diagnoses.push({
-      name: "Chronic Obstructive Pulmonary Disease",
-      code: "J44.9"
-    });
-    if (anxietyMatch) diagnoses.push({
-      name: "Generalized Anxiety Disorder",
-      code: "F41.1"
-    });
-    if (depressionMatch) diagnoses.push({
-      name: "Major Depressive Disorder",
-      code: "F32.9"
-    });
+    const diagnoses: { name: string; code: string }[] = [];
+    if (diabetesMatch) diagnoses.push({ name: "Type 2 Diabetes Mellitus", code: "E11.65" });
+    if (htnMatch) diagnoses.push({ name: "Essential Hypertension", code: "I10" });
+    if (copdMatch) diagnoses.push({ name: "Chronic Obstructive Pulmonary Disease", code: "J44.9" });
+    if (anxietyMatch) diagnoses.push({ name: "Generalized Anxiety Disorder", code: "F41.1" });
+    if (depressionMatch) diagnoses.push({ name: "Major Depressive Disorder", code: "F32.9" });
 
-    // Default if no specific conditions found
     if (diagnoses.length === 0) {
-      diagnoses.push({
-        name: "General Medical Examination",
-        code: "Z00.00"
-      });
+      diagnoses.push({ name: "General Medical Examination", code: "Z00.00" });
     }
 
-    // Build vitals section
     const vitalsItems: string[] = [];
     if (bpMatch) vitalsItems.push(`Blood Pressure: ${bpMatch[1]} mmHg`);
     if (hrMatch) vitalsItems.push(`Heart Rate: ${hrMatch[1]} bpm`);
     if (tempMatch) vitalsItems.push(`Temperature: ${tempMatch[1]}°F`);
     const vitalsSection = vitalsItems.length > 0 ? vitalsItems.join('\n') : "Vitals not documented in source notes";
 
-    // Extract plan items
     const planMatch = rawNotes.match(/(?:plan|rx|tx|treatment):?\s*(.+)/i);
     const followUpMatch = rawNotes.match(/(?:f\/u|follow.?up|rtn):?\s*(.+)/i);
     const planItems: string[] = [];
     if (planMatch) planItems.push(planMatch[1].trim());
     if (followUpMatch) planItems.push(`Follow-up: ${followUpMatch[1].trim()}`);
     if (planItems.length === 0) planItems.push("Continue current management", "Schedule follow-up as needed");
+
     return `**CLINICAL DOCUMENTATION**
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -126,21 +113,22 @@ Patient demonstrates understanding of treatment plan. Return precautions discuss
 *Generated by NextGenEHR AI Documentation Assistant*
 *Patient ID: ${selectedPatientId || 'Unknown'}*`;
   };
+
   const handleGenerateNote = async () => {
     if (!inputNotes.trim()) {
       toast.error("Please enter clinical notes first");
       return;
     }
     setIsGenerating(true);
-    setReasoning("");
+    updateState({ reasoning: "" });
 
-    // Simulate AI processing
     await new Promise(resolve => setTimeout(resolve, 1500));
     const generatedNote = generateStructuredNote(inputNotes);
-    setStructuredNote(generatedNote);
+    updateState({ structuredNote: generatedNote });
     setIsGenerating(false);
     toast.success("Structured note generated successfully");
   };
+
   const handleExplainReasoning = async () => {
     if (!structuredNote) {
       toast.error("Generate a structured note first");
@@ -165,9 +153,10 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
 • Assessment includes proper diagnosis codes
 • Plan is actionable and complete
 • Medical necessity established for billing`;
-    setReasoning(explanationText);
+    updateState({ reasoning: explanationText });
     setIsExplaining(false);
   };
+
   const handleCopy = async () => {
     if (structuredNote) {
       await navigator.clipboard.writeText(structuredNote);
@@ -176,18 +165,16 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
       setTimeout(() => setCopied(false), 2000);
     }
   };
+
   const handleSaveNote = async () => {
     if (!structuredNote) {
       toast.error("Generate a note first");
       return;
     }
 
-    // Use selected patient ID or fallback to syntheticPatient
     const patientId = selectedPatientId || syntheticPatient.patient_id;
     setIsSaving(true);
-    const {
-      error
-    } = await saveNote(patientId, inputNotes, structuredNote, reasoning || undefined);
+    const { error } = await saveNote(patientId, inputNotes, structuredNote, reasoning || undefined);
     if (error) {
       toast.error("Failed to save note");
     } else {
@@ -195,13 +182,17 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
     }
     setIsSaving(false);
   };
+
   const handleOpenPatientSelect = () => {
     setShowPatientSelect(true);
   };
+
   if (showHistory) {
     return <NotesHistory onBack={() => setShowHistory(false)} />;
   }
-  return <div className="h-full flex flex-col">
+
+  return (
+    <div className="h-full flex flex-col">
       {/* Header */}
       <div className="p-6 border-b border-border bg-card">
         <div className="flex items-center justify-between">
@@ -232,9 +223,11 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base font-medium">
                   Raw Clinical Notes
-                  {selectedPatientId && <span className="ml-2 text-xs font-normal text-muted-foreground">
+                  {selectedPatientId && (
+                    <span className="ml-2 text-xs font-normal text-muted-foreground">
                       ({selectedPatientId})
-                    </span>}
+                    </span>
+                  )}
                 </CardTitle>
                 <Button variant="ghost" size="sm" onClick={handleOpenPatientSelect}>
                   <FolderOpen className="w-4 h-4 mr-1" />
@@ -243,16 +236,25 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
               </div>
             </CardHeader>
             <CardContent className="flex-1 flex flex-col">
-              <Textarea value={inputNotes} onChange={e => setInputNotes(e.target.value)} placeholder="Paste or type raw clinician notes here..." className="flex-1 min-h-[300px] resize-none font-mono text-sm" />
+              <Textarea
+                value={inputNotes}
+                onChange={(e) => updateState({ inputNotes: e.target.value })}
+                placeholder="Paste or type raw clinician notes here..."
+                className="flex-1 min-h-[300px] resize-none font-mono text-sm"
+              />
               <div className="mt-4 flex gap-3">
                 <Button onClick={handleGenerateNote} disabled={isGenerating} className="flex-1">
-                  {isGenerating ? <>
+                  {isGenerating ? (
+                    <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                       Generating...
-                    </> : <>
+                    </>
+                  ) : (
+                    <>
                       <Sparkles className="w-4 h-4 mr-2" />
                       Generate Structured Note
-                    </>}
+                    </>
+                  )}
                 </Button>
               </div>
             </CardContent>
@@ -264,7 +266,8 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base font-medium">Structured Output</CardTitle>
                 <div className="flex gap-2">
-                  {structuredNote && <>
+                  {structuredNote && (
+                    <>
                       <Button variant="ghost" size="sm" onClick={handleCopy}>
                         {copied ? <Check className="w-4 h-4 mr-1" /> : <ClipboardCopy className="w-4 h-4 mr-1" />}
                         {copied ? "Copied" : "Copy"}
@@ -273,38 +276,50 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
                         {isSaving ? <Loader2 className="w-4 h-4 mr-1 animate-spin" /> : <Save className="w-4 h-4 mr-1" />}
                         Save
                       </Button>
-                    </>}
+                    </>
+                  )}
                 </div>
               </div>
             </CardHeader>
             <CardContent className="flex-1 flex flex-col">
               <div className="flex-1 bg-secondary/30 rounded-lg p-4 overflow-y-auto min-h-[300px]">
-                {structuredNote ? <pre className="whitespace-pre-wrap text-sm text-foreground font-sans leading-relaxed">
+                {structuredNote ? (
+                  <pre className="whitespace-pre-wrap text-sm text-foreground font-sans leading-relaxed">
                     {structuredNote}
-                  </pre> : <div className="h-full flex items-center justify-center text-muted-foreground">
+                  </pre>
+                ) : (
+                  <div className="h-full flex items-center justify-center text-muted-foreground">
                     <div className="text-center">
                       <FileText className="w-12 h-12 mx-auto mb-3 opacity-30" />
                       <p>Generated note will appear here</p>
                     </div>
-                  </div>}
+                  </div>
+                )}
               </div>
-              {structuredNote && <div className="mt-4">
+              {structuredNote && (
+                <div className="mt-4">
                   <Button variant="outline" onClick={handleExplainReasoning} disabled={isExplaining} className="w-full">
-                    {isExplaining ? <>
+                    {isExplaining ? (
+                      <>
                         <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                         Analyzing...
-                      </> : <>
+                      </>
+                    ) : (
+                      <>
                         <Lightbulb className="w-4 h-4 mr-2" />
                         Explain Reasoning
-                      </>}
+                      </>
+                    )}
                   </Button>
-                </div>}
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
 
         {/* Reasoning Panel */}
-        {reasoning && <Card className="mt-6 animate-fade-in">
+        {reasoning && (
+          <Card className="mt-6 animate-fade-in">
             <CardHeader className="pb-3">
               <CardTitle className="text-base font-medium flex items-center gap-2">
                 <Lightbulb className="w-4 h-4 text-warning" />
@@ -318,10 +333,13 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
                 </pre>
               </div>
             </CardContent>
-          </Card>}
+          </Card>
+        )}
       </div>
 
       <PatientSelectDialog open={showPatientSelect} onOpenChange={setShowPatientSelect} onSelect={handlePatientSelect} />
-    </div>;
+    </div>
+  );
 };
+
 export default DocumentationAssistant;
