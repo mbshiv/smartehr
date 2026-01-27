@@ -28,7 +28,7 @@ const Sidebar = ({
             <Activity className="w-6 h-6 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="font-bold text-lg text-sidebar-foreground">NextGenEHR</h1>
+            <h1 className="font-bold text-lg text-sidebar-foreground">SmartEHR</h1>
             <p className="text-xs text-sidebar-foreground/60">AI-Powered Platform</p>
           </div>
         </div>
