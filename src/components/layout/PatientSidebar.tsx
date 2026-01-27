@@ -8,13 +8,35 @@ interface PatientSidebarProps {
 }
 
 const PatientSidebar = ({ selectedPatientId }: PatientSidebarProps) => {
-  const patient = useMemo<PatientProfile>(() => {
+  const patient = useMemo<PatientProfile | null>(() => {
     if (selectedPatientId) {
-      const profile = getPatientProfile(selectedPatientId);
-      if (profile) return profile;
+      return getPatientProfile(selectedPatientId);
     }
-    return getDefaultPatientProfile();
+    return null;
   }, [selectedPatientId]);
+
+  if (!patient) {
+    return (
+      <aside className="w-80 bg-card border-l border-border h-full overflow-y-auto flex flex-col items-center justify-center">
+        <div className="text-center p-6">
+          <User className="w-16 h-16 text-muted-foreground/30 mx-auto mb-4" />
+          <h2 className="font-semibold text-lg text-muted-foreground">No Patient Selected</h2>
+          <p className="text-sm text-muted-foreground/70 mt-2">
+            Select a patient from the module to view their details.
+          </p>
+        </div>
+        {/* Synthetic Data Notice */}
+        <div className="p-4 m-4 bg-accent rounded-lg absolute bottom-4 left-4 right-4">
+          <p className="text-xs text-accent-foreground font-medium">
+            ⚠️ Synthetic Data Only
+          </p>
+          <p className="text-xs text-accent-foreground/70 mt-1">
+            No real PHI is used in this demo.
+          </p>
+        </div>
+      </aside>
+    );
+  }
 
   const calculateAge = (dob: string) => {
     const birthDate = new Date(dob);
