@@ -1,20 +1,23 @@
 import { useState } from "react";
-import { DollarSign, ShieldCheck, AlertTriangle, Loader2, Lightbulb, CheckCircle2, XCircle } from "lucide-react";
+import { DollarSign, ShieldCheck, AlertTriangle, Loader2, Lightbulb, CheckCircle2, XCircle, Save, History } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { syntheticEncounterNote, suggestedICD10Codes, suggestedCPTCodes } from "@/data/syntheticData";
+import { syntheticEncounterNote, syntheticPatient } from "@/data/syntheticData";
+import { useBillingValidations } from "@/hooks/useBillingValidations";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import BillingHistory from "./BillingHistory";
 
 interface ValidationResult {
   overallRisk: "low" | "medium" | "high";
   riskPercentage: number;
-  icd10Codes: Array<{ code: string; description: string; valid: boolean }>;
-  cptCodes: Array<{ code: string; description: string; valid: boolean }>;
+  icd10Codes: Array<{ code: string; description: string; confidence: number }>;
+  cptCodes: Array<{ code: string; description: string; confidence: number }>;
   denialRisks: Array<{ rule: string; status: "pass" | "warning" | "fail"; detail: string }>;
   recommendations: string[];
+  missingElements: string[];
 }
 
 const BillingValidator = () => {
@@ -23,6 +26,10 @@ const BillingValidator = () => {
   const [reasoning, setReasoning] = useState("");
   const [isValidating, setIsValidating] = useState(false);
   const [isExplaining, setIsExplaining] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
+
+  const { saveValidation } = useBillingValidations();
 
   const handleValidateClaim = async () => {
     if (!inputNotes.trim()) {
@@ -40,11 +47,11 @@ const BillingValidator = () => {
       overallRisk: "low",
       riskPercentage: 12,
       icd10Codes: [
-        { code: "E11.65", description: "Type 2 Diabetes with hyperglycemia", valid: true },
-        { code: "I10", description: "Essential (primary) hypertension", valid: true },
+        { code: "E11.65", description: "Type 2 Diabetes with hyperglycemia", confidence: 95 },
+        { code: "I10", description: "Essential (primary) hypertension", confidence: 92 },
       ],
       cptCodes: [
-        { code: "99214", description: "Office visit, established patient, moderate complexity", valid: true },
+        { code: "99214", description: "Office visit, established patient, moderate complexity", confidence: 88 },
       ],
       denialRisks: [
         { rule: "Medical necessity documented", status: "pass", detail: "Clear symptoms and clinical findings support diagnosis" },
@@ -56,6 +63,10 @@ const BillingValidator = () => {
         "Consider adding specific Metformin dosage in the plan section",
         "Document patient education provided regarding medication adherence",
         "Include follow-up timeline explicitly in the assessment",
+      ],
+      missingElements: [
+        "Specific medication dosage",
+        "Patient education documentation",
       ],
     };
 
@@ -105,6 +116,31 @@ The claim is likely to be approved with minor documentation improvements.`;
     setIsExplaining(false);
   };
 
+  const handleSaveValidation = async () => {
+    if (!validationResult) {
+      toast.error("Validate a claim first");
+      return;
+    }
+
+    setIsSaving(true);
+    const { error } = await saveValidation(
+      syntheticPatient.patient_id,
+      inputNotes,
+      validationResult.icd10Codes,
+      validationResult.cptCodes,
+      validationResult.riskPercentage,
+      validationResult.missingElements,
+      validationResult.recommendations
+    );
+
+    if (error) {
+      toast.error("Failed to save validation");
+    } else {
+      toast.success("Validation saved to your history");
+    }
+    setIsSaving(false);
+  };
+
   const handleLoadSample = () => {
     setInputNotes(syntheticEncounterNote);
     toast.info("Sample encounter note loaded");
@@ -132,22 +168,32 @@ The claim is likely to be approved with minor documentation improvements.`;
     }
   };
 
+  if (showHistory) {
+    return <BillingHistory onBack={() => setShowHistory(false)} />;
+  }
+
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
       <div className="p-6 border-b border-border bg-card">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-            <DollarSign className="w-5 h-5 text-primary" />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+              <DollarSign className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold text-foreground">
+                AI Coding & Billing Validator
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                Validate claims and prevent denials with AI-powered analysis
+              </p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-xl font-semibold text-foreground">
-              AI Coding & Billing Validator
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              Validate claims and prevent denials with AI-powered analysis
-            </p>
-          </div>
+          <Button variant="outline" onClick={() => setShowHistory(true)}>
+            <History className="w-4 h-4 mr-2" />
+            View History
+          </Button>
         </div>
       </div>
 
@@ -196,7 +242,19 @@ The claim is likely to be approved with minor documentation improvements.`;
           {/* Validation Results Panel */}
           <Card className="flex flex-col">
             <CardHeader className="pb-3">
-              <CardTitle className="text-base font-medium">Validation Results</CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-base font-medium">Validation Results</CardTitle>
+                {validationResult && (
+                  <Button variant="ghost" size="sm" onClick={handleSaveValidation} disabled={isSaving}>
+                    {isSaving ? (
+                      <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                    ) : (
+                      <Save className="w-4 h-4 mr-1" />
+                    )}
+                    Save
+                  </Button>
+                )}
+              </div>
             </CardHeader>
             <CardContent className="flex-1">
               {validationResult ? (
@@ -234,6 +292,7 @@ The claim is likely to be approved with minor documentation improvements.`;
                             <CheckCircle2 className="w-4 h-4 text-success mt-0.5 shrink-0" />
                             <div>
                               <span className="font-mono font-medium">{code.code}</span>
+                              <span className="text-xs text-muted-foreground ml-2">({code.confidence}%)</span>
                               <p className="text-xs text-muted-foreground">{code.description}</p>
                             </div>
                           </div>
@@ -250,6 +309,7 @@ The claim is likely to be approved with minor documentation improvements.`;
                             <CheckCircle2 className="w-4 h-4 text-success mt-0.5 shrink-0" />
                             <div>
                               <span className="font-mono font-medium">{code.code}</span>
+                              <span className="text-xs text-muted-foreground ml-2">({code.confidence}%)</span>
                               <p className="text-xs text-muted-foreground">{code.description}</p>
                             </div>
                           </div>

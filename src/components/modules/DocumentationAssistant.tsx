@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { FileText, Sparkles, Lightbulb, Loader2, ClipboardCopy, Check } from "lucide-react";
+import { FileText, Sparkles, Lightbulb, Loader2, ClipboardCopy, Check, Save, History } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { sampleRawClinicianNotes } from "@/data/syntheticData";
+import { sampleRawClinicianNotes, syntheticPatient } from "@/data/syntheticData";
+import { useClinicalNotes } from "@/hooks/useClinicalNotes";
 import { toast } from "sonner";
+import NotesHistory from "./NotesHistory";
 
 const DocumentationAssistant = () => {
   const [inputNotes, setInputNotes] = useState(sampleRawClinicianNotes);
@@ -12,7 +14,11 @@ const DocumentationAssistant = () => {
   const [reasoning, setReasoning] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [isExplaining, setIsExplaining] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
+
+  const { saveNote } = useClinicalNotes();
 
   const handleGenerateNote = async () => {
     if (!inputNotes.trim()) {
@@ -97,27 +103,59 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
     }
   };
 
+  const handleSaveNote = async () => {
+    if (!structuredNote) {
+      toast.error("Generate a note first");
+      return;
+    }
+
+    setIsSaving(true);
+    const { error } = await saveNote(
+      syntheticPatient.patient_id,
+      inputNotes,
+      structuredNote,
+      reasoning || undefined
+    );
+
+    if (error) {
+      toast.error("Failed to save note");
+    } else {
+      toast.success("Note saved to your history");
+    }
+    setIsSaving(false);
+  };
+
   const handleLoadSample = () => {
     setInputNotes(sampleRawClinicianNotes);
     toast.info("Sample notes loaded");
   };
 
+  if (showHistory) {
+    return <NotesHistory onBack={() => setShowHistory(false)} />;
+  }
+
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
       <div className="p-6 border-b border-border bg-card">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-            <FileText className="w-5 h-5 text-primary" />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+              <FileText className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold text-foreground">
+                AI Clinical Documentation Assistant
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                Transform raw clinician notes into structured clinical documentation
+              </p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-xl font-semibold text-foreground">
-              AI Clinical Documentation Assistant
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              Transform raw clinician notes into structured clinical documentation
-            </p>
-          </div>
+          <Button variant="outline" onClick={() => setShowHistory(true)}>
+            <History className="w-4 h-4 mr-2" />
+            View History
+          </Button>
         </div>
       </div>
 
@@ -168,16 +206,28 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base font-medium">Structured Output</CardTitle>
-                {structuredNote && (
-                  <Button variant="ghost" size="sm" onClick={handleCopy}>
-                    {copied ? (
-                      <Check className="w-4 h-4 mr-1" />
-                    ) : (
-                      <ClipboardCopy className="w-4 h-4 mr-1" />
-                    )}
-                    {copied ? "Copied" : "Copy"}
-                  </Button>
-                )}
+                <div className="flex gap-2">
+                  {structuredNote && (
+                    <>
+                      <Button variant="ghost" size="sm" onClick={handleCopy}>
+                        {copied ? (
+                          <Check className="w-4 h-4 mr-1" />
+                        ) : (
+                          <ClipboardCopy className="w-4 h-4 mr-1" />
+                        )}
+                        {copied ? "Copied" : "Copy"}
+                      </Button>
+                      <Button variant="ghost" size="sm" onClick={handleSaveNote} disabled={isSaving}>
+                        {isSaving ? (
+                          <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                        ) : (
+                          <Save className="w-4 h-4 mr-1" />
+                        )}
+                        Save
+                      </Button>
+                    </>
+                  )}
+                </div>
               </div>
             </CardHeader>
             <CardContent className="flex-1 flex flex-col">
