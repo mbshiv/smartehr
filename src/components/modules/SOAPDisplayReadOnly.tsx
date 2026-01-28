@@ -1,13 +1,16 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { FileText } from "lucide-react";
 import { StructuredSOAPNote } from "./SOAPOutput";
 
 interface SOAPDisplayReadOnlyProps {
   note: StructuredSOAPNote;
   noteTag?: string | null;
+  onLoadNote?: () => void;
 }
 
-const SOAPDisplayReadOnly = ({ note, noteTag }: SOAPDisplayReadOnlyProps) => {
+const SOAPDisplayReadOnly = ({ note, noteTag, onLoadNote }: SOAPDisplayReadOnlyProps) => {
   return (
     <Card className="flex flex-col h-full">
       <CardHeader className="pb-3">
@@ -20,6 +23,12 @@ const SOAPDisplayReadOnly = ({ note, noteTag }: SOAPDisplayReadOnlyProps) => {
               </span>
             )}
           </CardTitle>
+          {onLoadNote && (
+            <Button variant="ghost" size="sm" onClick={onLoadNote}>
+              <FileText className="w-4 h-4 mr-1" />
+              Load Clinical Note
+            </Button>
+          )}
         </div>
       </CardHeader>
       <CardContent className="flex-1 overflow-y-auto space-y-4">
