@@ -27,6 +27,13 @@ const BillingHistory = ({ onBack }: BillingHistoryProps) => {
   const { validations, loading, deleteValidation } = useBillingValidations();
   const [selectedValidation, setSelectedValidation] = useState<BillingValidation | null>(null);
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
+  const [hasAutoSelected, setHasAutoSelected] = useState(false);
+
+  // Auto-select topmost validation when data loads
+  if (!loading && validations.length > 0 && !selectedValidation && !hasAutoSelected) {
+    setSelectedValidation(validations[0]);
+    setHasAutoSelected(true);
+  }
 
   const handleDelete = async (validationId: string) => {
     setIsDeleting(validationId);

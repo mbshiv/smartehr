@@ -25,6 +25,13 @@ const NotesHistory = ({ onBack }: NotesHistoryProps) => {
   const { notes, loading, deleteNote } = useClinicalNotes();
   const [selectedNote, setSelectedNote] = useState<ClinicalNote | null>(null);
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
+  const [hasAutoSelected, setHasAutoSelected] = useState(false);
+
+  // Auto-select topmost note when notes load
+  if (!loading && notes.length > 0 && !selectedNote && !hasAutoSelected) {
+    setSelectedNote(notes[0]);
+    setHasAutoSelected(true);
+  }
 
   const handleDelete = async (noteId: string) => {
     setIsDeleting(noteId);
