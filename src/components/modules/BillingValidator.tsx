@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { DollarSign, ShieldCheck, AlertTriangle, Loader2, Lightbulb, CheckCircle2, XCircle, Save, History, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { syntheticPatient } from "@/data/syntheticData";
@@ -11,6 +10,8 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import BillingHistory from "./BillingHistory";
 import ClinicalNoteSelectDialog from "./ClinicalNoteSelectDialog";
+import SOAPDisplayReadOnly, { parseStructuredNoteString } from "./SOAPDisplayReadOnly";
+import { StructuredSOAPNote } from "./SOAPOutput";
 
 export interface ValidationResult {
   overallRisk: "low" | "medium" | "high";
@@ -351,53 +352,117 @@ The claim is likely to be approved with minor documentation improvements.`;
       {/* Main Content */}
       <div className="flex-1 p-6 overflow-y-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Input Panel */}
-          <Card className="flex flex-col">
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-base font-medium">
-                  Clinical Notes
-                  {selectedNoteTag && (
-                    <span className="ml-2 text-xs font-normal text-muted-foreground">
-                      ({selectedNoteTag})
-                    </span>
-                  )}
-                </CardTitle>
-                <Button variant="ghost" size="sm" onClick={() => setShowNoteSelect(true)}>
-                  <FileText className="w-4 h-4 mr-1" />
-                  Load Clinical Note
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent className="flex-1 flex flex-col">
-              <Textarea
-                value={inputNotes}
-                onChange={(e) => updateState({ inputNotes: e.target.value })}
-                placeholder="Load a clinical note from the Documentation Assistant to validate..."
-                className="flex-1 min-h-[300px] resize-none text-sm"
-                readOnly
-              />
-              <div className="mt-4">
-                <Button
-                  onClick={handleValidateClaim}
-                  disabled={isValidating || !inputNotes.trim()}
-                  className="w-full"
-                >
-                  {isValidating ? (
+          {/* Input Panel - SOAP Display */}
+          {inputNotes ? (
+            <div className="flex flex-col">
+              {(() => {
+                const parsedNote = parseStructuredNoteString(inputNotes);
+                if (parsedNote) {
+                  return (
                     <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Validating...
+                      <SOAPDisplayReadOnly note={parsedNote} noteTag={selectedNoteTag} />
+                      <div className="mt-4">
+                        <Button
+                          onClick={handleValidateClaim}
+                          disabled={isValidating}
+                          className="w-full"
+                        >
+                          {isValidating ? (
+                            <>
+                              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                              Validating...
+                            </>
+                          ) : (
+                            <>
+                              <ShieldCheck className="w-4 h-4 mr-2" />
+                              Validate Claim
+                            </>
+                          )}
+                        </Button>
+                      </div>
                     </>
-                  ) : (
-                    <>
-                      <ShieldCheck className="w-4 h-4 mr-2" />
-                      Validate Claim
-                    </>
-                  )}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+                  );
+                }
+                // Fallback for notes that can't be parsed
+                return (
+                  <Card className="flex flex-col">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-base font-medium">
+                          Clinical Notes
+                          {selectedNoteTag && (
+                            <span className="ml-2 text-xs font-normal text-muted-foreground">
+                              ({selectedNoteTag})
+                            </span>
+                          )}
+                        </CardTitle>
+                        <Button variant="ghost" size="sm" onClick={() => setShowNoteSelect(true)}>
+                          <FileText className="w-4 h-4 mr-1" />
+                          Load Clinical Note
+                        </Button>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="flex-1 flex flex-col">
+                      <div className="flex-1 bg-secondary/30 rounded-lg p-4 overflow-y-auto min-h-[300px]">
+                        <pre className="whitespace-pre-wrap text-sm text-foreground font-sans leading-relaxed">
+                          {inputNotes}
+                        </pre>
+                      </div>
+                      <div className="mt-4">
+                        <Button
+                          onClick={handleValidateClaim}
+                          disabled={isValidating}
+                          className="w-full"
+                        >
+                          {isValidating ? (
+                            <>
+                              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                              Validating...
+                            </>
+                          ) : (
+                            <>
+                              <ShieldCheck className="w-4 h-4 mr-2" />
+                              Validate Claim
+                            </>
+                          )}
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })()}
+            </div>
+          ) : (
+            <Card className="flex flex-col min-h-[400px]">
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-base font-medium">Clinical Notes</CardTitle>
+                  <Button variant="ghost" size="sm" onClick={() => setShowNoteSelect(true)}>
+                    <FileText className="w-4 h-4 mr-1" />
+                    Load Clinical Note
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent className="flex-1 flex flex-col">
+                <div className="flex-1 bg-secondary/30 rounded-lg p-4 flex items-center justify-center text-muted-foreground">
+                  <div className="text-center">
+                    <FileText className="w-12 h-12 mx-auto mb-3 opacity-30" />
+                    <p>Load a clinical note from the Documentation Assistant</p>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <Button
+                    onClick={handleValidateClaim}
+                    disabled={true}
+                    className="w-full"
+                  >
+                    <ShieldCheck className="w-4 h-4 mr-2" />
+                    Validate Claim
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Validation Results Panel */}
           <Card className="flex flex-col">
