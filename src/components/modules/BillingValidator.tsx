@@ -358,9 +358,9 @@ The claim is likely to be approved with minor documentation improvements.`;
               {(() => {
                 const parsedNote = parseStructuredNoteString(inputNotes);
                 if (parsedNote) {
-                  return (
+                      return (
                     <>
-                      <SOAPDisplayReadOnly note={parsedNote} noteTag={selectedNoteTag} />
+                      <SOAPDisplayReadOnly note={parsedNote} noteTag={selectedNoteTag} onLoadNote={() => setShowNoteSelect(true)} />
                       <div className="mt-4">
                         <Button
                           onClick={handleValidateClaim}
