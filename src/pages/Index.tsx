@@ -12,7 +12,8 @@ const Index = () => {
   // Lifted documentation state
   const [docState, setDocState] = useState<DocumentationState>({
     inputNotes: "",
-    structuredNote: "",
+    structuredNote: null,
+    structuredNoteString: "",
     reasoning: "",
     selectedPatientId: null,
   });
