@@ -240,7 +240,7 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
                 className="flex-1 min-h-[300px] resize-none font-mono text-sm"
               />
               <div className="mt-4 flex gap-3">
-                <Button onClick={handleGenerateNote} disabled={isGenerating} className="flex-1">
+                <Button onClick={handleGenerateNote} disabled={isGenerating || !inputNotes.trim()} className="flex-1">
                   {isGenerating ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />

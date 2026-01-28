@@ -380,7 +380,7 @@ The claim is likely to be approved with minor documentation improvements.`;
               <div className="mt-4">
                 <Button
                   onClick={handleValidateClaim}
-                  disabled={isValidating}
+                  disabled={isValidating || !inputNotes.trim()}
                   className="w-full"
                 >
                   {isValidating ? (
