@@ -259,9 +259,9 @@ The raw notes contained abbreviated clinical terminology (c/o, x, dx, htn, t2dm)
             <CardContent className="flex-1 flex flex-col">
               <Textarea
                 value={inputNotes}
-                onChange={(e) => updateState({ inputNotes: e.target.value })}
-                placeholder="Paste or type raw clinician notes here..."
-                className="flex-1 min-h-[300px] resize-none font-mono text-sm"
+                readOnly
+                placeholder="Click 'Load Patient' to load clinical notes..."
+                className="flex-1 min-h-[300px] resize-none font-mono text-sm bg-muted/30 cursor-default"
               />
               <div className="mt-4 flex gap-3">
                 <Button onClick={handleGenerateNote} disabled={isGenerating || !inputNotes.trim()} className="flex-1">
