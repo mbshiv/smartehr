@@ -1,31 +1,74 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import PatientSidebar from "@/components/layout/PatientSidebar";
 import DocumentationAssistant from "@/components/modules/DocumentationAssistant";
 import BillingValidator from "@/components/modules/BillingValidator";
 import { DocumentationState } from "@/components/modules/DocumentationAssistant";
 import { BillingState } from "@/components/modules/BillingValidator";
+import { useAuthContext } from "@/contexts/AuthContext";
+
+const DOC_STATE_KEY = "nextgenehr_doc_state";
+const BILLING_STATE_KEY = "nextgenehr_billing_state";
+
+const defaultDocState: DocumentationState = {
+  inputNotes: "",
+  structuredNote: null,
+  structuredNoteString: "",
+  reasoning: "",
+  selectedPatientId: null,
+};
+
+const defaultBillingState: BillingState = {
+  inputNotes: "",
+  validationResult: null,
+  reasoning: "",
+  selectedPatientId: null,
+  selectedNoteTag: null,
+};
+
+function loadState<T>(key: string, userId: string, fallback: T): T {
+  try {
+    const raw = localStorage.getItem(`${key}_${userId}`);
+    if (raw) return JSON.parse(raw);
+  } catch {}
+  return fallback;
+}
 
 const Index = () => {
+  const { user } = useAuthContext();
+  const userId = user?.id ?? "";
+
   const [activeModule, setActiveModule] = useState<"documentation" | "billing">("documentation");
 
-  // Lifted documentation state
-  const [docState, setDocState] = useState<DocumentationState>({
-    inputNotes: "",
-    structuredNote: null,
-    structuredNoteString: "",
-    reasoning: "",
-    selectedPatientId: null,
-  });
+  const [docState, setDocState] = useState<DocumentationState>(() =>
+    userId ? loadState(DOC_STATE_KEY, userId, defaultDocState) : defaultDocState
+  );
 
-  // Lifted billing state
-  const [billingState, setBillingState] = useState<BillingState>({
-    inputNotes: "",
-    validationResult: null,
-    reasoning: "",
-    selectedPatientId: null,
-    selectedNoteTag: null,
-  });
+  const [billingState, setBillingState] = useState<BillingState>(() =>
+    userId ? loadState(BILLING_STATE_KEY, userId, defaultBillingState) : defaultBillingState
+  );
+
+  // Restore state when user logs in
+  useEffect(() => {
+    if (userId) {
+      setDocState(loadState(DOC_STATE_KEY, userId, defaultDocState));
+      setBillingState(loadState(BILLING_STATE_KEY, userId, defaultBillingState));
+    }
+  }, [userId]);
+
+  // Persist doc state
+  useEffect(() => {
+    if (userId) {
+      localStorage.setItem(`${DOC_STATE_KEY}_${userId}`, JSON.stringify(docState));
+    }
+  }, [docState, userId]);
+
+  // Persist billing state
+  useEffect(() => {
+    if (userId) {
+      localStorage.setItem(`${BILLING_STATE_KEY}_${userId}`, JSON.stringify(billingState));
+    }
+  }, [billingState, userId]);
 
   // Derive the sidebar patient ID from the active module's state
   const selectedPatientId = useMemo(() => {
