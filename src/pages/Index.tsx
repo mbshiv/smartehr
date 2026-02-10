@@ -55,6 +55,10 @@ const Index = () => {
     userId ? loadState(BILLING_STATE_KEY, userId, defaultBillingState) : defaultBillingState
   );
 
+  const [queryState, setQueryState] = useState<QueryAssistantState>(() =>
+    userId ? loadState(QUERY_STATE_KEY, userId, defaultQueryState) : defaultQueryState
+  );
+
   // Restore state when user logs in
   useEffect(() => {
     if (userId) {
