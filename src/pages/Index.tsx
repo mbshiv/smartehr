@@ -93,9 +93,10 @@ const Index = () => {
   const selectedPatientId = useMemo(() => {
     if (activeModule === "documentation") {
       return docState.selectedPatientId;
-    } else {
+    } else if (activeModule === "billing") {
       return billingState.selectedPatientId;
     }
+    return null;
   }, [activeModule, docState.selectedPatientId, billingState.selectedPatientId]);
 
   return (
