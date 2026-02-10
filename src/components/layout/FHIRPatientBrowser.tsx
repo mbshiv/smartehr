@@ -48,10 +48,27 @@ function parseAllPatients(): ParsedPatient[] {
   return patients.sort((a, b) => a.id.localeCompare(b.id));
 }
 
-const FHIRPatientBrowser = () => {
+export interface FHIRBrowserState {
+  expandedIds: Set<string>;
+  expandedSections: Set<string>;
+}
+
+interface FHIRPatientBrowserProps {
+  browserState: FHIRBrowserState;
+  onBrowserStateChange: (state: FHIRBrowserState) => void;
+}
+
+const FHIRPatientBrowser = ({ browserState, onBrowserStateChange }: FHIRPatientBrowserProps) => {
   const [search, setSearch] = useState("");
-  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
-  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
+  const { expandedIds, expandedSections } = browserState;
+
+  const updateIds = (newIds: Set<string>) => {
+    onBrowserStateChange({ ...browserState, expandedIds: newIds });
+  };
+
+  const updateSections = (newSections: Set<string>) => {
+    onBrowserStateChange({ ...browserState, expandedSections: newSections });
+  };
 
   const allPatients = useMemo(() => parseAllPatients(), []);
 
@@ -64,62 +81,47 @@ const FHIRPatientBrowser = () => {
   }, [allPatients, search]);
 
   const togglePatient = useCallback((id: string) => {
-    setExpandedIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) {
-        next.delete(id);
-        // Also remove this patient's sections
-        setExpandedSections((prevSec) => {
-          const nextSec = new Set(prevSec);
-          for (const key of prevSec) {
-            if (key.startsWith(`${id}::`)) nextSec.delete(key);
-          }
-          return nextSec;
-        });
-      } else {
-        next.add(id);
-        // Auto-expand all sections for this patient
-        const patient = allPatients.find((p) => p.id === id);
-        if (patient) {
-          setExpandedSections((prevSec) => {
-            const nextSec = new Set(prevSec);
-            for (const sectionName of Object.keys(patient.sections)) {
-              nextSec.add(`${id}::${sectionName}`);
-            }
-            return nextSec;
-          });
+    const nextIds = new Set(expandedIds);
+    const nextSections = new Set(expandedSections);
+    if (nextIds.has(id)) {
+      nextIds.delete(id);
+      for (const key of expandedSections) {
+        if (key.startsWith(`${id}::`)) nextSections.delete(key);
+      }
+    } else {
+      nextIds.add(id);
+      const patient = allPatients.find((p) => p.id === id);
+      if (patient) {
+        for (const sectionName of Object.keys(patient.sections)) {
+          nextSections.add(`${id}::${sectionName}`);
         }
       }
-      return next;
-    });
-  }, [allPatients]);
+    }
+    onBrowserStateChange({ expandedIds: nextIds, expandedSections: nextSections });
+  }, [allPatients, expandedIds, expandedSections, onBrowserStateChange]);
 
   const toggleSection = useCallback((patientId: string, section: string) => {
     const key = `${patientId}::${section}`;
-    setExpandedSections((prev) => {
-      const next = new Set(prev);
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
-      return next;
-    });
-  }, []);
+    const next = new Set(expandedSections);
+    if (next.has(key)) next.delete(key);
+    else next.add(key);
+    updateSections(next);
+  }, [expandedSections]);
 
   const expandAll = useCallback(() => {
     const ids = new Set(filtered.map((p) => p.id));
-    setExpandedIds(ids);
     const sections = new Set<string>();
     for (const p of filtered) {
       for (const s of Object.keys(p.sections)) {
         sections.add(`${p.id}::${s}`);
       }
     }
-    setExpandedSections(sections);
-  }, [filtered]);
+    onBrowserStateChange({ expandedIds: ids, expandedSections: sections });
+  }, [filtered, onBrowserStateChange]);
 
   const collapseAll = useCallback(() => {
-    setExpandedIds(new Set());
-    setExpandedSections(new Set());
-  }, []);
+    onBrowserStateChange({ expandedIds: new Set(), expandedSections: new Set() });
+  }, [onBrowserStateChange]);
 
   return (
     <aside className="w-80 bg-card border-l border-border h-full flex flex-col overflow-hidden">
