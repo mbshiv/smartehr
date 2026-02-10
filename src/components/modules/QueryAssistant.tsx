@@ -424,12 +424,12 @@ function HistoryPanel({
               <Loader2 className="w-4 h-4 animate-spin mr-2" />
               Loading sessions...
             </div>
-          ) : sessions.length === 0 ? (
+          ) : filtered.length === 0 ? (
             <p className="text-sm text-muted-foreground text-center py-8">
-              No past sessions found.
+              {searchTerm ? "No sessions match your search." : "No past sessions found."}
             </p>
           ) : (
-            sessions.map((s) => (
+            filtered.map((s) => (
               <div
                 key={s.session_id}
                 className={`group flex items-start gap-3 rounded-lg border p-3 cursor-pointer transition-colors hover:bg-accent/50 ${
