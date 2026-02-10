@@ -2,8 +2,8 @@ import { FileText, DollarSign, Activity, Database } from "lucide-react";
 import { cn } from "@/lib/utils";
 import UserMenu from "./UserMenu";
 interface SidebarProps {
-  activeModule: "documentation" | "billing";
-  onModuleChange: (module: "documentation" | "billing") => void;
+  activeModule: "documentation" | "billing" | "query";
+  onModuleChange: (module: "documentation" | "billing" | "query") => void;
 }
 const Sidebar = ({
   activeModule,
