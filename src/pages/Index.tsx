@@ -127,8 +127,12 @@ const Index = () => {
           )}
         </div>
 
-        {/* Right Patient Sidebar */}
-        <PatientSidebar selectedPatientId={selectedPatientId} />
+        {/* Right Sidebar */}
+        {activeModule === "query" ? (
+          <FHIRPatientBrowser />
+        ) : (
+          <PatientSidebar selectedPatientId={selectedPatientId} />
+        )}
       </main>
     </div>
   );
