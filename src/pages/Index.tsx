@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import PatientSidebar from "@/components/layout/PatientSidebar";
+import FHIRPatientBrowser from "@/components/layout/FHIRPatientBrowser";
 import DocumentationAssistant from "@/components/modules/DocumentationAssistant";
 import BillingValidator from "@/components/modules/BillingValidator";
 import QueryAssistant from "@/components/modules/QueryAssistant";
