@@ -185,7 +185,7 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
             <Database className="w-5 h-5 text-primary" />
           </div>
-          <div>
+          <div className="flex-1">
             <h2 className="text-xl font-semibold text-foreground">
               Interoperability Query Assistant
             </h2>
@@ -193,6 +193,15 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
               Query synthetic FHIR patient records using natural language
             </p>
           </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => updateState({ messages: [] })}
+            disabled={isLoading || messages.length === 0}
+          >
+            <Plus className="w-4 h-4 mr-1" />
+            New Chat
+          </Button>
         </div>
       </div>
 
