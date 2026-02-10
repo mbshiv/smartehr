@@ -71,7 +71,9 @@ const FHIRPatientBrowser = () => {
       setExpandedSections(new Set());
     } else {
       setExpandedId(id);
-      setExpandedSections(new Set());
+      // Auto-expand all sections for the selected patient
+      const patient = allPatients.find((p) => p.id === id);
+      setExpandedSections(patient ? new Set(Object.keys(patient.sections)) : new Set());
     }
   };
 
