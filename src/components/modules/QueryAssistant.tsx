@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { Search, Send, Loader2, Database, AlertCircle, ChevronDown, ChevronUp, Copy, Download, Check, Plus } from "lucide-react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { Search, Send, Loader2, Database, AlertCircle, ChevronDown, ChevronUp, Copy, Download, Check, Plus, History, Clock, Trash2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -32,6 +32,14 @@ export interface QueryMessage {
 
 export interface QueryAssistantState {
   messages: QueryMessage[];
+  currentSessionId: string | null;
+}
+
+interface ChatSession {
+  session_id: string;
+  firstQuery: string;
+  queryCount: number;
+  created_at: string;
 }
 
 interface QueryAssistantProps {
@@ -51,56 +59,17 @@ const EXAMPLE_QUERIES = [
 const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [historyLoaded, setHistoryLoaded] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
+  const [sessions, setSessions] = useState<ChatSession[]>([]);
+  const [sessionsLoading, setSessionsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const { user } = useAuthContext();
 
-  const { messages } = state;
+  const { messages, currentSessionId } = state;
 
   const updateState = (updates: Partial<QueryAssistantState>) => {
     onStateChange({ ...state, ...updates });
   };
-
-  // Load history from DB on mount
-  useEffect(() => {
-    if (!user?.id || historyLoaded) return;
-    const loadHistory = async () => {
-      const { data, error } = await supabase
-        .from("query_history")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("created_at", { ascending: true })
-        .limit(200);
-
-      if (error) {
-        console.error("Failed to load query history:", error);
-        return;
-      }
-
-      if (data && data.length > 0) {
-        const restoredMessages: QueryMessage[] = [];
-        for (const row of data) {
-          restoredMessages.push({
-            id: `${row.id}-q`,
-            role: "user",
-            content: row.query,
-            timestamp: new Date(row.created_at).getTime(),
-          });
-          const result = row.result as unknown as QueryResult;
-          restoredMessages.push({
-            id: row.id,
-            role: "assistant",
-            content: result?.summary || "",
-            result,
-            timestamp: new Date(row.created_at).getTime() + 1,
-          });
-        }
-        updateState({ messages: restoredMessages });
-      }
-      setHistoryLoaded(true);
-    };
-    loadHistory();
-  }, [user?.id]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -108,12 +77,127 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
     }
   }, [messages]);
 
-  const saveToDb = async (query: string, result: QueryResult) => {
+  // Load current session from DB on mount
+  useEffect(() => {
+    if (!user?.id || !currentSessionId || messages.length > 0) return;
+    loadSession(currentSessionId);
+  }, [user?.id, currentSessionId]);
+
+  const loadSessions = useCallback(async () => {
+    if (!user?.id) return;
+    setSessionsLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from("query_history")
+        .select("session_id, query, created_at")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false })
+        .limit(500);
+
+      if (error) throw error;
+
+      // Group by session_id
+      const sessionMap = new Map<string, { firstQuery: string; queryCount: number; created_at: string }>();
+      for (const row of data || []) {
+        const sid = row.session_id as string;
+        if (!sessionMap.has(sid)) {
+          sessionMap.set(sid, { firstQuery: row.query, queryCount: 1, created_at: row.created_at });
+        } else {
+          const s = sessionMap.get(sid)!;
+          s.queryCount++;
+          if (row.created_at < s.created_at) {
+            s.created_at = row.created_at;
+            s.firstQuery = row.query;
+          }
+        }
+      }
+
+      const list: ChatSession[] = Array.from(sessionMap.entries())
+        .map(([session_id, v]) => ({ session_id, ...v }))
+        .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+      setSessions(list);
+    } catch (e) {
+      console.error("Failed to load sessions:", e);
+    } finally {
+      setSessionsLoading(false);
+    }
+  }, [user?.id]);
+
+  const loadSession = async (sessionId: string) => {
+    if (!user?.id) return;
+    const { data, error } = await supabase
+      .from("query_history")
+      .select("*")
+      .eq("user_id", user.id)
+      .eq("session_id", sessionId)
+      .order("created_at", { ascending: true });
+
+    if (error) {
+      console.error("Failed to load session:", error);
+      return;
+    }
+
+    if (data && data.length > 0) {
+      const restoredMessages: QueryMessage[] = [];
+      for (const row of data) {
+        restoredMessages.push({
+          id: `${row.id}-q`,
+          role: "user",
+          content: row.query,
+          timestamp: new Date(row.created_at).getTime(),
+        });
+        const result = row.result as unknown as QueryResult;
+        restoredMessages.push({
+          id: row.id,
+          role: "assistant",
+          content: result?.summary || "",
+          result,
+          timestamp: new Date(row.created_at).getTime() + 1,
+        });
+      }
+      updateState({ messages: restoredMessages, currentSessionId: sessionId });
+    }
+    setShowHistory(false);
+  };
+
+  const deleteSession = async (sessionId: string) => {
+    if (!user?.id) return;
+    const { error } = await supabase
+      .from("query_history")
+      .delete()
+      .eq("user_id", user.id)
+      .eq("session_id", sessionId);
+
+    if (error) {
+      toast.error("Failed to delete session");
+      return;
+    }
+
+    toast.success("Session deleted");
+    setSessions((prev) => prev.filter((s) => s.session_id !== sessionId));
+
+    if (currentSessionId === sessionId) {
+      updateState({ messages: [], currentSessionId: null });
+    }
+  };
+
+  const handleNewChat = () => {
+    updateState({ messages: [], currentSessionId: null });
+  };
+
+  const handleOpenHistory = () => {
+    setShowHistory(true);
+    loadSessions();
+  };
+
+  const saveToDb = async (query: string, result: QueryResult, sessionId: string) => {
     if (!user?.id) return;
     const { error } = await supabase.from("query_history").insert({
       user_id: user.id,
       query,
       result: result as any,
+      session_id: sessionId,
     });
     if (error) console.error("Failed to save query history:", error);
   };
@@ -121,6 +205,12 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
   const handleSubmit = async (query?: string) => {
     const q = query || input.trim();
     if (!q || isLoading) return;
+
+    // Create session if needed
+    const sessionId = currentSessionId || crypto.randomUUID();
+    if (!currentSessionId) {
+      updateState({ ...state, currentSessionId: sessionId });
+    }
 
     const userMsg: QueryMessage = {
       id: crypto.randomUUID(),
@@ -130,7 +220,7 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
     };
 
     const newMessages = [...messages, userMsg];
-    updateState({ messages: newMessages });
+    onStateChange({ messages: newMessages, currentSessionId: sessionId });
     setInput("");
     setIsLoading(true);
 
@@ -149,7 +239,7 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
           error: data.error,
           timestamp: Date.now(),
         };
-        updateState({ messages: [...newMessages, errMsg] });
+        onStateChange({ messages: [...newMessages, errMsg], currentSessionId: sessionId });
       } else {
         const assistantMsg: QueryMessage = {
           id: crypto.randomUUID(),
@@ -158,8 +248,8 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
           result: data as QueryResult,
           timestamp: Date.now(),
         };
-        updateState({ messages: [...newMessages, assistantMsg] });
-        await saveToDb(q, data as QueryResult);
+        onStateChange({ messages: [...newMessages, assistantMsg], currentSessionId: sessionId });
+        await saveToDb(q, data as QueryResult, sessionId);
       }
     } catch (e: any) {
       console.error("Query error:", e);
@@ -170,7 +260,7 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
         error: e.message || "Failed to process query",
         timestamp: Date.now(),
       };
-      updateState({ messages: [...newMessages, errMsg] });
+      onStateChange({ messages: [...newMessages, errMsg], currentSessionId: sessionId });
       toast.error("Query failed. Please try again.");
     } finally {
       setIsLoading(false);
@@ -193,10 +283,14 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
               Query synthetic FHIR patient records using natural language
             </p>
           </div>
+          <Button variant="outline" size="sm" onClick={handleOpenHistory}>
+            <History className="w-4 h-4 mr-1" />
+            History
+          </Button>
           <Button
             variant="outline"
             size="sm"
-            onClick={() => updateState({ messages: [] })}
+            onClick={handleNewChat}
             disabled={isLoading || messages.length === 0}
           >
             <Plus className="w-4 h-4 mr-1" />
@@ -205,62 +299,160 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
         </div>
       </div>
 
+      {/* History Panel */}
+      {showHistory && (
+        <HistoryPanel
+          sessions={sessions}
+          loading={sessionsLoading}
+          currentSessionId={currentSessionId}
+          onSelect={loadSession}
+          onDelete={deleteSession}
+          onClose={() => setShowHistory(false)}
+        />
+      )}
+
       {/* Messages Area */}
-      <div className="flex-1 overflow-hidden">
-        <ScrollArea className="h-full" ref={scrollRef}>
-          <div className="p-6 space-y-4">
-            {messages.length === 0 ? (
-              <EmptyState onExampleClick={(q) => handleSubmit(q)} />
-            ) : (
-              messages.map((msg) => (
-                <MessageBubble key={msg.id} message={msg} />
-              ))
-            )}
-            {isLoading && (
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <Loader2 className="w-4 h-4 animate-spin" />
-                <span className="text-sm">Querying patient records...</span>
-              </div>
-            )}
-          </div>
-        </ScrollArea>
-      </div>
+      {!showHistory && (
+        <div className="flex-1 overflow-hidden">
+          <ScrollArea className="h-full" ref={scrollRef}>
+            <div className="p-6 space-y-4">
+              {messages.length === 0 ? (
+                <EmptyState onExampleClick={(q) => handleSubmit(q)} />
+              ) : (
+                messages.map((msg) => (
+                  <MessageBubble key={msg.id} message={msg} />
+                ))
+              )}
+              {isLoading && (
+                <div className="flex items-center gap-3 text-muted-foreground">
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span className="text-sm">Querying patient records...</span>
+                </div>
+              )}
+            </div>
+          </ScrollArea>
+        </div>
+      )}
 
       {/* Input */}
-      <div className="p-4 border-t border-border bg-card">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit();
-          }}
-          className="flex gap-3"
-        >
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about patient records... e.g. 'List allergies for PATIENT_023'"
-              className="pl-9"
-              disabled={isLoading}
-            />
-          </div>
-          <Button type="submit" disabled={isLoading || !input.trim()}>
-            {isLoading ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
-            ) : (
-              <Send className="w-4 h-4" />
-            )}
-          </Button>
-        </form>
-        <p className="text-xs text-muted-foreground mt-2">
-          100 synthetic patients available (PATIENT_001 – PATIENT_100). No real PHI.
-        </p>
-      </div>
+      {!showHistory && (
+        <div className="p-4 border-t border-border bg-card">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+            className="flex gap-3"
+          >
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Ask about patient records... e.g. 'List allergies for PATIENT_023'"
+                className="pl-9"
+                disabled={isLoading}
+              />
+            </div>
+            <Button type="submit" disabled={isLoading || !input.trim()}>
+              {isLoading ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <Send className="w-4 h-4" />
+              )}
+            </Button>
+          </form>
+          <p className="text-xs text-muted-foreground mt-2">
+            100 synthetic patients available (PATIENT_001 – PATIENT_100). No real PHI.
+          </p>
+        </div>
+      )}
     </div>
   );
 };
 
+/* ─── History Panel ─── */
+function HistoryPanel({
+  sessions,
+  loading,
+  currentSessionId,
+  onSelect,
+  onDelete,
+  onClose,
+}: {
+  sessions: ChatSession[];
+  loading: boolean;
+  currentSessionId: string | null;
+  onSelect: (id: string) => void;
+  onDelete: (id: string) => void;
+  onClose: () => void;
+}) {
+  return (
+    <div className="flex-1 overflow-hidden flex flex-col">
+      <div className="p-4 border-b border-border flex items-center justify-between">
+        <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
+          <Clock className="w-4 h-4 text-muted-foreground" />
+          Past Sessions
+        </h3>
+        <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={onClose}>
+          <X className="w-4 h-4" />
+        </Button>
+      </div>
+      <ScrollArea className="flex-1">
+        <div className="p-4 space-y-2">
+          {loading ? (
+            <div className="flex items-center justify-center py-8 text-muted-foreground">
+              <Loader2 className="w-4 h-4 animate-spin mr-2" />
+              Loading sessions...
+            </div>
+          ) : sessions.length === 0 ? (
+            <p className="text-sm text-muted-foreground text-center py-8">
+              No past sessions found.
+            </p>
+          ) : (
+            sessions.map((s) => (
+              <div
+                key={s.session_id}
+                className={`group flex items-start gap-3 rounded-lg border p-3 cursor-pointer transition-colors hover:bg-accent/50 ${
+                  s.session_id === currentSessionId ? "border-primary bg-primary/5" : "border-border"
+                }`}
+                onClick={() => onSelect(s.session_id)}
+              >
+                <Database className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-foreground truncate">
+                    {s.firstQuery}
+                  </p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <Badge variant="secondary" className="text-xs">
+                      {s.queryCount} {s.queryCount === 1 ? "query" : "queries"}
+                    </Badge>
+                    <span className="text-xs text-muted-foreground">
+                      {new Date(s.created_at).toLocaleDateString()}
+                    </span>
+                  </div>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-7 w-7 p-0 opacity-0 group-hover:opacity-100 shrink-0"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDelete(s.session_id);
+                  }}
+                >
+                  <Trash2 className="w-3.5 h-3.5 text-destructive" />
+                </Button>
+              </div>
+            ))
+          )}
+        </div>
+      </ScrollArea>
+    </div>
+  );
+}
+
+/* ─── Empty State ─── */
 function EmptyState({ onExampleClick }: { onExampleClick: (q: string) => void }) {
   return (
     <div className="flex flex-col items-center justify-center py-12">
@@ -290,6 +482,7 @@ function EmptyState({ onExampleClick }: { onExampleClick: (q: string) => void })
   );
 }
 
+/* ─── Result Actions ─── */
 function ResultActions({ result }: { result: QueryResult }) {
   const [copied, setCopied] = useState(false);
 
@@ -325,6 +518,7 @@ function ResultActions({ result }: { result: QueryResult }) {
   );
 }
 
+/* ─── Message Bubble ─── */
 function MessageBubble({ message }: { message: QueryMessage }) {
   if (message.role === "user") {
     return (
@@ -361,10 +555,7 @@ function MessageBubble({ message }: { message: QueryMessage }) {
       <div className="space-y-3 max-w-[85%] min-w-0">
         {result && (
           <>
-            {/* Actions */}
             <ResultActions result={result} />
-
-            {/* Query Interpretation */}
             <Card>
               <CardContent className="p-3">
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
@@ -373,13 +564,9 @@ function MessageBubble({ message }: { message: QueryMessage }) {
                 <p className="text-sm text-foreground">{result.query_interpretation}</p>
               </CardContent>
             </Card>
-
-            {/* Retrieved Resources */}
             {result.retrieved_resources.length > 0 && (
               <ResourceList resources={result.retrieved_resources} />
             )}
-
-            {/* Summary */}
             <Card>
               <CardContent className="p-3">
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
@@ -388,8 +575,6 @@ function MessageBubble({ message }: { message: QueryMessage }) {
                 <p className="text-sm text-foreground whitespace-pre-wrap">{result.summary}</p>
               </CardContent>
             </Card>
-
-            {/* Data Quality Notes */}
             {result.data_quality_notes.length > 0 && (
               <div className="flex flex-wrap gap-1.5">
                 {result.data_quality_notes.map((note, i) => (
@@ -401,7 +586,6 @@ function MessageBubble({ message }: { message: QueryMessage }) {
             )}
           </>
         )}
-
         {!result && message.content && (
           <Card>
             <CardContent className="p-3">
@@ -414,13 +598,9 @@ function MessageBubble({ message }: { message: QueryMessage }) {
   );
 }
 
-function ResourceList({
-  resources,
-}: {
-  resources: QueryResult["retrieved_resources"];
-}) {
+/* ─── Resource List ─── */
+function ResourceList({ resources }: { resources: QueryResult["retrieved_resources"] }) {
   const [expanded, setExpanded] = useState(resources.length <= 5);
-
   const displayed = expanded ? resources : resources.slice(0, 5);
 
   return (
@@ -429,40 +609,18 @@ function ResourceList({
         <CardTitle className="text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center justify-between">
           <span>Retrieved Resources ({resources.length})</span>
           {resources.length > 5 && (
-            <Button
-              variant="ghost"
-              size="sm"
-              className="h-6 px-2 text-xs"
-              onClick={() => setExpanded(!expanded)}
-            >
-              {expanded ? (
-                <>
-                  <ChevronUp className="w-3 h-3 mr-1" />
-                  Collapse
-                </>
-              ) : (
-                <>
-                  <ChevronDown className="w-3 h-3 mr-1" />
-                  Show All
-                </>
-              )}
+            <Button variant="ghost" size="sm" className="h-6 px-2 text-xs" onClick={() => setExpanded(!expanded)}>
+              {expanded ? <><ChevronUp className="w-3 h-3 mr-1" />Collapse</> : <><ChevronDown className="w-3 h-3 mr-1" />Show All</>}
             </Button>
           )}
         </CardTitle>
       </CardHeader>
       <CardContent className="p-3 pt-0 space-y-2">
         {displayed.map((r, i) => (
-          <div
-            key={i}
-            className="bg-secondary/50 rounded-md px-3 py-2 text-sm"
-          >
+          <div key={i} className="bg-secondary/50 rounded-md px-3 py-2 text-sm">
             <div className="flex items-center gap-2 mb-1">
-              <Badge variant="secondary" className="text-xs">
-                {r.resource_type}
-              </Badge>
-              <span className="text-xs font-mono text-muted-foreground">
-                {r.patient_id}
-              </span>
+              <Badge variant="secondary" className="text-xs">{r.resource_type}</Badge>
+              <span className="text-xs font-mono text-muted-foreground">{r.patient_id}</span>
             </div>
             <p className="text-foreground whitespace-pre-wrap">{r.data}</p>
           </div>
