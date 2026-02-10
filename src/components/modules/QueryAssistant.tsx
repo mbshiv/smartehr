@@ -73,9 +73,14 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
 
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      const viewport = scrollRef.current.querySelector("[data-radix-scroll-area-viewport]");
+      if (viewport) {
+        setTimeout(() => {
+          viewport.scrollTop = viewport.scrollHeight;
+        }, 50);
+      }
     }
-  }, [messages]);
+  }, [messages, isLoading]);
 
   // Load current session from DB on mount
   useEffect(() => {
@@ -313,8 +318,8 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
 
       {/* Messages Area */}
       {!showHistory && (
-        <div className="flex-1 overflow-hidden">
-          <ScrollArea className="h-full" ref={scrollRef}>
+        <div className="flex-1 overflow-hidden" ref={scrollRef}>
+          <ScrollArea className="h-full">
             <div className="p-6 space-y-4">
               {messages.length === 0 ? (
                 <EmptyState onExampleClick={(q) => handleSubmit(q)} />
