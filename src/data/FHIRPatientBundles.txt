@@ -1,0 +1,1599 @@
+Patient 001
+ID: PATIENT_001
+DOB: 1966-01-23
+Gender: Female
+Insurance: Aetna
+Allergies: Bee stings, Penicillin
+Conditions: None
+Medications: Omeprazole, Metformin
+Encounters: ENC-001-1 (2025-01-14, Primary Care Visit, Routine follow-up, Dr. Smith)
+Observations: OBS-001-1 (2025-01-14, Blood Pressure, 138/84 mmHg, final)
+Vitals: VIT-001-1 (2025-01-14, Heart Rate, 78 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 002
+ID: PATIENT_002
+DOB: 1990-03-26
+Gender: Female
+Insurance: HealthFirst
+Allergies: Penicillin, Latex, Bee stings
+Conditions: None
+Medications: Ibuprofen, Omeprazole
+Encounters: ENC-002-1 (2025-02-02, Urgent Care Visit, Headache and nausea, Dr. Patel)
+Observations: OBS-002-1 (2025-02-02, Temperature, 99.1 F, final)
+Vitals: VIT-002-1 (2025-02-02, Heart Rate, 82 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 003
+ID: PATIENT_003
+DOB: 1977-08-10
+Gender: Male
+Insurance: HealthFirst
+Allergies: Penicillin, Shellfish, Latex
+Conditions: COPD
+Medications: Ibuprofen, Omeprazole, Metformin
+Encounters: ENC-003-1 (2025-01-20, Pulmonology Visit, COPD management, Dr. Lopez)
+Observations: OBS-003-1 (2025-01-20, O2 Saturation, 93 %, final)
+Vitals: VIT-003-1 (2025-01-20, Respiratory Rate, 20 breaths/min)
+Imaging: IMG-003-1 (2025-01-20, Chest X-ray, Mild hyperinflation)
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 004
+ID: PATIENT_004
+DOB: 1981-08-29
+Gender: Female
+Insurance: UnitedHealth
+Allergies: Shellfish, Latex
+Conditions: None
+Medications: Metformin
+Encounters: ENC-004-1 (2025-03-01, Primary Care Visit, Fatigue evaluation, Dr. Singh)
+Observations: OBS-004-1 (2025-03-01, Blood Pressure, 124/78 mmHg, final)
+Vitals: VIT-004-1 (2025-03-01, Heart Rate, 74 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 005
+ID: PATIENT_005
+DOB: 1965-10-19
+Gender: Female
+Insurance: BlueCross
+Allergies: Penicillin, Shellfish, Latex
+Conditions: Diabetes
+Medications: Sertraline, Atorvastatin, Ibuprofen
+Encounters: ENC-005-1 (2025-02-10, Endocrinology Visit, Diabetes follow-up, Dr. Chen)
+Observations: OBS-005-1 (2025-02-10, A1C, 7.4 %, final)
+Vitals: VIT-005-1 (2025-02-10, Heart Rate, 81 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 006
+ID: PATIENT_006
+DOB: 1994-06-07
+Gender: Male
+Insurance: Aetna
+Allergies: None
+Conditions: None
+Medications: None
+Encounters: ENC-006-1 (2025-01-18, Primary Care Visit, Annual physical, Dr. Green)
+Observations: OBS-006-1 (2025-01-18, BMI, 24.8 kg/m2, final)
+Vitals: VIT-006-1 (2025-01-18, Blood Pressure, 118/72 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: IMM-006-1 (2024-10-01, Influenza, completed)
+----------------------------------------
+
+Patient 007
+ID: PATIENT_007
+DOB: 1993-09-21
+Gender: Male
+Insurance: UnitedHealth
+Allergies: None
+Conditions: Depression, Asthma, Anxiety
+Medications: None
+Encounters: ENC-007-1 (2025-02-05, Behavioral Health Visit, Mood follow-up, Dr. Allen)
+Observations: OBS-007-1 (2025-02-05, PHQ-9 Score, 11, final)
+Vitals: VIT-007-1 (2025-02-05, Heart Rate, 80 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 008
+ID: PATIENT_008
+DOB: 1960-01-13
+Gender: Male
+Insurance: BlueCross
+Allergies: None
+Conditions: Hypertension
+Medications: Sertraline, Ibuprofen, Albuterol
+Encounters: ENC-008-1 (2025-01-22, Primary Care Visit, Hypertension follow-up, Dr. Smith)
+Observations: OBS-008-1 (2025-01-22, Blood Pressure, 146/90 mmHg, final)
+Vitals: VIT-008-1 (2025-01-22, Heart Rate, 88 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 009
+ID: PATIENT_009
+DOB: 1976-02-04
+Gender: Male
+Insurance: WellCare
+Allergies: Shellfish, Pollen, Penicillin
+Conditions: None
+Medications: Lisinopril
+Encounters: ENC-009-1 (2025-03-03, Primary Care Visit, Elevated blood pressure, Dr. Patel)
+Observations: OBS-009-1 (2025-03-03, Blood Pressure, 150/92 mmHg, final)
+Vitals: VIT-009-1 (2025-03-03, Heart Rate, 90 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 010
+ID: PATIENT_010
+DOB: 1971-09-02
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: Latex, Bee stings
+Conditions: Asthma
+Medications: None
+Encounters: ENC-010-1 (2025-02-11, Pulmonology Visit, Asthma control visit, Dr. Lopez)
+Observations: OBS-010-1 (2025-02-11, Peak Flow, 380 L/min, final)
+Vitals: VIT-010-1 (2025-02-11, Respiratory Rate, 18 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 011
+ID: PATIENT_011
+DOB: 1984-02-09
+Gender: Male
+Insurance: Aetna
+Allergies: Shellfish, Dust
+Conditions: Asthma, Diabetes
+Medications: Sertraline
+Encounters: ENC-011-1 (2025-01-30, Primary Care Visit, Asthma and diabetes follow-up, Dr. Singh)
+Observations: OBS-011-1 (2025-01-30, A1C, 7.9 %, final)
+Vitals: VIT-011-1 (2025-01-30, Blood Pressure, 132/84 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 012
+ID: PATIENT_012
+DOB: 1982-09-17
+Gender: Male
+Insurance: Cigna
+Allergies: Shellfish, Bee stings
+Conditions: None
+Medications: Ibuprofen, Atorvastatin, Omeprazole
+Encounters: ENC-012-1 (2025-02-08, Primary Care Visit, Chest discomfort evaluation, Dr. Green)
+Observations: OBS-012-1 (2025-02-08, LDL Cholesterol, 132 mg/dL, final)
+Vitals: VIT-012-1 (2025-02-08, Blood Pressure, 128/80 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 013
+ID: PATIENT_013
+DOB: 1980-02-03
+Gender: Male
+Insurance: Aetna
+Allergies: Peanuts
+Conditions: Diabetes, Asthma, COPD
+Medications: None
+Encounters: ENC-013-1 (2025-01-25, Pulmonology Visit, COPD and asthma follow-up, Dr. Lopez)
+Observations: OBS-013-1 (2025-01-25, O2 Saturation, 92 %, final)
+Vitals: VIT-013-1 (2025-01-25, Respiratory Rate, 22 breaths/min)
+Imaging: IMG-013-1 (2025-01-25, Chest X-ray, Hyperinflation with mild scarring)
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 014
+ID: PATIENT_014
+DOB: 1966-04-19
+Gender: Female
+Insurance: Aetna
+Allergies: Peanuts, Penicillin
+Conditions: None
+Medications: None
+Encounters: ENC-014-1 (2025-02-14, Primary Care Visit, Allergy counseling, Dr. Smith)
+Observations: OBS-014-1 (2025-02-14, BMI, 26.1 kg/m2, final)
+Vitals: VIT-014-1 (2025-02-14, Blood Pressure, 120/76 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: IMM-014-1 (2024-10-10, Influenza, completed)
+----------------------------------------
+
+Patient 015
+ID: PATIENT_015
+DOB: 1975-07-20
+Gender: Male
+Insurance: Aetna
+Allergies: None
+Conditions: Depression, Asthma
+Medications: Ibuprofen, Sertraline, Atorvastatin
+Encounters: ENC-015-1 (2025-03-01, Behavioral Health Visit, Depression follow-up, Dr. Allen)
+Observations: OBS-015-1 (2025-03-01, PHQ-9 Score, 9, final)
+Vitals: VIT-015-1 (2025-03-01, Heart Rate, 76 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 016
+ID: PATIENT_016
+DOB: 1990-05-14
+Gender: Male
+Insurance: Kaiser Permanente
+Allergies: None
+Conditions: Hypertension, Anxiety, Arthritis
+Medications: None
+Encounters: ENC-016-1 (2025-02-20, Primary Care Visit, Joint pain and blood pressure check, Dr. Green)
+Observations: OBS-016-1 (2025-02-20, Blood Pressure, 144/88 mmHg, final)
+Vitals: VIT-016-1 (2025-02-20, Heart Rate, 86 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 017
+ID: PATIENT_017
+DOB: 1979-04-12
+Gender: Male
+Insurance: BlueCross
+Allergies: Shellfish, Pollen
+Conditions: Diabetes
+Medications: Atorvastatin, Omeprazole, Albuterol
+Encounters: ENC-017-1 (2025-01-28, Endocrinology Visit, Diabetes follow-up, Dr. Chen)
+Observations: OBS-017-1 (2025-01-28, A1C, 8.2 %, final)
+Vitals: VIT-017-1 (2025-01-28, Blood Pressure, 138/86 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 018
+ID: PATIENT_018
+DOB: 1980-06-08
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: Bee stings, Shellfish, Peanuts
+Conditions: COPD, Hypertension, Diabetes
+Medications: Omeprazole, Ibuprofen
+Encounters: ENC-018-1 (2025-02-03, Primary Care Visit, COPD and hypertension follow-up, Dr. Lopez)
+Observations: OBS-018-1 (2025-02-03, O2 Saturation, 94 %, final)
+Vitals: VIT-018-1 (2025-02-03, Blood Pressure, 148/90 mmHg)
+Imaging: IMG-018-1 (2025-02-03, Chest X-ray, Mild chronic changes)
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 019
+ID: PATIENT_019
+DOB: 1973-09-01
+Gender: Female
+Insurance: WellCare
+Allergies: None
+Conditions: COPD, Depression, Diabetes
+Medications: Lisinopril
+Encounters: ENC-019-1 (2025-01-19, Primary Care Visit, COPD and mood follow-up, Dr. Smith)
+Observations: OBS-019-1 (2025-01-19, A1C, 7.7 %, final)
+Vitals: VIT-019-1 (2025-01-19, Respiratory Rate, 20 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 020
+ID: PATIENT_020
+DOB: 2003-11-10
+Gender: Male
+Insurance: Kaiser Permanente
+Allergies: Pollen, Latex
+Conditions: COPD, Anxiety
+Medications: Atorvastatin, Sertraline, Lisinopril
+Encounters: ENC-020-1 (2025-03-04, Pulmonology Visit, COPD follow-up, Dr. Lopez)
+Observations: OBS-020-1 (2025-03-04, O2 Saturation, 95 %, final)
+Vitals: VIT-020-1 (2025-03-04, Heart Rate, 84 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 021
+ID: PATIENT_021
+DOB: 1998-12-26
+Gender: Male
+Insurance: Cigna
+Allergies: None
+Conditions: Asthma
+Medications: None
+Encounters: ENC-021-1 (2025-02-01, Primary Care Visit, Asthma follow-up, Dr. Green)
+Observations: OBS-021-1 (2025-02-01, Peak Flow, 410 L/min, final)
+Vitals: VIT-021-1 (2025-02-01, Respiratory Rate, 18 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 022
+ID: PATIENT_022
+DOB: 1979-02-16
+Gender: Female
+Insurance: Aetna
+Allergies: Latex, Bee stings
+Conditions: None
+Medications: Metformin
+Encounters: ENC-022-1 (2025-01-27, Primary Care Visit, Routine follow-up, Dr. Smith)
+Observations: OBS-022-1 (2025-01-27, BMI, 27.3 kg/m2, final)
+Vitals: VIT-022-1 (2025-01-27, Blood Pressure, 122/78 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 023
+ID: PATIENT_023
+DOB: 2003-04-23
+Gender: Female
+Insurance: HealthFirst
+Allergies: Bee stings, Dust, Latex
+Conditions: Depression, Arthritis
+Medications: Atorvastatin, Ibuprofen
+Encounters: ENC-023-1 (2025-03-02, Behavioral Health Visit, Depression follow-up, Dr. Allen)
+Observations: OBS-023-1 (2025-03-02, PHQ-9 Score, 10, final)
+Vitals: VIT-023-1 (2025-03-02, Heart Rate, 79 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 024
+ID: PATIENT_024
+DOB: 1955-10-25
+Gender: Female
+Insurance: HealthFirst
+Allergies: None
+Conditions: Depression
+Medications: Lisinopril, Ibuprofen, Atorvastatin
+Encounters: ENC-024-1 (2025-01-15, Behavioral Health Visit, Depression management, Dr. Allen)
+Observations: OBS-024-1 (2025-01-15, PHQ-9 Score, 12, final)
+Vitals: VIT-024-1 (2025-01-15, Blood Pressure, 130/82 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 025
+ID: PATIENT_025
+DOB: 2001-12-31
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: Pollen
+Conditions: None
+Medications: Omeprazole, Sertraline, Albuterol
+Encounters: ENC-025-1 (2025-02-18, Primary Care Visit, Reflux and anxiety, Dr. Green)
+Observations: OBS-025-1 (2025-02-18, BMI, 23.9 kg/m2, final)
+Vitals: VIT-025-1 (2025-02-18, Blood Pressure, 116/74 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 026
+ID: PATIENT_026
+DOB: 1960-06-20
+Gender: Male
+Insurance: Cigna
+Allergies: Pollen, Penicillin
+Conditions: Anxiety
+Medications: None
+Encounters: ENC-026-1 (2025-01-29, Behavioral Health Visit, Anxiety evaluation, Dr. Allen)
+Observations: OBS-026-1 (2025-01-29, GAD-7 Score, 13, final)
+Vitals: VIT-026-1 (2025-01-29, Heart Rate, 82 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 027
+ID: PATIENT_027
+DOB: 1999-07-01
+Gender: Female
+Insurance: WellCare
+Allergies: Dust, Bee stings
+Conditions: None
+Medications: Albuterol, Metformin
+Encounters: ENC-027-1 (2025-02-07, Primary Care Visit, Wheezing and fatigue, Dr. Smith)
+Observations: OBS-027-1 (2025-02-07, Peak Flow, 390 L/min, final)
+Vitals: VIT-027-1 (2025-02-07, Respiratory Rate, 19 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 028
+ID: PATIENT_028
+DOB: 1965-08-24
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: Shellfish, Penicillin, Dust
+Conditions: None
+Medications: None
+Encounters: ENC-028-1 (2025-01-26, Primary Care Visit, Allergy counseling, Dr. Green)
+Observations: OBS-028-1 (2025-01-26, BMI, 28.4 kg/m2, final)
+Vitals: VIT-028-1 (2025-01-26, Blood Pressure, 126/80 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 029
+ID: PATIENT_029
+DOB: 1999-07-15
+Gender: Female
+Insurance: Cigna
+Allergies: None
+Conditions: Arthritis, COPD, Hypertension
+Medications: Lisinopril, Metformin, Ibuprofen
+Encounters: ENC-029-1 (2025-02-12, Primary Care Visit, Joint pain and COPD follow-up, Dr. Lopez)
+Observations: OBS-029-1 (2025-02-12, O2 Saturation, 94 %, final)
+Vitals: VIT-029-1 (2025-02-12, Blood Pressure, 142/88 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 030
+ID: PATIENT_030
+DOB: 1995-12-04
+Gender: Male
+Insurance: Cigna
+Allergies: None
+Conditions: Anxiety
+Medications: Lisinopril
+Encounters: ENC-030-1 (2025-03-06, Behavioral Health Visit, Anxiety follow-up, Dr. Allen)
+Observations: OBS-030-1 (2025-03-06, GAD-7 Score, 10, final)
+Vitals: VIT-030-1 (2025-03-06, Heart Rate, 78 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 031
+ID: PATIENT_031
+DOB: 1988-08-11
+Gender: Female
+Insurance: Aetna
+Allergies: Bee stings, Latex, Pollen
+Conditions: Anxiety
+Medications: None
+Encounters: ENC-031-1 (2025-02-09, Behavioral Health Visit, Anxiety evaluation, Dr. Allen)
+Observations: OBS-031-1 (2025-02-09, GAD-7 Score, 14, final)
+Vitals: VIT-031-1 (2025-02-09, Heart Rate, 84 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 032
+ID: PATIENT_032
+DOB: 2002-05-18
+Gender: Male
+Insurance: HealthFirst
+Allergies: None
+Conditions: None
+Medications: Albuterol, Sertraline
+Encounters: ENC-032-1 (2025-01-31, Primary Care Visit, Shortness of breath and mood, Dr. Smith)
+Observations: OBS-032-1 (2025-01-31, Peak Flow, 400 L/min, final)
+Vitals: VIT-032-1 (2025-01-31, Respiratory Rate, 18 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 033
+ID: PATIENT_033
+DOB: 2000-01-19
+Gender: Male
+Insurance: WellCare
+Allergies: None
+Conditions: None
+Medications: None
+Encounters: ENC-033-1 (2025-02-15, Primary Care Visit, Annual physical, Dr. Green)
+Observations: OBS-033-1 (2025-02-15, BMI, 23.4 kg/m2, final)
+Vitals: VIT-033-1 (2025-02-15, Blood Pressure, 118/70 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: IMM-033-1 (2024-10-05, Influenza, completed)
+----------------------------------------
+
+Patient 034
+ID: PATIENT_034
+DOB: 1953-07-29
+Gender: Male
+Insurance: Aetna
+Allergies: None
+Conditions: Hypertension
+Medications: None
+Encounters: ENC-034-1 (2025-01-21, Primary Care Visit, Hypertension follow-up, Dr. Smith)
+Observations: OBS-034-1 (2025-01-21, Blood Pressure, 150/88 mmHg, final)
+Vitals: VIT-034-1 (2025-01-21, Heart Rate, 82 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 035
+ID: PATIENT_035
+DOB: 1950-08-23
+Gender: Male
+Insurance: BlueCross
+Allergies: None
+Conditions: Depression, Arthritis
+Medications: Albuterol, Metformin
+Encounters: ENC-035-1 (2025-02-04, Behavioral Health Visit, Depression follow-up, Dr. Allen)
+Observations: OBS-035-1 (2025-02-04, PHQ-9 Score, 13, final)
+Vitals: VIT-035-1 (2025-02-04, Heart Rate, 80 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 036
+ID: PATIENT_036
+DOB: 1968-08-10
+Gender: Female
+Insurance: BlueCross
+Allergies: None
+Conditions: Asthma
+Medications: None
+Encounters: ENC-036-1 (2025-01-24, Pulmonology Visit, Asthma follow-up, Dr. Lopez)
+Observations: OBS-036-1 (2025-01-24, Peak Flow, 370 L/min, final)
+Vitals: VIT-036-1 (2025-01-24, Respiratory Rate, 19 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 037
+ID: PATIENT_037
+DOB: 1973-01-10
+Gender: Male
+Insurance: Cigna
+Allergies: Latex, Shellfish
+Conditions: COPD, Diabetes
+Medications: None
+Encounters: ENC-037-1 (2025-02-06, Pulmonology Visit, COPD follow-up, Dr. Lopez)
+Observations: OBS-037-1 (2025-02-06, O2 Saturation, 93 %, final)
+Vitals: VIT-037-1 (2025-02-06, Respiratory Rate, 21 breaths/min)
+Imaging: IMG-037-1 (2025-02-06, Chest X-ray, Chronic changes)
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 038
+ID: PATIENT_038
+DOB: 1991-01-30
+Gender: Male
+Insurance: Kaiser Permanente
+Allergies: Shellfish, Penicillin
+Conditions: Diabetes, Depression, COPD
+Medications: Omeprazole
+Encounters: ENC-038-1 (2025-01-23, Primary Care Visit, COPD and mood follow-up, Dr. Smith)
+Observations: OBS-038-1 (2025-01-23, A1C, 8.1 %, final)
+Vitals: VIT-038-1 (2025-01-23, Blood Pressure, 140/86 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 039
+ID: PATIENT_039
+DOB: 1950-08-22
+Gender: Female
+Insurance: HealthFirst
+Allergies: Bee stings, Peanuts
+Conditions: None
+Medications: Ibuprofen, Omeprazole, Metformin
+Encounters: ENC-039-1 (2025-02-13, Primary Care Visit, Reflux and joint pain, Dr. Green)
+Observations: OBS-039-1 (2025-02-13, BMI, 29.2 kg/m2, final)
+Vitals: VIT-039-1 (2025-02-13, Blood Pressure, 134/82 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 040
+ID: PATIENT_040
+DOB: 2001-05-26
+Gender: Female
+Insurance: WellCare
+Allergies: None
+Conditions: Depression, Asthma
+Medications: Ibuprofen, Metformin, Atorvastatin
+Encounters: ENC-040-1 (2025-03-03, Behavioral Health Visit, Depression follow-up, Dr. Allen)
+Observations: OBS-040-1 (2025-03-03, PHQ-9 Score, 11, final)
+Vitals: VIT-040-1 (2025-03-03, Heart Rate, 82 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 041
+ID: PATIENT_041
+DOB: 2004-09-25
+Gender: Female
+Insurance: UnitedHealth
+Allergies: None
+Conditions: None
+Medications: Sertraline, Atorvastatin, Lisinopril
+Encounters: ENC-041-1 (2025-02-10, Primary Care Visit, Medication review, Dr. Smith)
+Observations: OBS-041-1 (2025-02-10, BMI, 22.8 kg/m2, final)
+Vitals: VIT-041-1 (2025-02-10, Blood Pressure, 118/72 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 042
+ID: PATIENT_042
+DOB: 1976-08-19
+Gender: Female
+Insurance: Aetna
+Allergies: Peanuts, Dust
+Conditions: Asthma, Diabetes, Hypertension
+Medications: Sertraline, Metformin, Omeprazole
+Encounters: ENC-042-1 (2025-01-18, Primary Care Visit, Asthma and diabetes follow-up, Dr. Singh)
+Observations: OBS-042-1 (2025-01-18, A1C, 8.0 %, final)
+Vitals: VIT-042-1 (2025-01-18, Blood Pressure, 146/88 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 043
+ID: PATIENT_043
+DOB: 1985-09-21
+Gender: Male
+Insurance: UnitedHealth
+Allergies: None
+Conditions: None
+Medications: Atorvastatin, Sertraline, Ibuprofen
+Encounters: ENC-043-1 (2025-02-16, Primary Care Visit, Medication review, Dr. Green)
+Observations: OBS-043-1 (2025-02-16, LDL Cholesterol, 128 mg/dL, final)
+Vitals: VIT-043-1 (2025-02-16, Blood Pressure, 126/80 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 044
+ID: PATIENT_044
+DOB: 2000-04-14
+Gender: Female
+Insurance: HealthFirst
+Allergies: Penicillin, Peanuts, Pollen
+Conditions: Diabetes, Asthma
+Medications: Ibuprofen, Albuterol, Lisinopril
+Encounters: ENC-044-1 (2025-01-29, Primary Care Visit, Asthma and diabetes follow-up, Dr. Smith)
+Observations: OBS-044-1 (2025-01-29, A1C, 7.6 %, final)
+Vitals: VIT-044-1 (2025-01-29, Respiratory Rate, 18 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 045
+ID: PATIENT_045
+DOB: 1998-09-25
+Gender: Female
+Insurance: HealthFirst
+Allergies: Bee stings, Penicillin, Dust
+Conditions: None
+Medications: None
+Encounters: ENC-045-1 (2025-02-21, Primary Care Visit, Allergy counseling, Dr. Green)
+Observations: OBS-045-1 (2025-02-21, BMI, 24.1 kg/m2, final)
+Vitals: VIT-045-1 (2025-02-21, Blood Pressure, 118/74 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 046
+ID: PATIENT_046
+DOB: 1992-09-14
+Gender: Male
+Insurance: BlueCross
+Allergies: None
+Conditions: Hypertension
+Medications: Albuterol, Sertraline
+Encounters: ENC-046-1 (2025-01-26, Primary Care Visit, Hypertension follow-up, Dr. Smith)
+Observations: OBS-046-1 (2025-01-26, Blood Pressure, 148/92 mmHg, final)
+Vitals: VIT-046-1 (2025-01-26, Heart Rate, 88 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 047
+ID: PATIENT_047
+DOB: 1955-02-15
+Gender: Female
+Insurance: UnitedHealth
+Allergies: Penicillin
+Conditions: Diabetes, Depression, Hypertension
+Medications: Atorvastatin
+Encounters: ENC-047-1 (2025-02-03, Primary Care Visit, Diabetes and mood follow-up, Dr. Singh)
+Observations: OBS-047-1 (2025-02-03, A1C, 8.3 %, final)
+Vitals: VIT-047-1 (2025-02-03, Blood Pressure, 152/90 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 048
+ID: PATIENT_048
+DOB: 1989-07-14
+Gender: Female
+Insurance: Aetna
+Allergies: Shellfish
+Conditions: Asthma, COPD
+Medications: Lisinopril, Ibuprofen, Atorvastatin
+Encounters: ENC-048-1 (2025-01-30, Pulmonology Visit, Asthma and COPD follow-up, Dr. Lopez)
+Observations: OBS-048-1 (2025-01-30, O2 Saturation, 94 %, final)
+Vitals: VIT-048-1 (2025-01-30, Respiratory Rate, 20 breaths/min)
+Imaging: IMG-048-1 (2025-01-30, Chest X-ray, Mild hyperinflation)
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 049
+ID: PATIENT_049
+DOB: 1999-10-31
+Gender: Female
+Insurance: Aetna
+Allergies: Dust, Pollen, Shellfish
+Conditions: COPD
+Medications: None
+Encounters: ENC-049-1 (2025-02-11, Pulmonology Visit, COPD evaluation, Dr. Lopez)
+Observations: OBS-049-1 (2025-02-11, O2 Saturation, 95 %, final)
+Vitals: VIT-049-1 (2025-02-11, Respiratory Rate, 19 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 050
+ID: PATIENT_050
+DOB: 1959-06-10
+Gender: Male
+Insurance: Kaiser Permanente
+Allergies: None
+Conditions: Asthma, Anxiety
+Medications: Atorvastatin, Omeprazole
+Encounters: ENC-050-1 (2025-01-19, Primary Care Visit, Asthma and anxiety follow-up, Dr. Smith)
+Observations: OBS-050-1 (2025-01-19, Peak Flow, 360 L/min, final)
+Vitals: VIT-050-1 (2025-01-19, Respiratory Rate, 18 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 051
+ID: PATIENT_051
+DOB: 1950-04-18
+Gender: Female
+Insurance: UnitedHealth
+Allergies: Latex, Shellfish, Bee stings
+Conditions: Asthma, Anxiety
+Medications: Omeprazole, Lisinopril, Albuterol
+Encounters: ENC-051-1 (2025-02-09, Primary Care Visit, Asthma and anxiety follow-up, Dr. Green)
+Observations: OBS-051-1 (2025-02-09, Peak Flow, 350 L/min, final)
+Vitals: VIT-051-1 (2025-02-09, Blood Pressure, 140/86 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 052
+ID: PATIENT_052
+DOB: 1954-10-11
+Gender: Female
+Insurance: HealthFirst
+Allergies: None
+Conditions: Anxiety, Hypertension, Depression
+Medications: Atorvastatin, Metformin
+Encounters: ENC-052-1 (2025-01-22, Behavioral Health Visit, Anxiety and depression follow-up, Dr. Allen)
+Observations: OBS-052-1 (2025-01-22, PHQ-9 Score, 10, final)
+Vitals: VIT-052-1 (2025-01-22, Blood Pressure, 148/88 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 053
+ID: PATIENT_053
+DOB: 2004-07-05
+Gender: Female
+Insurance: Aetna
+Allergies: Penicillin, Bee stings, Peanuts
+Conditions: Anxiety, Arthritis, Depression
+Medications: Lisinopril, Albuterol, Metformin
+Encounters: ENC-053-1 (2025-03-05, Behavioral Health Visit, Anxiety and depression follow-up, Dr. Allen)
+Observations: OBS-053-1 (2025-03-05, PHQ-9 Score, 12, final)
+Vitals: VIT-053-1 (2025-03-05, Heart Rate, 86 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 054
+ID: PATIENT_054
+DOB: 1996-01-19
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: None
+Conditions: None
+Medications: Lisinopril, Omeprazole
+Encounters: ENC-054-1 (2025-02-14, Primary Care Visit, Reflux and blood pressure check, Dr. Smith)
+Observations: OBS-054-1 (2025-02-14, Blood Pressure, 128/78 mmHg, final)
+Vitals: VIT-054-1 (2025-02-14, Heart Rate, 76 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 055
+ID: PATIENT_055
+DOB: 1989-10-22
+Gender: Female
+Insurance: WellCare
+Allergies: Penicillin, Latex, Peanuts
+Conditions: Asthma, Anxiety, Depression
+Medications: Metformin, Albuterol, Ibuprofen
+Encounters: ENC-055-1 (2025-01-27, Behavioral Health Visit, Anxiety and depression follow-up, Dr. Allen)
+Observations: OBS-055-1 (2025-01-27, PHQ-9 Score, 11, final)
+Vitals: VIT-055-1 (2025-01-27, Heart Rate, 84 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 056
+ID: PATIENT_056
+DOB: 1962-05-08
+Gender: Male
+Insurance: WellCare
+Allergies: Penicillin, Shellfish
+Conditions: None
+Medications: Ibuprofen, Sertraline, Atorvastatin
+Encounters: ENC-056-1 (2025-02-06, Primary Care Visit, Joint pain and mood follow-up, Dr. Green)
+Observations: OBS-056-1 (2025-02-06, BMI, 30.1 kg/m2, final)
+Vitals: VIT-056-1 (2025-02-06, Blood Pressure, 136/84 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 057
+ID: PATIENT_057
+DOB: 1993-06-08
+Gender: Male
+Insurance: Cigna
+Allergies: Bee stings
+Conditions: Anxiety, Hypertension, Depression
+Medications: Omeprazole, Sertraline
+Encounters: ENC-057-1 (2025-02-19, Behavioral Health Visit, Anxiety and depression follow-up, Dr. Allen)
+Observations: OBS-057-1 (2025-02-19, PHQ-9 Score, 13, final)
+Vitals: VIT-057-1 (2025-02-19, Blood Pressure, 146/90 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 058
+ID: PATIENT_058
+DOB: 1999-01-20
+Gender: Female
+Insurance: Cigna
+Allergies: Peanuts, Bee stings, Penicillin
+Conditions: Asthma, Diabetes, Arthritis
+Medications: Lisinopril, Atorvastatin, Ibuprofen
+Encounters: ENC-058-1 (2025-01-25, Primary Care Visit, Asthma and diabetes follow-up, Dr. Singh)
+Observations: OBS-058-1 (2025-01-25, A1C, 7.8 %, final)
+Vitals: VIT-058-1 (2025-01-25, Respiratory Rate, 18 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 059
+ID: PATIENT_059
+DOB: 1975-01-12
+Gender: Female
+Insurance: WellCare
+Allergies: Penicillin, Bee stings
+Conditions: Anxiety, Arthritis, Diabetes
+Medications: None
+Encounters: ENC-059-1 (2025-02-01, Behavioral Health Visit, Anxiety follow-up, Dr. Allen)
+Observations: OBS-059-1 (2025-02-01, GAD-7 Score, 12, final)
+Vitals: VIT-059-1 (2025-02-01, Heart Rate, 82 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 060
+ID: PATIENT_060
+DOB: 1977-10-19
+Gender: Female
+Insurance: Aetna
+Allergies: None
+Conditions: None
+Medications: Lisinopril, Ibuprofen, Atorvastatin
+Encounters: ENC-060-1 (2025-01-23, Primary Care Visit, Medication review, Dr. Smith)
+Observations: OBS-060-1 (2025-01-23, LDL Cholesterol, 126 mg/dL, final)
+Vitals: VIT-060-1 (2025-01-23, Blood Pressure, 130/80 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 061
+ID: PATIENT_061
+DOB: 1953-10-22
+Gender: Female
+Insurance: Aetna
+Allergies: Bee stings, Penicillin, Dust
+Conditions: None
+Medications: Omeprazole
+Encounters: ENC-061-1 (2025-02-05, Primary Care Visit, Reflux follow-up, Dr. Green)
+Observations: OBS-061-1 (2025-02-05, BMI, 29.8 kg/m2, final)
+Vitals: VIT-061-1 (2025-02-05, Blood Pressure, 134/82 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 062
+ID: PATIENT_062
+DOB: 1976-09-16
+Gender: Female
+Insurance: Aetna
+Allergies: Dust
+Conditions: None
+Medications: None
+Encounters: ENC-062-1 (2025-02-24, Primary Care Visit, Allergy counseling, Dr. Smith)
+Observations: OBS-062-1 (2025-02-24, BMI, 25.6 kg/m2, final)
+Vitals: VIT-062-1 (2025-02-24, Blood Pressure, 120/76 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 063
+ID: PATIENT_063
+DOB: 1973-04-07
+Gender: Female
+Insurance: HealthFirst
+Allergies: Latex, Shellfish
+Conditions: Anxiety, Asthma, Depression
+Medications: Lisinopril, Atorvastatin, Metformin
+Encounters: ENC-063-1 (2025-01-28, Behavioral Health Visit, Anxiety and depression follow-up, Dr. Allen)
+Observations: OBS-063-1 (2025-01-28, PHQ-9 Score, 14, final)
+Vitals: VIT-063-1 (2025-01-28, Heart Rate, 88 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 064
+ID: PATIENT_064
+DOB: 1966-11-01
+Gender: Female
+Insurance: Aetna
+Allergies: Peanuts, Shellfish, Pollen
+Conditions: Anxiety
+Medications: Ibuprofen
+Encounters: ENC-064-1 (2025-02-02, Behavioral Health Visit, Anxiety evaluation, Dr. Allen)
+Observations: OBS-064-1 (2025-02-02, GAD-7 Score, 11, final)
+Vitals: VIT-064-1 (2025-02-02, Heart Rate, 80 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 065
+ID: PATIENT_065
+DOB: 1974-08-24
+Gender: Male
+Insurance: BlueCross
+Allergies: Shellfish
+Conditions: Arthritis, Hypertension
+Medications: Albuterol, Ibuprofen
+Encounters: ENC-065-1 (2025-01-30, Primary Care Visit, Joint pain and blood pressure follow-up, Dr. Smith)
+Observations: OBS-065-1 (2025-01-30, Blood Pressure, 148/90 mmHg, final)
+Vitals: VIT-065-1 (2025-01-30, Heart Rate, 86 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 066
+ID: PATIENT_066
+DOB: 2004-11-17
+Gender: Male
+Insurance: HealthFirst
+Allergies: Pollen, Penicillin, Dust
+Conditions: Hypertension, COPD, Depression
+Medications: None
+Encounters: ENC-066-1 (2025-03-01, Primary Care Visit, COPD and mood evaluation, Dr. Green)
+Observations: OBS-066-1 (2025-03-01, O2 Saturation, 95 %, final)
+Vitals: VIT-066-1 (2025-03-01, Blood Pressure, 150/92 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 067
+ID: PATIENT_067
+DOB: 1972-06-28
+Gender: Female
+Insurance: BlueCross
+Allergies: None
+Conditions: Anxiety, Diabetes
+Medications: Omeprazole
+Encounters: ENC-067-1 (2025-02-07, Behavioral Health Visit, Anxiety follow-up, Dr. Allen)
+Observations: OBS-067-1 (2025-02-07, GAD-7 Score, 10, final)
+Vitals: VIT-067-1 (2025-02-07, Heart Rate, 78 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 068
+ID: PATIENT_068
+DOB: 1951-01-09
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: Bee stings, Pollen, Penicillin
+Conditions: Diabetes
+Medications: Sertraline
+Encounters: ENC-068-1 (2025-01-20, Endocrinology Visit, Diabetes follow-up, Dr. Chen)
+Observations: OBS-068-1 (2025-01-20, A1C, 7.9 %, final)
+Vitals: VIT-068-1 (2025-01-20, Blood Pressure, 142/86 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 069
+ID: PATIENT_069
+DOB: 1989-03-01
+Gender: Female
+Insurance: BlueCross
+Allergies: Bee stings, Pollen, Peanuts
+Conditions: Anxiety, Asthma
+Medications: None
+Encounters: ENC-069-1 (2025-02-18, Behavioral Health Visit, Anxiety evaluation, Dr. Allen)
+Observations: OBS-069-1 (2025-02-18, GAD-7 Score, 12, final)
+Vitals: VIT-069-1 (2025-02-18, Heart Rate, 82 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 070
+ID: PATIENT_070
+DOB: 1999-12-27
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: Penicillin, Shellfish
+Conditions: None
+Medications: None
+Encounters: ENC-070-1 (2025-01-31, Primary Care Visit, Annual physical, Dr. Smith)
+Observations: OBS-070-1 (2025-01-31, BMI, 22.6 kg/m2, final)
+Vitals: VIT-070-1 (2025-01-31, Blood Pressure, 116/72 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: IMM-070-1 (2024-10-03, Influenza, completed)
+----------------------------------------
+
+Patient 071
+ID: PATIENT_071
+DOB: 1992-12-11
+Gender: Male
+Insurance: UnitedHealth
+Allergies: None
+Conditions: None
+Medications: Metformin, Sertraline
+Encounters: ENC-071-1 (2025-02-11, Primary Care Visit, Mood and metabolic follow-up, Dr. Green)
+Observations: OBS-071-1 (2025-02-11, A1C, 7.2 %, final)
+Vitals: VIT-071-1 (2025-02-11, Blood Pressure, 128/80 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 072
+ID: PATIENT_072
+DOB: 1972-10-30
+Gender: Female
+Insurance: Aetna
+Allergies: Shellfish
+Conditions: Diabetes
+Medications: Atorvastatin, Lisinopril
+Encounters: ENC-072-1 (2025-01-29, Endocrinology Visit, Diabetes follow-up, Dr. Chen)
+Observations: OBS-072-1 (2025-01-29, A1C, 7.6 %, final)
+Vitals: VIT-072-1 (2025-01-29, Blood Pressure, 140/84 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 073
+ID: PATIENT_073
+DOB: 1994-08-05
+Gender: Male
+Insurance: HealthFirst
+Allergies: None
+Conditions: Diabetes
+Medications: Albuterol, Ibuprofen, Lisinopril
+Encounters: ENC-073-1 (2025-02-03, Primary Care Visit, Diabetes follow-up, Dr. Smith)
+Observations: OBS-073-1 (2025-02-03, A1C, 7.5 %, final)
+Vitals: VIT-073-1 (2025-02-03, Blood Pressure, 136/82 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 074
+ID: PATIENT_074
+DOB: 1961-10-08
+Gender: Male
+Insurance: UnitedHealth
+Allergies: Latex
+Conditions: Asthma, Diabetes
+Medications: Ibuprofen
+Encounters: ENC-074-1 (2025-01-26, Primary Care Visit, Asthma and diabetes follow-up, Dr. Singh)
+Observations: OBS-074-1 (2025-01-26, A1C, 7.8 %, final)
+Vitals: VIT-074-1 (2025-01-26, Respiratory Rate, 18 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 075
+ID: PATIENT_075
+DOB: 1999-10-01
+Gender: Male
+Insurance: Aetna
+Allergies: Dust
+Conditions: Asthma, Diabetes, Arthritis
+Medications: Metformin
+Encounters: ENC-075-1 (2025-02-09, Primary Care Visit, Asthma and joint pain follow-up, Dr. Smith)
+Observations: OBS-075-1 (2025-02-09, A1C, 7.9 %, final)
+Vitals: VIT-075-1 (2025-02-09, Respiratory Rate, 19 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 076
+ID: PATIENT_076
+DOB: 1975-11-28
+Gender: Male
+Insurance: UnitedHealth
+Allergies: None
+Conditions: COPD
+Medications: None
+Encounters: ENC-076-1 (2025-01-24, Pulmonology Visit, COPD follow-up, Dr. Lopez)
+Observations: OBS-076-1 (2025-01-24, O2 Saturation, 94 %, final)
+Vitals: VIT-076-1 (2025-01-24, Respiratory Rate, 20 breaths/min)
+Imaging: IMG-076-1 (2025-01-24, Chest X-ray, Mild hyperinflation)
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 077
+ID: PATIENT_077
+DOB: 1957-10-23
+Gender: Female
+Insurance: BlueCross
+Allergies: Shellfish, Pollen
+Conditions: None
+Medications: Atorvastatin, Omeprazole
+Encounters: ENC-077-1 (2025-02-02, Primary Care Visit, Reflux and lipid follow-up, Dr. Green)
+Observations: OBS-077-1 (2025-02-02, LDL Cholesterol, 130 mg/dL, final)
+Vitals: VIT-077-1 (2025-02-02, Blood Pressure, 132/80 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 078
+ID: PATIENT_078
+DOB: 2000-12-27
+Gender: Female
+Insurance: BlueCross
+Allergies: None
+Conditions: None
+Medications: Ibuprofen, Atorvastatin, Albuterol
+Encounters: ENC-078-1 (2025-02-20, Primary Care Visit, Chest tightness and lipid follow-up, Dr. Smith)
+Observations: OBS-078-1 (2025-02-20, Peak Flow, 390 L/min, final)
+Vitals: VIT-078-1 (2025-02-20, Blood Pressure, 120/76 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 079
+ID: PATIENT_079
+DOB: 1964-01-19
+Gender: Female
+Insurance: Aetna
+Allergies: Bee stings, Pollen, Latex
+Conditions: Diabetes, Depression
+Medications: Omeprazole
+Encounters: ENC-079-1 (2025-01-27, Behavioral Health Visit, Depression follow-up, Dr. Allen)
+Observations: OBS-079-1 (2025-01-27, PHQ-9 Score, 11, final)
+Vitals: VIT-079-1 (2025-01-27, Blood Pressure, 134/82 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 080
+ID: PATIENT_080
+DOB: 1952-03-28
+Gender: Female
+Insurance: WellCare
+Allergies: None
+Conditions: Anxiety, Hypertension, Diabetes
+Medications: Omeprazole
+Encounters: ENC-080-1 (2025-02-08, Primary Care Visit, Anxiety and diabetes follow-up, Dr. Singh)
+Observations: OBS-080-1 (2025-02-08, A1C, 8.0 %, final)
+Vitals: VIT-080-1 (2025-02-08, Blood Pressure, 150/90 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 081
+ID: PATIENT_081
+DOB: 1984-08-03
+Gender: Male
+Insurance: HealthFirst
+Allergies: Penicillin, Bee stings
+Conditions: Anxiety, Depression, Hypertension
+Medications: None
+Encounters: ENC-081-1 (2025-02-18, Behavioral Health Visit, Anxiety and depression follow-up, Dr. Allen)
+Observations: OBS-081-1 (2025-02-18, PHQ-9 Score, 13, final)
+Vitals: VIT-081-1 (2025-02-18, Blood Pressure, 146/88 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 082
+ID: PATIENT_082
+DOB: 1990-08-28
+Gender: Female
+Insurance: HealthFirst
+Allergies: Dust, Shellfish
+Conditions: Asthma, Anxiety, Diabetes
+Medications: None
+Encounters: ENC-082-1 (2025-01-30, Primary Care Visit, Asthma and anxiety follow-up, Dr. Smith)
+Observations: OBS-082-1 (2025-01-30, A1C, 7.7 %, final)
+Vitals: VIT-082-1 (2025-01-30, Respiratory Rate, 18 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 083
+ID: PATIENT_083
+DOB: 1993-08-04
+Gender: Female
+Insurance: Cigna
+Allergies: None
+Conditions: None
+Medications: Omeprazole, Lisinopril
+Encounters: ENC-083-1 (2025-02-06, Primary Care Visit, Reflux and blood pressure follow-up, Dr. Green)
+Observations: OBS-083-1 (2025-02-06, Blood Pressure, 132/82 mmHg, final)
+Vitals: VIT-083-1 (2025-02-06, Heart Rate, 78 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 084
+ID: PATIENT_084
+DOB: 1996-01-03
+Gender: Female
+Insurance: Cigna
+Allergies: Dust
+Conditions: Anxiety, COPD, Hypertension
+Medications: Lisinopril
+Encounters: ENC-084-1 (2025-02-22, Primary Care Visit, COPD and anxiety follow-up, Dr. Smith)
+Observations: OBS-084-1 (2025-02-22, O2 Saturation, 95 %, final)
+Vitals: VIT-084-1 (2025-02-22, Blood Pressure, 148/90 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 085
+ID: PATIENT_085
+DOB: 2003-06-12
+Gender: Female
+Insurance: Cigna
+Allergies: None
+Conditions: Anxiety, COPD, Depression
+Medications: None
+Encounters: ENC-085-1 (2025-03-02, Behavioral Health Visit, Anxiety and depression follow-up, Dr. Allen)
+Observations: OBS-085-1 (2025-03-02, PHQ-9 Score, 12, final)
+Vitals: VIT-085-1 (2025-03-02, Heart Rate, 84 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 086
+ID: PATIENT_086
+DOB: 1982-05-31
+Gender: Male
+Insurance: BlueCross
+Allergies: Peanuts
+Conditions: None
+Medications: None
+Encounters: ENC-086-1 (2025-01-28, Primary Care Visit, Annual physical, Dr. Green)
+Observations: OBS-086-1 (2025-01-28, BMI, 24.5 kg/m2, final)
+Vitals: VIT-086-1 (2025-01-28, Blood Pressure, 120/76 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: IMM-086-1 (2024-10-06, Influenza, completed)
+----------------------------------------
+
+Patient 087
+ID: PATIENT_087
+DOB: 1952-01-25
+Gender: Male
+Insurance: HealthFirst
+Allergies: Dust, Latex, Shellfish
+Conditions: None
+Medications: Albuterol
+Encounters: ENC-087-1 (2025-02-04, Primary Care Visit, Wheezing evaluation, Dr. Smith)
+Observations: OBS-087-1 (2025-02-04, Peak Flow, 360 L/min, final)
+Vitals: VIT-087-1 (2025-02-04, Respiratory Rate, 18 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 088
+ID: PATIENT_088
+DOB: 1996-12-01
+Gender: Female
+Insurance: HealthFirst
+Allergies: Bee stings, Dust
+Conditions: Diabetes, Hypertension
+Medications: None
+Encounters: ENC-088-1 (2025-02-16, Primary Care Visit, Diabetes and blood pressure follow-up, Dr. Singh)
+Observations: OBS-088-1 (2025-02-16, A1C, 8.1 %, final)
+Vitals: VIT-088-1 (2025-02-16, Blood Pressure, 152/92 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 089
+ID: PATIENT_089
+DOB: 1998-10-16
+Gender: Male
+Insurance: Kaiser Permanente
+Allergies: None
+Conditions: Hypertension
+Medications: None
+Encounters: ENC-089-1 (2025-01-25, Primary Care Visit, Hypertension evaluation, Dr. Smith)
+Observations: OBS-089-1 (2025-01-25, Blood Pressure, 148/90 mmHg, final)
+Vitals: VIT-089-1 (2025-01-25, Heart Rate, 84 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 090
+ID: PATIENT_090
+DOB: 1966-06-27
+Gender: Female
+Insurance: Kaiser Permanente
+Allergies: None
+Conditions: Arthritis, Asthma
+Medications: Lisinopril, Omeprazole
+Encounters: ENC-090-1 (2025-02-01, Primary Care Visit, Joint pain and asthma follow-up, Dr. Green)
+Observations: OBS-090-1 (2025-02-01, Peak Flow, 370 L/min, final)
+Vitals: VIT-090-1 (2025-02-01, Respiratory Rate, 18 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 091
+ID: PATIENT_091
+DOB: 1954-09-24
+Gender: Female
+Insurance: Cigna
+Allergies: None
+Conditions: None
+Medications: Omeprazole
+Encounters: ENC-091-1 (2025-01-19, Primary Care Visit, Reflux follow-up, Dr. Smith)
+Observations: OBS-091-1 (2025-01-19, BMI, 28.7 kg/m2, final)
+Vitals: VIT-091-1 (2025-01-19, Blood Pressure, 132/80 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 092
+ID: PATIENT_092
+DOB: 1986-05-02
+Gender: Male
+Insurance: WellCare
+Allergies: Latex
+Conditions: Asthma
+Medications: None
+Encounters: ENC-092-1 (2025-02-10, Pulmonology Visit, Asthma follow-up, Dr. Lopez)
+Observations: OBS-092-1 (2025-02-10, Peak Flow, 380 L/min, final)
+Vitals: VIT-092-1 (2025-02-10, Respiratory Rate, 18 breaths/min)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 093
+ID: PATIENT_093
+DOB: 1973-09-09
+Gender: Female
+Insurance: UnitedHealth
+Allergies: Latex, Shellfish
+Conditions: None
+Medications: Lisinopril
+Encounters: ENC-093-1 (2025-01-30, Primary Care Visit, Blood pressure follow-up, Dr. Singh)
+Observations: OBS-093-1 (2025-01-30, Blood Pressure, 144/88 mmHg, final)
+Vitals: VIT-093-1 (2025-01-30, Heart Rate, 82 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 094
+ID: PATIENT_094
+DOB: 1966-05-23
+Gender: Female
+Insurance: UnitedHealth
+Allergies: Latex, Dust
+Conditions: COPD
+Medications: Atorvastatin, Omeprazole
+Encounters: ENC-094-1 (2025-02-18, Pulmonology Visit, COPD follow-up, Dr. Lopez)
+Observations: OBS-094-1 (2025-02-18, O2 Saturation, 94 %, final)
+Vitals: VIT-094-1 (2025-02-18, Respiratory Rate, 20 breaths/min)
+Imaging: IMG-094-1 (2025-02-18, Chest X-ray, Mild chronic changes)
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 095
+ID: PATIENT_095
+DOB: 1980-02-29
+Gender: Male
+Insurance: Aetna
+Allergies: Pollen
+Conditions: None
+Medications: None
+Encounters: ENC-095-1 (2025-03-03, Primary Care Visit, Allergy evaluation, Dr. Smith)
+Observations: OBS-095-1 (2025-03-03, BMI, 25.2 kg/m2, final)
+Vitals: VIT-095-1 (2025-03-03, Blood Pressure, 122/78 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 096
+ID: PATIENT_096
+DOB: 1991-10-17
+Gender: Female
+Insurance: Aetna
+Allergies: None
+Conditions: None
+Medications: None
+Encounters: ENC-096-1 (2025-02-06, Primary Care Visit, Annual physical, Dr. Green)
+Observations: OBS-096-1 (2025-02-06, BMI, 23.1 kg/m2, final)
+Vitals: VIT-096-1 (2025-02-06, Blood Pressure, 116/72 mmHg)
+Imaging: None
+Procedures: None
+Immunizations: IMM-096-1 (2024-10-04, Influenza, completed)
+----------------------------------------
+
+Patient 097
+ID: PATIENT_097
+DOB: 1977-09-01
+Gender: Male
+Insurance: WellCare
+Allergies: Latex, Pollen, Penicillin
+Conditions: Depression
+Medications: Atorvastatin, Sertraline
+Encounters: ENC-097-1 (2025-01-22, Behavioral Health Visit, Depression follow-up, Dr. Allen)
+Observations: OBS-097-1 (2025-01-22, PHQ-9 Score, 13, final)
+Vitals: VIT-097-1 (2025-01-22, Heart Rate, 82 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 098
+ID: PATIENT_098
+DOB: 1955-11-12
+Gender: Female
+Insurance: BlueCross
+Allergies: Pollen
+Conditions: Depression, COPD
+Medications: None
+Encounters: ENC-098-1 (2025-02-14, Pulmonology Visit, COPD and mood follow-up, Dr. Lopez)
+Observations: OBS-098-1 (2025-02-14, O2 Saturation, 93 %, final)
+Vitals: VIT-098-1 (2025-02-14, Respiratory Rate, 20 breaths/min)
+Imaging: IMG-098-1 (2025-02-14, Chest X-ray, Chronic changes)
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 099
+ID: PATIENT_099
+DOB: 1952-03-23
+Gender: Male
+Insurance: Kaiser Permanente
+Allergies: Peanuts
+Conditions: Depression, Hypertension
+Medications: Lisinopril
+Encounters: ENC-099-1 (2025-01-27, Primary Care Visit, Mood and blood pressure follow-up, Dr. Singh)
+Observations: OBS-099-1 (2025-01-27, Blood Pressure, 150/92 mmHg, final)
+Vitals: VIT-099-1 (2025-01-27, Heart Rate, 84 bpm)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
+
+Patient 100
+ID: PATIENT_100
+DOB: 1972-06-24
+Gender: Male
+Insurance: Cigna
+Allergies: None
+Conditions: COPD, Diabetes
+Medications: Atorvastatin
+Encounters: ENC-100-1 (2025-02-05, Pulmonology Visit, COPD and diabetes follow-up, Dr. Lopez)
+Observations: OBS-100-1 (2025-02-05, A1C, 7.9 %, final)
+Vitals: VIT-100-1 (2025-02-05, O2 Saturation, 95 %, final)
+Imaging: None
+Procedures: None
+Immunizations: None
+----------------------------------------
