@@ -3,12 +3,15 @@ import Sidebar from "@/components/layout/Sidebar";
 import PatientSidebar from "@/components/layout/PatientSidebar";
 import DocumentationAssistant from "@/components/modules/DocumentationAssistant";
 import BillingValidator from "@/components/modules/BillingValidator";
+import QueryAssistant from "@/components/modules/QueryAssistant";
 import { DocumentationState } from "@/components/modules/DocumentationAssistant";
 import { BillingState } from "@/components/modules/BillingValidator";
+import { QueryAssistantState } from "@/components/modules/QueryAssistant";
 import { useAuthContext } from "@/contexts/AuthContext";
 
 const DOC_STATE_KEY = "nextgenehr_doc_state";
 const BILLING_STATE_KEY = "nextgenehr_billing_state";
+const QUERY_STATE_KEY = "nextgenehr_query_state";
 
 const defaultDocState: DocumentationState = {
   inputNotes: "",
@@ -26,6 +29,10 @@ const defaultBillingState: BillingState = {
   selectedNoteTag: null,
 };
 
+const defaultQueryState: QueryAssistantState = {
+  messages: [],
+};
+
 function loadState<T>(key: string, userId: string, fallback: T): T {
   try {
     const raw = localStorage.getItem(`${key}_${userId}`);
@@ -38,7 +45,7 @@ const Index = () => {
   const { user } = useAuthContext();
   const userId = user?.id ?? "";
 
-  const [activeModule, setActiveModule] = useState<"documentation" | "billing">("documentation");
+  const [activeModule, setActiveModule] = useState<"documentation" | "billing" | "query">("documentation");
 
   const [docState, setDocState] = useState<DocumentationState>(() =>
     userId ? loadState(DOC_STATE_KEY, userId, defaultDocState) : defaultDocState
@@ -48,11 +55,16 @@ const Index = () => {
     userId ? loadState(BILLING_STATE_KEY, userId, defaultBillingState) : defaultBillingState
   );
 
+  const [queryState, setQueryState] = useState<QueryAssistantState>(() =>
+    userId ? loadState(QUERY_STATE_KEY, userId, defaultQueryState) : defaultQueryState
+  );
+
   // Restore state when user logs in
   useEffect(() => {
     if (userId) {
       setDocState(loadState(DOC_STATE_KEY, userId, defaultDocState));
       setBillingState(loadState(BILLING_STATE_KEY, userId, defaultBillingState));
+      setQueryState(loadState(QUERY_STATE_KEY, userId, defaultQueryState));
     }
   }, [userId]);
 
@@ -70,13 +82,21 @@ const Index = () => {
     }
   }, [billingState, userId]);
 
+  // Persist query state
+  useEffect(() => {
+    if (userId) {
+      localStorage.setItem(`${QUERY_STATE_KEY}_${userId}`, JSON.stringify(queryState));
+    }
+  }, [queryState, userId]);
+
   // Derive the sidebar patient ID from the active module's state
   const selectedPatientId = useMemo(() => {
     if (activeModule === "documentation") {
       return docState.selectedPatientId;
-    } else {
+    } else if (activeModule === "billing") {
       return billingState.selectedPatientId;
     }
+    return null;
   }, [activeModule, docState.selectedPatientId, billingState.selectedPatientId]);
 
   return (
@@ -92,10 +112,15 @@ const Index = () => {
               state={docState}
               onStateChange={setDocState}
             />
-          ) : (
+          ) : activeModule === "billing" ? (
             <BillingValidator
               state={billingState}
               onStateChange={setBillingState}
+            />
+          ) : (
+            <QueryAssistant
+              state={queryState}
+              onStateChange={setQueryState}
             />
           )}
         </div>

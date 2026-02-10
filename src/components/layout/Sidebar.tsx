@@ -1,9 +1,9 @@
-import { FileText, DollarSign, Activity } from "lucide-react";
+import { FileText, DollarSign, Activity, Database } from "lucide-react";
 import { cn } from "@/lib/utils";
 import UserMenu from "./UserMenu";
 interface SidebarProps {
-  activeModule: "documentation" | "billing";
-  onModuleChange: (module: "documentation" | "billing") => void;
+  activeModule: "documentation" | "billing" | "query";
+  onModuleChange: (module: "documentation" | "billing" | "query") => void;
 }
 const Sidebar = ({
   activeModule,
@@ -19,6 +19,11 @@ const Sidebar = ({
     label: "Billing Validator",
     icon: DollarSign,
     description: "Coding & claim validation"
+  }, {
+    id: "query" as const,
+    label: "Query Assistant",
+    icon: Database,
+    description: "Natural-language patient queries"
   }];
   return <aside className="w-64 bg-sidebar text-sidebar-foreground flex flex-col h-full">
       {/* Logo */}
