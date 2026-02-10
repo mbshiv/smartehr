@@ -1,4 +1,4 @@
-import { FileText, DollarSign, Activity } from "lucide-react";
+import { FileText, DollarSign, Activity, Database } from "lucide-react";
 import { cn } from "@/lib/utils";
 import UserMenu from "./UserMenu";
 interface SidebarProps {
