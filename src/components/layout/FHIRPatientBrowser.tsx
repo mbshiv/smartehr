@@ -12,38 +12,39 @@ interface ParsedPatient {
 }
 
 function parseAllPatients(): ParsedPatient[] {
-  const blocks = fhirData.split(/(?=={10,})/);
+  // Split by the dashed separator lines
+  const blocks = fhirData.split(/-{10,}/);
   const patients: ParsedPatient[] = [];
 
   for (const block of blocks) {
-    const idMatch = block.match(/PATIENT_(\d+)/);
+    const trimmed = block.trim();
+    if (!trimmed) continue;
+
+    const idMatch = trimmed.match(/ID:\s*PATIENT_(\d+)/);
     if (!idMatch) continue;
     const id = `PATIENT_${idMatch[1].padStart(3, "0")}`;
 
-    // Parse sections
+    // Parse key: value lines into sections
     const sections: Record<string, string> = {};
-    const sectionRegex = /^([A-Z][A-Za-z /&]+):\s*$/gm;
-    let match: RegExpExecArray | null;
-    const sectionStarts: { name: string; index: number }[] = [];
+    const lines = trimmed.split("\n");
 
-    while ((match = sectionRegex.exec(block)) !== null) {
-      sectionStarts.push({ name: match[1].trim(), index: match.index + match[0].length });
+    for (const line of lines) {
+      const colonIdx = line.indexOf(":");
+      if (colonIdx === -1) continue;
+      const key = line.slice(0, colonIdx).trim();
+      const value = line.slice(colonIdx + 1).trim();
+      // Skip the "Patient NNN" header line and ID (already used)
+      if (key.match(/^Patient \d+$/) || key === "ID") continue;
+      if (value && value !== "None") {
+        sections[key] = value;
+      }
     }
 
-    for (let i = 0; i < sectionStarts.length; i++) {
-      const start = sectionStarts[i].index;
-      const end = i + 1 < sectionStarts.length ? sectionStarts[i + 1].index - sectionStarts[i + 1].name.length - 2 : block.length;
-      const content = block.slice(start, end).trim();
-      if (content) sections[sectionStarts[i].name] = content;
-    }
-
-    // Fallback: if no sections parsed, grab lines after the header
     if (Object.keys(sections).length === 0) {
-      const lines = block.split("\n").filter((l) => l.trim() && !l.startsWith("="));
-      sections["Full Record"] = lines.join("\n");
+      sections["Full Record"] = trimmed;
     }
 
-    patients.push({ id, raw: block.trim(), sections });
+    patients.push({ id, raw: trimmed, sections });
   }
 
   return patients.sort((a, b) => a.id.localeCompare(b.id));
