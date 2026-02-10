@@ -19,6 +19,11 @@ const Sidebar = ({
     label: "Billing Validator",
     icon: DollarSign,
     description: "Coding & claim validation"
+  }, {
+    id: "query" as const,
+    label: "Query Assistant",
+    icon: Database,
+    description: "Natural-language patient queries"
   }];
   return <aside className="w-64 bg-sidebar text-sidebar-foreground flex flex-col h-full">
       {/* Logo */}
