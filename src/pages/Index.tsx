@@ -64,6 +64,7 @@ const Index = () => {
     if (userId) {
       setDocState(loadState(DOC_STATE_KEY, userId, defaultDocState));
       setBillingState(loadState(BILLING_STATE_KEY, userId, defaultBillingState));
+      setQueryState(loadState(QUERY_STATE_KEY, userId, defaultQueryState));
     }
   }, [userId]);
 
