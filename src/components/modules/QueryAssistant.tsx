@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from "react";
-import { Search, Send, Loader2, Database, AlertCircle, ChevronDown, ChevronUp } from "lucide-react";
+import { Search, Send, Loader2, Database, AlertCircle, ChevronDown, ChevronUp, Copy, Download, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuthContext } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 import fhirData from "@/data/FHIRPatientBundles.txt?raw";
 
@@ -45,14 +46,14 @@ const EXAMPLE_QUERIES = [
   "Summarize encounters for PATIENT_014",
   "What imaging has PATIENT_003 had?",
   "Give me all vitals for PATIENT_050",
-  "Provide a clinical summary for PATIENT_018",
-  "Which patients have COPD?",
 ];
 
 const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [historyLoaded, setHistoryLoaded] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { user } = useAuthContext();
 
   const { messages } = state;
 
@@ -60,11 +61,62 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
     onStateChange({ ...state, ...updates });
   };
 
+  // Load history from DB on mount
+  useEffect(() => {
+    if (!user?.id || historyLoaded) return;
+    const loadHistory = async () => {
+      const { data, error } = await supabase
+        .from("query_history")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: true })
+        .limit(200);
+
+      if (error) {
+        console.error("Failed to load query history:", error);
+        return;
+      }
+
+      if (data && data.length > 0) {
+        const restoredMessages: QueryMessage[] = [];
+        for (const row of data) {
+          restoredMessages.push({
+            id: `${row.id}-q`,
+            role: "user",
+            content: row.query,
+            timestamp: new Date(row.created_at).getTime(),
+          });
+          const result = row.result as unknown as QueryResult;
+          restoredMessages.push({
+            id: row.id,
+            role: "assistant",
+            content: result?.summary || "",
+            result,
+            timestamp: new Date(row.created_at).getTime() + 1,
+          });
+        }
+        updateState({ messages: restoredMessages });
+      }
+      setHistoryLoaded(true);
+    };
+    loadHistory();
+  }, [user?.id]);
+
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages]);
+
+  const saveToDb = async (query: string, result: QueryResult) => {
+    if (!user?.id) return;
+    const { error } = await supabase.from("query_history").insert({
+      user_id: user.id,
+      query,
+      result: result as any,
+    });
+    if (error) console.error("Failed to save query history:", error);
+  };
 
   const handleSubmit = async (query?: string) => {
     const q = query || input.trim();
@@ -107,6 +159,7 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
           timestamp: Date.now(),
         };
         updateState({ messages: [...newMessages, assistantMsg] });
+        await saveToDb(q, data as QueryResult);
       }
     } catch (e: any) {
       console.error("Query error:", e);
@@ -211,7 +264,7 @@ function EmptyState({ onExampleClick }: { onExampleClick: (q: string) => void })
         Results are returned in structured clinical format.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-w-lg w-full">
-        {EXAMPLE_QUERIES.slice(0, 6).map((q) => (
+        {EXAMPLE_QUERIES.map((q) => (
           <Button
             key={q}
             variant="outline"
@@ -224,6 +277,41 @@ function EmptyState({ onExampleClick }: { onExampleClick: (q: string) => void })
           </Button>
         ))}
       </div>
+    </div>
+  );
+}
+
+function ResultActions({ result }: { result: QueryResult }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(JSON.stringify(result, null, 2));
+    setCopied(true);
+    toast.success("Copied to clipboard");
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleExport = () => {
+    const blob = new Blob([JSON.stringify(result, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `query-result-${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success("JSON file downloaded");
+  };
+
+  return (
+    <div className="flex gap-1.5">
+      <Button variant="ghost" size="sm" className="h-7 px-2 text-xs" onClick={handleCopy}>
+        {copied ? <Check className="w-3 h-3 mr-1" /> : <Copy className="w-3 h-3 mr-1" />}
+        {copied ? "Copied" : "Copy JSON"}
+      </Button>
+      <Button variant="ghost" size="sm" className="h-7 px-2 text-xs" onClick={handleExport}>
+        <Download className="w-3 h-3 mr-1" />
+        Export JSON
+      </Button>
     </div>
   );
 }
@@ -264,6 +352,9 @@ function MessageBubble({ message }: { message: QueryMessage }) {
       <div className="space-y-3 max-w-[85%] min-w-0">
         {result && (
           <>
+            {/* Actions */}
+            <ResultActions result={result} />
+
             {/* Query Interpretation */}
             <Card>
               <CardContent className="p-3">
