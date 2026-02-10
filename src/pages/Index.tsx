@@ -3,12 +3,15 @@ import Sidebar from "@/components/layout/Sidebar";
 import PatientSidebar from "@/components/layout/PatientSidebar";
 import DocumentationAssistant from "@/components/modules/DocumentationAssistant";
 import BillingValidator from "@/components/modules/BillingValidator";
+import QueryAssistant from "@/components/modules/QueryAssistant";
 import { DocumentationState } from "@/components/modules/DocumentationAssistant";
 import { BillingState } from "@/components/modules/BillingValidator";
+import { QueryAssistantState } from "@/components/modules/QueryAssistant";
 import { useAuthContext } from "@/contexts/AuthContext";
 
 const DOC_STATE_KEY = "nextgenehr_doc_state";
 const BILLING_STATE_KEY = "nextgenehr_billing_state";
+const QUERY_STATE_KEY = "nextgenehr_query_state";
 
 const defaultDocState: DocumentationState = {
   inputNotes: "",
@@ -24,6 +27,10 @@ const defaultBillingState: BillingState = {
   reasoning: "",
   selectedPatientId: null,
   selectedNoteTag: null,
+};
+
+const defaultQueryState: QueryAssistantState = {
+  messages: [],
 };
 
 function loadState<T>(key: string, userId: string, fallback: T): T {
