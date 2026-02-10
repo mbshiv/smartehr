@@ -387,16 +387,35 @@ function HistoryPanel({
   onDelete: (id: string) => void;
   onClose: () => void;
 }) {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filtered = searchTerm.trim()
+    ? sessions.filter((s) =>
+        s.firstQuery.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : sessions;
+
   return (
     <div className="flex-1 overflow-hidden flex flex-col">
-      <div className="p-4 border-b border-border flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
-          <Clock className="w-4 h-4 text-muted-foreground" />
-          Past Sessions
-        </h3>
-        <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={onClose}>
-          <X className="w-4 h-4" />
-        </Button>
+      <div className="p-4 border-b border-border space-y-3">
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
+            <Clock className="w-4 h-4 text-muted-foreground" />
+            Past Sessions
+          </h3>
+          <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={onClose}>
+            <X className="w-4 h-4" />
+          </Button>
+        </div>
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
+          <Input
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search past sessions..."
+            className="pl-9 h-8 text-sm"
+          />
+        </div>
       </div>
       <ScrollArea className="flex-1">
         <div className="p-4 space-y-2">
@@ -405,12 +424,12 @@ function HistoryPanel({
               <Loader2 className="w-4 h-4 animate-spin mr-2" />
               Loading sessions...
             </div>
-          ) : sessions.length === 0 ? (
+          ) : filtered.length === 0 ? (
             <p className="text-sm text-muted-foreground text-center py-8">
-              No past sessions found.
+              {searchTerm ? "No sessions match your search." : "No past sessions found."}
             </p>
           ) : (
-            sessions.map((s) => (
+            filtered.map((s) => (
               <div
                 key={s.session_id}
                 className={`group flex items-start gap-3 rounded-lg border p-3 cursor-pointer transition-colors hover:bg-accent/50 ${
