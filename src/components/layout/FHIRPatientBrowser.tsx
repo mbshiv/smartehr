@@ -1,7 +1,8 @@
-import { useState, useMemo } from "react";
-import { Users, Search, ChevronRight, ChevronDown, User } from "lucide-react";
+import { useState, useMemo, useCallback } from "react";
+import { Users, Search, ChevronRight, ChevronDown, User, ChevronsUpDown, ChevronsDownUp } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import fhirData from "@/data/FHIRPatientBundles.txt?raw";
 
@@ -12,7 +13,6 @@ interface ParsedPatient {
 }
 
 function parseAllPatients(): ParsedPatient[] {
-  // Split by the dashed separator lines
   const blocks = fhirData.split(/-{10,}/);
   const patients: ParsedPatient[] = [];
 
@@ -24,7 +24,6 @@ function parseAllPatients(): ParsedPatient[] {
     if (!idMatch) continue;
     const id = `PATIENT_${idMatch[1].padStart(3, "0")}`;
 
-    // Parse key: value lines into sections
     const sections: Record<string, string> = {};
     const lines = trimmed.split("\n");
 
@@ -33,7 +32,6 @@ function parseAllPatients(): ParsedPatient[] {
       if (colonIdx === -1) continue;
       const key = line.slice(0, colonIdx).trim();
       const value = line.slice(colonIdx + 1).trim();
-      // Skip the "Patient NNN" header line and ID (already used)
       if (key.match(/^Patient \d+$/) || key === "ID") continue;
       if (value && value !== "None") {
         sections[key] = value;
@@ -52,7 +50,7 @@ function parseAllPatients(): ParsedPatient[] {
 
 const FHIRPatientBrowser = () => {
   const [search, setSearch] = useState("");
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
 
   const allPatients = useMemo(() => parseAllPatients(), []);
@@ -65,26 +63,63 @@ const FHIRPatientBrowser = () => {
     );
   }, [allPatients, search]);
 
-  const togglePatient = (id: string) => {
-    if (expandedId === id) {
-      setExpandedId(null);
-      setExpandedSections(new Set());
-    } else {
-      setExpandedId(id);
-      // Auto-expand all sections for the selected patient
-      const patient = allPatients.find((p) => p.id === id);
-      setExpandedSections(patient ? new Set(Object.keys(patient.sections)) : new Set());
-    }
-  };
-
-  const toggleSection = (section: string) => {
-    setExpandedSections((prev) => {
+  const togglePatient = useCallback((id: string) => {
+    setExpandedIds((prev) => {
       const next = new Set(prev);
-      if (next.has(section)) next.delete(section);
-      else next.add(section);
+      if (next.has(id)) {
+        next.delete(id);
+        // Also remove this patient's sections
+        setExpandedSections((prevSec) => {
+          const nextSec = new Set(prevSec);
+          for (const key of prevSec) {
+            if (key.startsWith(`${id}::`)) nextSec.delete(key);
+          }
+          return nextSec;
+        });
+      } else {
+        next.add(id);
+        // Auto-expand all sections for this patient
+        const patient = allPatients.find((p) => p.id === id);
+        if (patient) {
+          setExpandedSections((prevSec) => {
+            const nextSec = new Set(prevSec);
+            for (const sectionName of Object.keys(patient.sections)) {
+              nextSec.add(`${id}::${sectionName}`);
+            }
+            return nextSec;
+          });
+        }
+      }
       return next;
     });
-  };
+  }, [allPatients]);
+
+  const toggleSection = useCallback((patientId: string, section: string) => {
+    const key = `${patientId}::${section}`;
+    setExpandedSections((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  }, []);
+
+  const expandAll = useCallback(() => {
+    const ids = new Set(filtered.map((p) => p.id));
+    setExpandedIds(ids);
+    const sections = new Set<string>();
+    for (const p of filtered) {
+      for (const s of Object.keys(p.sections)) {
+        sections.add(`${p.id}::${s}`);
+      }
+    }
+    setExpandedSections(sections);
+  }, [filtered]);
+
+  const collapseAll = useCallback(() => {
+    setExpandedIds(new Set());
+    setExpandedSections(new Set());
+  }, []);
 
   return (
     <aside className="w-80 bg-card border-l border-border h-full flex flex-col overflow-hidden">
@@ -108,6 +143,16 @@ const FHIRPatientBrowser = () => {
             className="pl-9 h-8 text-sm"
           />
         </div>
+        <div className="flex gap-1.5">
+          <Button variant="outline" size="sm" className="h-7 text-xs flex-1" onClick={expandAll}>
+            <ChevronsUpDown className="w-3 h-3 mr-1" />
+            Expand All
+          </Button>
+          <Button variant="outline" size="sm" className="h-7 text-xs flex-1" onClick={collapseAll}>
+            <ChevronsDownUp className="w-3 h-3 mr-1" />
+            Collapse All
+          </Button>
+        </div>
       </div>
 
       {/* Patient List */}
@@ -119,10 +164,9 @@ const FHIRPatientBrowser = () => {
             </p>
           ) : (
             filtered.map((patient) => {
-              const isExpanded = expandedId === patient.id;
+              const isExpanded = expandedIds.has(patient.id);
               return (
                 <div key={patient.id}>
-                  {/* Patient row */}
                   <button
                     onClick={() => togglePatient(patient.id)}
                     className={`w-full flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent/50 ${
@@ -138,15 +182,15 @@ const FHIRPatientBrowser = () => {
                     <span className="font-mono text-xs">{patient.id}</span>
                   </button>
 
-                  {/* Expanded FHIR sections */}
                   {isExpanded && (
                     <div className="ml-5 pl-3 border-l-2 border-border space-y-0.5 py-1">
                       {Object.entries(patient.sections).map(([name, content]) => {
-                        const isSectionOpen = expandedSections.has(name);
+                        const sectionKey = `${patient.id}::${name}`;
+                        const isSectionOpen = expandedSections.has(sectionKey);
                         return (
                           <div key={name}>
                             <button
-                              onClick={() => toggleSection(name)}
+                              onClick={() => toggleSection(patient.id, name)}
                               className="w-full flex items-center gap-2 rounded-md px-2 py-1.5 text-xs transition-colors hover:bg-accent/50 text-muted-foreground hover:text-foreground"
                             >
                               {isSectionOpen ? (
