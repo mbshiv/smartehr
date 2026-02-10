@@ -31,6 +31,7 @@ const defaultBillingState: BillingState = {
 
 const defaultQueryState: QueryAssistantState = {
   messages: [],
+  currentSessionId: null,
 };
 
 function loadState<T>(key: string, userId: string, fallback: T): T {
