@@ -45,7 +45,7 @@ const Index = () => {
   const { user } = useAuthContext();
   const userId = user?.id ?? "";
 
-  const [activeModule, setActiveModule] = useState<"documentation" | "billing">("documentation");
+  const [activeModule, setActiveModule] = useState<"documentation" | "billing" | "query">("documentation");
 
   const [docState, setDocState] = useState<DocumentationState>(() =>
     userId ? loadState(DOC_STATE_KEY, userId, defaultDocState) : defaultDocState
