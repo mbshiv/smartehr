@@ -82,6 +82,13 @@ const Index = () => {
     }
   }, [billingState, userId]);
 
+  // Persist query state
+  useEffect(() => {
+    if (userId) {
+      localStorage.setItem(`${QUERY_STATE_KEY}_${userId}`, JSON.stringify(queryState));
+    }
+  }, [queryState, userId]);
+
   // Derive the sidebar patient ID from the active module's state
   const selectedPatientId = useMemo(() => {
     if (activeModule === "documentation") {
