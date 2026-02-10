@@ -112,10 +112,15 @@ const Index = () => {
               state={docState}
               onStateChange={setDocState}
             />
-          ) : (
+          ) : activeModule === "billing" ? (
             <BillingValidator
               state={billingState}
               onStateChange={setBillingState}
+            />
+          ) : (
+            <QueryAssistant
+              state={queryState}
+              onStateChange={setQueryState}
             />
           )}
         </div>
