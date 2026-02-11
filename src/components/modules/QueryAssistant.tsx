@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 import fhirData from "@/data/FHIRPatientBundles.txt?raw";
+import rawClinicalNotes from "@/data/RawClinicalNotes.txt?raw";
 
 export interface QueryResult {
   query_interpretation: string;
@@ -230,29 +231,30 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
     setIsLoading(true);
 
     try {
-      // Fetch saved clinical notes from the Documentation Assistant module
-      let clinicalNotesContext = "";
+      // Fetch saved structured notes from the Documentation Assistant module
+      let structuredNotesContext = "";
       if (user?.id) {
         const { data: savedNotes } = await supabase
           .from("clinical_notes")
-          .select("patient_id, raw_notes, structured_note, reasoning")
+          .select("patient_id, structured_note")
           .eq("user_id", user.id)
           .order("created_at", { ascending: false });
 
         if (savedNotes && savedNotes.length > 0) {
-          clinicalNotesContext = savedNotes.map((n) => {
-            let entry = `=== Clinical Note for ${n.patient_id} ===\n`;
-            if (n.structured_note) {
-              entry += `STRUCTURED OUTPUT:\n${n.structured_note}\n`;
-            }
-            entry += `RAW NOTES:\n${n.raw_notes}\n`;
-            return entry;
-          }).join("\n");
+          structuredNotesContext = savedNotes
+            .filter((n) => n.structured_note)
+            .map((n) => `=== Structured Note for ${n.patient_id} ===\n${n.structured_note}`)
+            .join("\n\n");
         }
       }
 
       const { data, error } = await supabase.functions.invoke("query-assistant", {
-        body: { query: q, patientData: fhirData, clinicalNotes: clinicalNotesContext },
+        body: {
+          query: q,
+          patientData: fhirData,
+          rawClinicalNotes: rawClinicalNotes,
+          structuredNotes: structuredNotesContext,
+        },
       });
 
       if (error) throw error;
