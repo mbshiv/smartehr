@@ -230,8 +230,29 @@ const QueryAssistant = ({ state, onStateChange }: QueryAssistantProps) => {
     setIsLoading(true);
 
     try {
+      // Fetch saved clinical notes from the Documentation Assistant module
+      let clinicalNotesContext = "";
+      if (user?.id) {
+        const { data: savedNotes } = await supabase
+          .from("clinical_notes")
+          .select("patient_id, raw_notes, structured_note, reasoning")
+          .eq("user_id", user.id)
+          .order("created_at", { ascending: false });
+
+        if (savedNotes && savedNotes.length > 0) {
+          clinicalNotesContext = savedNotes.map((n) => {
+            let entry = `=== Clinical Note for ${n.patient_id} ===\n`;
+            if (n.structured_note) {
+              entry += `STRUCTURED OUTPUT:\n${n.structured_note}\n`;
+            }
+            entry += `RAW NOTES:\n${n.raw_notes}\n`;
+            return entry;
+          }).join("\n");
+        }
+      }
+
       const { data, error } = await supabase.functions.invoke("query-assistant", {
-        body: { query: q, patientData: fhirData },
+        body: { query: q, patientData: fhirData, clinicalNotes: clinicalNotesContext },
       });
 
       if (error) throw error;
