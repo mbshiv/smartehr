@@ -43,7 +43,13 @@ const DocumentationAssistant = ({
   };
 
   const handlePatientSelect = (patientId: string, notes: string) => {
-    updateState({ inputNotes: notes, selectedPatientId: patientId });
+    updateState({
+      inputNotes: notes,
+      selectedPatientId: patientId,
+      structuredNote: null,
+      structuredNoteString: "",
+      reasoning: "",
+    });
     toast.success(`Loaded notes for ${patientId}`);
   };
 
