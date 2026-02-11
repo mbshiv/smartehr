@@ -65,12 +65,17 @@ const Index = () => {
     userId ? loadState(QUERY_STATE_KEY, userId, defaultQueryState) : defaultQueryState
   );
 
-  // Restore state when user logs in
+  // Restore state when user logs in, reset on logout
   useEffect(() => {
     if (userId) {
       setDocState(loadState(DOC_STATE_KEY, userId, defaultDocState));
       setBillingState(loadState(BILLING_STATE_KEY, userId, defaultBillingState));
       setQueryState(loadState(QUERY_STATE_KEY, userId, defaultQueryState));
+    } else {
+      setDocState(defaultDocState);
+      setBillingState(defaultBillingState);
+      setQueryState(defaultQueryState);
+      setFhirBrowserState({ expandedIds: new Set(), expandedSections: new Set() });
     }
   }, [userId]);
 
