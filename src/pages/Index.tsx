@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import PatientSidebar from "@/components/layout/PatientSidebar";
 import FHIRPatientBrowser, { FHIRBrowserState } from "@/components/layout/FHIRPatientBrowser";
@@ -65,18 +65,28 @@ const Index = () => {
     userId ? loadState(QUERY_STATE_KEY, userId, defaultQueryState) : defaultQueryState
   );
 
-  // Restore state when user logs in, reset on logout
+  const prevUserIdRef = useRef(userId);
+
+  // Restore state when user logs in, reset and clear storage on logout
   useEffect(() => {
     if (userId) {
       setDocState(loadState(DOC_STATE_KEY, userId, defaultDocState));
       setBillingState(loadState(BILLING_STATE_KEY, userId, defaultBillingState));
       setQueryState(loadState(QUERY_STATE_KEY, userId, defaultQueryState));
     } else {
+      // Clear localStorage for the previous user before resetting
+      const prevId = prevUserIdRef.current;
+      if (prevId) {
+        localStorage.removeItem(`${DOC_STATE_KEY}_${prevId}`);
+        localStorage.removeItem(`${BILLING_STATE_KEY}_${prevId}`);
+        localStorage.removeItem(`${QUERY_STATE_KEY}_${prevId}`);
+      }
       setDocState(defaultDocState);
       setBillingState(defaultBillingState);
       setQueryState(defaultQueryState);
       setFhirBrowserState({ expandedIds: new Set(), expandedSections: new Set() });
     }
+    prevUserIdRef.current = userId;
   }, [userId]);
 
   // Persist doc state
